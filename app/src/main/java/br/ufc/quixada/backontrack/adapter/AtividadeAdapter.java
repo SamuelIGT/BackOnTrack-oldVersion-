@@ -47,14 +47,6 @@ public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.MyVi
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.exercise_card, parent, false);
         ImageView thumbnail = (ImageView) itemView.findViewById(R.id.thumbnail_view);
-        Log.v("Thumbnail", thumbnail.toString());
-        try{
-            Glide.with(itemView.getContext()).load(
-                    R.drawable.images).into(
-                    (ImageView) itemView.findViewById(R.id.thumbnail_view));
-        } catch (Exception e){
-            e.printStackTrace();
-        }
         return new MyViewHolder(itemView);
     }
 

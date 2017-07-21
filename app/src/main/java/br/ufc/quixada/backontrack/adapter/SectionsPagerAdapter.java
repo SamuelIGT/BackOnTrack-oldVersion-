@@ -1,4 +1,4 @@
-package br.ufc.quixada.backontrack;
+package br.ufc.quixada.backontrack.adapter;
 
 /**
  * Created by samue on 14/07/2017.
@@ -11,12 +11,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import br.ufc.quixada.backontrack.Fragments.ExerciseFragment;
+import br.ufc.quixada.backontrack.MainActivity;
+import br.ufc.quixada.backontrack.R;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-class SectionsPagerAdapter extends FragmentPagerAdapter {
+public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     Context context;
 

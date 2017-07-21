@@ -13,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import br.ufc.quixada.backontrack.adapter.SectionsPagerAdapter;
+
 public class MainActivity extends AppCompatActivity {
 
     /**
