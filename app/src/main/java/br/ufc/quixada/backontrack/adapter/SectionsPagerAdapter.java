@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import br.ufc.quixada.backontrack.Fragments.ExerciseFragment;
+import br.ufc.quixada.backontrack.Fragments.SectionsFragment;
 import br.ufc.quixada.backontrack.MainActivity;
 import br.ufc.quixada.backontrack.R;
 
@@ -35,7 +36,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // Return a PlaceholderFragment (defined as a static inner class below).
         switch (position){
             case 0:
-                return new ExerciseFragment();
+                return new SectionsFragment();
         }
         return MainActivity.PlaceholderFragment.newInstance(position + 1);
     }
