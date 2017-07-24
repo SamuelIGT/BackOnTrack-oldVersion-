@@ -37,6 +37,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         switch (position){
             case 0:
                 return new SectionsFragment();
+/*            case 1:
+                return new ExerciseFragment();*/
         }
         return MainActivity.PlaceholderFragment.newInstance(position + 1);
     }

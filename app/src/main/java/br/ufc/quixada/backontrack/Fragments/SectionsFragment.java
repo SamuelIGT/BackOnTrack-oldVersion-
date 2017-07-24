@@ -1,7 +1,12 @@
 package br.ufc.quixada.backontrack.Fragments;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,16 +55,33 @@ public class SectionsFragment extends Fragment {
         listAdapter = new ExpandableListAdapter(rootView.getContext(), listDataHeader, listDataChild);
         expListView.setAdapter(listAdapter);
 
-        FnClickEvents();
+        FnClickEvents(rootView);
         return rootView;
     }
 
-    void FnClickEvents() {
+    void FnClickEvents(final View thisView) {
         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             //Listening to child item selection
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
-                Toast.makeText(rootView.getContext(), "OnClickChild", Toast.LENGTH_SHORT).show();
+
+                // Create new fragment and transaction
+                Fragment newFragment = new ExerciseFragment();
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.container, newFragment,"EXCSE_FRGMNT")
+                        .addToBackStack(null)
+                        .commit();
+            /*    // Create new fragment and transaction
+                Fragment newFragment = new ExerciseFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+                // Replace whatever is in the fragment_container view with this fragment,
+                // and add the transaction to the back stack
+                transaction.replace(R.id.container, newFragment, "EXCSE_FRGMNT");
+                transaction.addToBackStack(null);
+                // Commit the transaction
+                transaction.commit();
+*/
                 return false;
             }
         });
@@ -86,39 +108,35 @@ public class SectionsFragment extends Fragment {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
         // Adding child data
-        listDataHeader.add("Computer science");
-        listDataHeader.add("Electrocs & comm.");
-        listDataHeader.add("Mechanical");
+        listDataHeader.add("Nível 1");
+        listDataHeader.add("Nível 2");
+        listDataHeader.add("Nível 3");
 
         // Adding child data
-        List<String> lstCS = new ArrayList<String>();
-        lstCS.add("Data structure");
-        lstCS.add("C# Programming");
-        lstCS.add("Java programming");
-        lstCS.add("ADA");
-        lstCS.add("Operation reserach");
-        lstCS.add("OOPS with C");
-        lstCS.add("C++ Programming");
+        List<String> lstOne = new ArrayList<String>();
+        lstOne.add("Alongamento");
+        lstOne.add("Fortalecimento do braço");
+        lstOne.add("Fortalecimento da mão");
+        lstOne.add("Cordenação");
 
-        List<String> lstEC = new ArrayList<String>();
-        lstEC.add("Field Theory");
-        lstEC.add("Logic Design");
-        lstEC.add("Analog electronics");
-        lstEC.add("Network analysis");
-        lstEC.add("Micro controller");
-        lstEC.add("Signals and system");
+        List<String> lstTwo = new ArrayList<String>();
+        lstTwo.add("Alongamento");
+        lstTwo.add("Fortalecimento do braço");
+        lstTwo.add("Fortalecimento da mão");
+        lstTwo.add("Cordenação");
+        lstTwo.add("Habilidades manuais");
 
-        List<String> lstMech = new ArrayList<String>();
-        lstMech.add("Instrumentation technology");
-        lstMech.add("Dynamics of machinnes");
-        lstMech.add("Energy engineering");
-        lstMech.add("Design of machine");
-        lstMech.add("Turbo machine");
-        lstMech.add("Energy conversion");
+
+        List<String> lstThree = new ArrayList<String>();
+        lstThree.add("Alongamento");
+        lstThree.add("Fortalecimento do braço");
+        lstThree.add("Fortalecimento da mão");
+        lstThree.add("Cordenação");
+        lstThree.add("Habilidades manuais");
 
         // Header, Child data
-        listDataChild.put(listDataHeader.get(0), lstCS);
-        listDataChild.put(listDataHeader.get(1), lstEC);
-        listDataChild.put(listDataHeader.get(2), lstMech);
+        listDataChild.put(listDataHeader.get(0), lstOne);
+        listDataChild.put(listDataHeader.get(1), lstTwo);
+        listDataChild.put(listDataHeader.get(2), lstThree);
     }
 }

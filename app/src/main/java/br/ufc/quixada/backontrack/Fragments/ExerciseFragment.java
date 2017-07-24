@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,33 +46,53 @@ public class ExerciseFragment extends Fragment{
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.v("Inicialization test", "On Create");
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-        initCollapsingToolbar();
-        //initCollapsingToolbar();
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-
-        atividadeList = new ArrayList<>();
-        adapter = new AtividadeAdapter(rootView.getContext(), atividadeList);
-
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(rootView.getContext(), 1);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
-
-        try{
-            Glide.with(rootView.getContext()).load(
-                    R.drawable.cover).into((ImageView) rootView.findViewById(R.id.backdrop));
-        } catch (Exception e){
-            e.printStackTrace();
-            Log.v("Backdrop Glide catch", "Gliding Error");
+        if (rootView != null) {
+            Log.v("Inicialization test", "On Create View");
+            ViewGroup parent = (ViewGroup) rootView.getParent();
+            if (parent != null)
+                parent.removeView(rootView);
         }
-        prepareAtivity();
+        try {
+
+            rootView = inflater.inflate(R.layout.fragment_main,
+                    container, false);
+
+            Log.v("Inicialization test", "try");
+            initCollapsingToolbar();
+            //initCollapsingToolbar();
+            recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+
+            atividadeList = new ArrayList<>();
+            adapter = new AtividadeAdapter(rootView.getContext(), atividadeList);
+
+            RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(rootView.getContext(), 1);
+            recyclerView.setLayoutManager(mLayoutManager);
+            recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setAdapter(adapter);
+
+            try{
+                Glide.with(rootView.getContext()).load(
+                        R.drawable.cover).into((ImageView) rootView.findViewById(R.id.backdrop));
+            } catch (Exception e){
+                e.printStackTrace();
+                Log.v("Backdrop Glide catch", "Gliding Error");
+            }
+            prepareAtivity();
+
+        } catch (InflateException e) {
+            Log.v("Inicialization test", "catch");
+            return rootView;
+        }
 
         return rootView;
     }
