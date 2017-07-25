@@ -2,7 +2,6 @@ package br.ufc.quixada.backontrack.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,16 +13,16 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import br.ufc.quixada.backontrack.R;
-import br.ufc.quixada.backontrack.model.Atividade;
+import br.ufc.quixada.backontrack.model.Exercise;
 
 /**
  * Created by samue on 17/07/2017.
  */
 
-public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.MyViewHolder> {
+public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<Atividade> atividadeList;
+    private List<Exercise> exerciseList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, description;
@@ -37,9 +36,9 @@ public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.MyVi
         }
     }
 
-    public AtividadeAdapter(Context mContext, List<Atividade> atividadeList) {
+    public ExerciseAdapter(Context mContext, List<Exercise> exerciseList) {
         this.mContext = mContext;
-        this.atividadeList = atividadeList;
+        this.exerciseList = exerciseList;
     }
 
     @Override
@@ -47,17 +46,19 @@ public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.MyVi
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.exercise_card, parent, false);
         ImageView thumbnail = (ImageView) itemView.findViewById(R.id.thumbnail_view);
+
+        TextView t = (TextView) itemView.findViewById(R.id.title_text);
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Atividade atividade = atividadeList.get(position);
-        holder.title.setText(atividade.getNome());
-        holder.description.setText(atividade.getDescricao());
+        Exercise exercise = exerciseList.get(position);
+        holder.title.setText(exercise.getNome());
+        holder.description.setText(exercise.getDescricao());
 
         // loading album cover using Glide library
-        Glide.with(mContext).load(atividade.getThumbnail()).into(holder.thumbnail);
+        Glide.with(mContext).load(exercise.getThumbnail()).into(holder.thumbnail);
 
         //popup menu
 //        holder.overflow.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +106,7 @@ public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.MyVi
 
     @Override
     public int getItemCount() {
-        return atividadeList.size();
+        return exerciseList.size();
     }
 
 }

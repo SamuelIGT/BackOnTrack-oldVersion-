@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
@@ -56,7 +57,7 @@ public class ExerciseFragment extends Fragment{
         rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         if (rootView != null) {
-            Log.v("Inicialization test", "On Create View");
+            Log.v("Inicialization test", "If");
             ViewGroup parent = (ViewGroup) rootView.getParent();
             if (parent != null)
                 parent.removeView(rootView);
@@ -90,9 +91,10 @@ public class ExerciseFragment extends Fragment{
             prepareAtivity();
 
         } catch (InflateException e) {
-            Log.v("Inicialization test", "catch");
+
             return rootView;
         }
+
 
         return rootView;
     }

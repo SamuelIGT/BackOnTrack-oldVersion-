@@ -4,23 +4,23 @@ package br.ufc.quixada.backontrack.model;
  * Created by samue on 17/07/2017.
  */
 
-public class Atividade {
+public class Exercise {
     private Integer id;
     private int nivel;
     private String nome;
     private String descricao;
-    private int duracao;
+    //private int duracao;
     private int thumbnail;
 
-    public Atividade(){
+    public Exercise(){
 
     }
 
-    public Atividade(int nivel, String nome, int duracao, String descricao, int thumbnail){
+    public Exercise(int nivel, String nome,/* int duracao,*/ String descricao, int thumbnail){
         this.nivel = nivel;
         this.nome = nome;
         this.descricao = descricao;
-        this.duracao = duracao;
+        //this.duracao = duracao;
         this.thumbnail = thumbnail;
     }
 
@@ -53,13 +53,13 @@ public class Atividade {
         this.descricao = descricao;
     }
 
-    public int getDuracao() {
+/*    public int getDuracao() {
         return duracao;
     }
 
     public void setDuracao(int duracao) {
         this.duracao = duracao;
-    }
+    }*/
 
     public int getThumbnail() {
         return thumbnail;
