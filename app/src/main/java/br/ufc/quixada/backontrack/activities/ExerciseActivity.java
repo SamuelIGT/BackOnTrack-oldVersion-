@@ -2,10 +2,13 @@ package br.ufc.quixada.backontrack.activities;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -34,19 +37,22 @@ public class ExerciseActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ExerciseAdapter adapter;
     private List<Exercise> exerciseList;
-    private List<Section> secList;
+    private Section sec;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
         setContentView(R.layout.fragment_main);
+        //Initializes the collapsing toolbar
         initCollapsingToolbar();
-        //initCollapsingToolbar();
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        //secList = getIntent().getStringExtra("EXTRA_SESSION_ID");
-        exerciseList = new ArrayList<>();
-        adapter = new ExerciseAdapter(this, exerciseList);
+
+        //gets the section that was chosen
+        sec = (Section) getIntent().getSerializableExtra(getString(R.string.sectionToExercise_extraTAG));
+        adapter = new ExerciseAdapter(this, sec.getExerciseList());
+
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -54,13 +60,8 @@ public class ExerciseActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
-        try{
-            Glide.with(this).load(
-                    R.drawable.cover).into((ImageView) findViewById(R.id.backdrop));
-        } catch (Exception e){
-            e.printStackTrace();
-            Log.v("Backdrop Glide catch", "Gliding Error");
-        }
+        //
+
         prepareAtivity();
 
 
@@ -83,7 +84,7 @@ public class ExerciseActivity extends AppCompatActivity {
                     scroolRange = appBarLayout.getTotalScrollRange();
                 }
                 if(scroolRange + verticalOffset == 0){
-                    collapsingToolbar.setTitle("Flexões");
+                    collapsingToolbar.setTitle(sec.getTitle());
                     isShow = true;
                 } else if(isShow){
                     collapsingToolbar.setTitle(" ");
@@ -100,7 +101,16 @@ public class ExerciseActivity extends AppCompatActivity {
 
     //Just for testing purpose
     private void prepareAtivity(){
-        int[] thumbnails = new int[]{
+
+        try{
+            Glide.with(this).load(
+                    R.drawable.cover).into((ImageView) findViewById(R.id.backdrop));
+        } catch (Exception e){
+            e.printStackTrace();
+            Log.v("Backdrop Glide catch", "Gliding Error");
+        }
+
+        /*int[] thumbnails = new int[]{
                 R.drawable.exercise,
                 R.drawable.images
         };
@@ -116,7 +126,7 @@ public class ExerciseActivity extends AppCompatActivity {
 
         a = new Exercise(1, "Flexão4", getString(R.string.description_test), thumbnails[1]);
         exerciseList.add(a);
-
+*/
         adapter.notifyDataSetChanged();
     }
 }

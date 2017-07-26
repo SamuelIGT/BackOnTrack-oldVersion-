@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
 
     <!-- A CardView that contains a TextView -->
     <android.support.v7.widget.CardView
@@ -10,12 +13,16 @@
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        card_view:cardCornerRadius="4dp">
+        app:cardUseCompatPadding="true"
+        card_view:cardCornerRadius="2dp"
+        >
 
         <RelativeLayout
             android:id="@+id/grid_layout_cardview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/white_view"
+            >
 
             <ImageView
                 android:id="@+id/thumbnail_view"
@@ -27,7 +34,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/thumbnail_view"
+                android:paddingBottom="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="24dp"
                 android:text="TESTE BACK ON TRACK"
+                android:textColor="#212121"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -35,17 +48,36 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/title_text"
-                android:paddingLeft="10dp"
-                android:text="asdjoajdojaodjasjdoajsodjasijdasjdajsodijasjdjasoidjaoisjdoajdjasodjasoijdoasjdoiajsdojasiodjasodjaoisjdioajsdoijasiodja"/>
+                android:paddingBottom="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="asdjoajdojaodjasjdoajsodjasijdasjdajsodijasjdjasoidjaoisjdoajdjasodjasoijdoasjdoiajsdojasiodjasodjaoisjdioajsdoijasiodja"
+                android:textColor="#757575"
+                android:textSize="14sp" />
 
-            <ImageButton
-                android:id="@+id/lock_button"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_below="@+id/title_text"
-                android:layout_toEndOf="@+id/description_text"
-                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/description_text"
+                android:background="@android:color/transparent"
+                android:paddingBottom="8dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="16dp"
+                android:text="COMEÇAR"
+                android:textColor="@color/colorAccent" />
+
+
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
 </LinearLayout>
+<!--
+<ImageButton
+android:id="@+id/lock_button"
+android:layout_width="100px"
+android:layout_height="100px"
+android:background="@drawable/start_exercise_100px"
+android:layout_below="@+id/title_text"
+android:layout_toEndOf="@+id/description_text"
+    />-->

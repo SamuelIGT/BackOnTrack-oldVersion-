@@ -1,6 +1,9 @@
 package br.ufc.quixada.backontrack.adapter;
 
 import android.content.Context;
+import android.os.Build;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +48,9 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.exercise_card, parent, false);
+        //fixes the card corner not transparent bug
+       // setupLayout(itemView);
+
         ImageView thumbnail = (ImageView) itemView.findViewById(R.id.thumbnail_view);
 
         TextView t = (TextView) itemView.findViewById(R.id.title_text);
@@ -67,6 +73,17 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
 //                showPopupMenu(holder.overflow);
 //            }
 //        });
+    }
+
+    private void setupLayout(View view){
+        CardView cv = (CardView) view.findViewById(R.id.card_view);
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP){
+            cv.getBackground().setAlpha(0);
+        }
+        else
+        {
+            cv.setBackgroundColor(ContextCompat.getColor(view.getContext(), android.R.color.transparent));
+        }
     }
 
     /**

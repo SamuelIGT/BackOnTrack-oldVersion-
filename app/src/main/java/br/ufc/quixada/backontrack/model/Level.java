@@ -1,12 +1,13 @@
 package br.ufc.quixada.backontrack.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by samue on 25/07/2017.
  */
 
-public class Level {
+public class Level implements Serializable {
 
     private int level;
     private List<Section> sectionsList;

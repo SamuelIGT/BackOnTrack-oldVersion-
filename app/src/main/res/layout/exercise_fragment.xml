@@ -3,13 +3,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#bdbdbd">
+    android:background="#eeeeee">
     
     <ExpandableListView
         android:id="@+id/lvExp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#c6c6c6"
+        android:background="#fafafa"
         android:layout_margin="5dp">
 
     </ExpandableListView>

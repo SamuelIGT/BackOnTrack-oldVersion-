@@ -1,10 +1,12 @@
 package br.ufc.quixada.backontrack.model;
 
+import java.io.Serializable;
+
 /**
  * Created by samue on 17/07/2017.
  */
 
-public class Exercise {
+public class Exercise implements Serializable{
     private Integer id;
     private int nivel;
     private String nome;

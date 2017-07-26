@@ -71,7 +71,18 @@ public class SectionsFragment extends Fragment {
                // switch ()
 
                 Intent exerciseIntent = new Intent(getActivity(), ExerciseActivity.class);
-                Log.v("ON CLICK CHILD ID: ", ""+groupPosition);
+                Log.v("CLICK_C groupPosition:", ""+groupPosition);
+                Log.v("CLICK_C childPosition:", ""+childPosition);
+                Log.v("CLICK_C id:", ""+id);
+
+                switch (groupPosition){
+                    case 0:
+                        exerciseIntent.putExtra("LEVEL", lOne.getSectionsList().get(childPosition));
+                    case 1:
+                        exerciseIntent.putExtra("LEVEL", lTwo.getSectionsList().get(childPosition));
+                    case 2:
+                        exerciseIntent.putExtra("LEVEL", lThree.getSectionsList().get(childPosition));
+                }
                 getActivity().startActivity(exerciseIntent);
 
 

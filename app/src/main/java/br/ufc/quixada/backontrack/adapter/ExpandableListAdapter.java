@@ -59,11 +59,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         return _listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosition);
     }
 
+    //Returns a ID based on position of the root list (childPosition)
     @Override
     public long getGroupId(int groupPosition) {
         return groupPosition;
     }
 
+    //Returns a ID based on position of the list item  (childPosition)
     @Override
     public long getChildId(int groupPosition, int childPosition) {
         return childPosition;
