@@ -22,6 +22,7 @@
         <activity
             android:name=".activities.ExerciseActivity"
             android:label="Exercícios"
+            android:theme="@style/AppTheme.NoActionBar"
             >
     </activity>
 

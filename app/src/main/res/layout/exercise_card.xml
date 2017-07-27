@@ -13,9 +13,12 @@
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
         app:cardUseCompatPadding="true"
         card_view:cardCornerRadius="2dp"
-        >
+        card_view:cardElevation="4dp">
 
         <RelativeLayout
             android:id="@+id/grid_layout_cardview"
@@ -56,15 +59,17 @@
                 android:textSize="14sp" />
 
             <Button
+                android:id="@+id/btn_start"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/description_text"
-                android:background="@android:color/transparent"
                 android:paddingBottom="8dp"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:paddingTop="16dp"
-                android:text="COMEÇAR"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:text="@string/start_exercise"
                 android:textColor="@color/colorAccent" />
 
 
@@ -81,3 +86,4 @@ android:background="@drawable/start_exercise_100px"
 android:layout_below="@+id/title_text"
 android:layout_toEndOf="@+id/description_text"
     />-->
+    <!--style="@style/DefaultButton"-->
