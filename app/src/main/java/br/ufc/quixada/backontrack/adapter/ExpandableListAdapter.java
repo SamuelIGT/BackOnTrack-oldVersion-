@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.load.engine.Resource;
@@ -97,6 +98,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListItem);
         txtListChild.setText(childText);
 
+/*//Sets space between child items
+        if (childPosition == groups.get(groupPosition).getChilds().size() - 1) {
+            convertView.setPadding(0, 0, 0, 40);
+        } else
+            convertView.setPadding(0, 0, 0, 0);*/
         return convertView;
     }
 

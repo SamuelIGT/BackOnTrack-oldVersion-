@@ -1,6 +1,7 @@
 package br.ufc.quixada.backontrack.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +18,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import br.ufc.quixada.backontrack.R;
+import br.ufc.quixada.backontrack.activities.ExerciseExecutionActivity;
 import br.ufc.quixada.backontrack.model.Exercise;
 
 /**
@@ -26,6 +29,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
 
     private Context mContext;
     private List<Exercise> exerciseList;
+    private View itemView;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, description;
@@ -46,16 +50,28 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
+        itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.exercise_card, parent, false);
         //fixes the card corner not transparent bug
-       // setupLayout(itemView);
+        // setupLayout(itemView);
 
         ImageView thumbnail = (ImageView) itemView.findViewById(R.id.thumbnail_view);
+
+        Button start = (Button) itemView.findViewById(R.id.btn_start);
+
+        start.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent exerciseIntent = new Intent(mContext, ExerciseExecutionActivity.class);
+                mContext.startActivity(exerciseIntent);
+            }
+
+        });
 
         TextView t = (TextView) itemView.findViewById(R.id.title_text);
         return new MyViewHolder(itemView);
     }
+
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
@@ -75,13 +91,11 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
 //        });
     }
 
-    private void setupLayout(View view){
+    private void setupLayout(View view) {
         CardView cv = (CardView) view.findViewById(R.id.card_view);
-        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP){
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             cv.getBackground().setAlpha(0);
-        }
-        else
-        {
+        } else {
             cv.setBackgroundColor(ContextCompat.getColor(view.getContext(), android.R.color.transparent));
         }
     }
@@ -120,7 +134,6 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
 //            return false;
 //        }
 //    }
-
     @Override
     public int getItemCount() {
         return exerciseList.size();

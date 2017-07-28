@@ -7,13 +7,13 @@
     <TextView
         android:id="@+id/lblListItem"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24dp"
+        android:layout_height="48dp"
+        android:textSize="12pt"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:text="Test"
         android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
-        android:textColor="#fff69212"
+        android:textColor="@color/colorAccent"
         android:textStyle="bold"
         android:background="#ffffffff"
         />

@@ -33,17 +33,10 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
             app:layout_scrollFlags="scroll|enterAlways"
             tools:ignore="UnusedAttribute"
-            app:tabGravity="fill" />
+            app:tabGravity="fill"
+            app:tabMaxWidth="0dp"/>
 
     </android.support.design.widget.AppBarLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/container"
@@ -53,3 +46,11 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </android.support.design.widget.CoordinatorLayout>
+
+<!--<android.support.design.widget.FloatingActionButton
+android:id="@+id/fab"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="end|bottom"
+android:layout_margin="@dimen/fab_margin"
+app:srcCompat="@android:drawable/ic_dialog_email" />-->

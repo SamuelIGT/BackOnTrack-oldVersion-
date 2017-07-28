@@ -19,13 +19,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activities.ExerciseActivity"
             android:label="Exercícios"
-            android:theme="@style/AppTheme.NoActionBar"
-            >
-    </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
-</application>
+        <activity
+            android:name=".activities.ExerciseExecutionActivity"
+            android:label="Exercícios"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+    </application>
 
 </manifest>

@@ -51,12 +51,16 @@ public class SectionsFragment extends Fragment {
         rootView = inflater.inflate(R.layout.exercise_fragment, container, false);
         expListView = (ExpandableListView) rootView.findViewById(R.id.lvExp);
 
+
         //Prepare list data
         prepareSections();
 
         //Bind list
         listAdapter = new ExpandableListAdapter(rootView.getContext(), listDataHeader, listDataChild);
+
         expListView.setAdapter(listAdapter);
+//        expListView.setDivider(null);
+//        expListView.setDividerHeight(8);
 
         FnClickEvents(rootView);
 
@@ -121,6 +125,7 @@ public class SectionsFragment extends Fragment {
         expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupPosition) {
+
                 if (groupPosition != previousGroup)
                     expListView.collapseGroup(previousGroup);
                 previousGroup = groupPosition;
@@ -130,7 +135,8 @@ public class SectionsFragment extends Fragment {
         expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
             @Override
             public void onGroupCollapse(int i) {
-                Toast.makeText(rootView.getContext(), "OnClickGroupCollapse", Toast.LENGTH_SHORT).show();
+              /*  Toast.makeText(rootView.getContext(), "OnClickGroupCollapse", Toast.LENGTH_SHORT).show();*/
+
             }
         });
     }

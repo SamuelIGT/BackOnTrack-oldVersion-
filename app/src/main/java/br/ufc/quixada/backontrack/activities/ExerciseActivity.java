@@ -17,6 +17,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -41,6 +42,7 @@ public class ExerciseActivity extends AppCompatActivity {
     private List<Exercise> exerciseList;
     private Section sec;
 
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -62,6 +64,8 @@ public class ExerciseActivity extends AppCompatActivity {
         //recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true)); //Defines how the cards will be shown
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
+
+
 
 
 

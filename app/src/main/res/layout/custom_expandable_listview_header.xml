@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"/>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
@@ -13,16 +24,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
-        android:textSize="24sp"
+        android:textSize="36sp"
         android:text="Nível 1"
         android:textColor="#ffffffff"
         android:textStyle="bold" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </View>
 
     <ImageView
         android:id="@+id/img_lock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/lock_128"
-        android:layout_marginLeft="140dp"/>
+        />
 
+</LinearLayout>
 </LinearLayout>
