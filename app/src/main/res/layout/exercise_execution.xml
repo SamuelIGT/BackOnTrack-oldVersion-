@@ -2,7 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_exercise_execution"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:tabIndicatorColor="@color/colorAccent">
+
+    </android.support.v7.widget.Toolbar>
 
     <View
         android:layout_width="0dp"
@@ -62,15 +73,34 @@
             />
 
         <Button
-            android:id="@+id/start_stop"
+            android:id="@+id/btn_start_stop"
             android:layout_width="192dp"
             android:layout_height="192dp"
             android:layout_centerInParent="true"
             android:background="@android:color/transparent"
-            android:text="@string/start_exercise"
+            android:text="@string/button_start"
             android:textSize="30dp"
             android:textStyle="bold"
             android:textColor="@color/secondary_text"/>
+
+        <Button
+            android:id="@+id/btn_finish"
+            android:layout_width="88dp"
+            android:layout_height="48dp"
+            android:layout_above="@+id/timer_sec_description"
+            android:layout_toRightOf="@+id/pgBarStatic"
+            android:layout_marginLeft="70dp"
+            android:text="@string/button_finish"
+            android:textSize="7pt"
+            android:textStyle="bold"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:textColor="@color/colorAccent"
+
+            />
+        <!--android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="210dp"
+        -->
 
         <TextView
             android:id="@+id/timer"
