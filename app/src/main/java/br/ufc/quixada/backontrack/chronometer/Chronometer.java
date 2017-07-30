@@ -1,151 +1,168 @@
 package br.ufc.quixada.backontrack.chronometer;
 
-import android.content.Context;
-import android.os.Handler;
-import android.os.SystemClock;
-import android.widget.Button;
-import android.widget.TextView;
-
-import java.text.DecimalFormat;
-
 /**
  * Created by samue on 29/07/2017.
  */
 
-public class Chronometer {
-    private TextView timer;
-    private Context mContext;
 
-    private int min, s, ms;
-    private boolean isRunning;
-    private long startTime, timeMS, timeSB, update;
-    Handler h = new Handler();
+        import android.content.Context;
+        import android.os.Handler;
+        import android.os.Message;
+        import android.os.SystemClock;
+        import android.util.AttributeSet;
+        import android.widget.TextView;
+        import java.text.DecimalFormat;
 
-    public Chronometer(TextView timer, Context context){
-        this.timer = timer;
-        mContext = context;
+public class Chronometer extends TextView {
+    @SuppressWarnings("unused")
+    private static final String TAG = "Chronometer";
+
+    public interface OnChronometerTickListener {
+
+        void onChronometerTick(Chronometer chronometer);
     }
 
-    //Functions
-    public void startTimer(long startTime) {
-        setStartTime(startTime);
-        h.postDelayed(r, 0);
-        setRunning(true);
+    private long mBase;
+    private boolean mVisible;
+    private boolean mStarted;
+    private boolean mRunning;
+    private OnChronometerTickListener mOnChronometerTickListener;
+
+    private static final int TICK_WHAT = 2;
+
+    private long timeElapsed;
+
+    public Chronometer(Context context) {
+        this (context, null, 0);
     }
 
-    public void stopTimer(){
-        setTimeSB(getTimeSB()+getTimeMS());//timeSB += timeMS;
-        h.removeCallbacks(r);
-        setRunning(false);
+    public Chronometer(Context context, AttributeSet attrs) {
+        this (context, attrs, 0);
     }
 
-    public void resetTimer(){
-        setStartTime(0);
-        setTimeMS(0);//timeMS = 0;
-        setTimeSB(0);//timeSB = 0;
-        setS(0);//s = 0;
-        setMin(0);//min = 0;
-        setMs(0);//ms = 0;
-        this.h.removeCallbacks(r);
-        getTimer().setText("0:00:000");//timer.setText("0:00:000");
+    public Chronometer(Context context, AttributeSet attrs, int defStyle) {
+        super (context, attrs, defStyle);
+
+        init();
     }
 
-//Getters and Setters
-    public boolean isRunning() {
-        return isRunning;
+    private void init() {
+        mBase = SystemClock.elapsedRealtime();
+        updateText(mBase);
     }
 
-    public void setRunning(boolean running) {
-        isRunning = running;
+    public void setBase(long base) {
+        mBase = base;
+        dispatchChronometerTick();
+        updateText(SystemClock.elapsedRealtime());
     }
 
-    public long getStartTime() {
-        return startTime;
+    public long getBase() {
+        return mBase;
     }
 
-    public void setStartTime(long startTime) {
-        this.startTime = startTime;
+    public void setOnChronometerTickListener(
+            OnChronometerTickListener listener) {
+        mOnChronometerTickListener = listener;
     }
 
-    public TextView getTimer() {
-        return timer;
+    public OnChronometerTickListener getOnChronometerTickListener() {
+        return mOnChronometerTickListener;
     }
 
-    public void setTimer(TextView timer) {
-        this.timer = timer;
+    public void start() {
+        mStarted = true;
+        updateRunning();
     }
 
-    public Context getmContext() {
-        return mContext;
+    public void stop() {
+        mStarted = false;
+        updateRunning();
     }
 
-    public void setmContext(Context mContext) {
-        this.mContext = mContext;
+
+    public void setStarted(boolean started) {
+        mStarted = started;
+        updateRunning();
     }
 
-    public int getMin() {
-        return min;
+    @Override
+    protected void onDetachedFromWindow() {
+        super .onDetachedFromWindow();
+        mVisible = false;
+        updateRunning();
     }
 
-    public void setMin(int min) {
-        this.min = min;
+    @Override
+    protected void onWindowVisibilityChanged(int visibility) {
+        super .onWindowVisibilityChanged(visibility);
+        mVisible = visibility == VISIBLE;
+        updateRunning();
     }
 
-    public int getS() {
-        return s;
+    private synchronized void updateText(long now) {
+        timeElapsed = now - mBase;
+
+        DecimalFormat df = new DecimalFormat("00");
+
+        int hours = (int)(timeElapsed / (3600 * 1000));
+        int remaining = (int)(timeElapsed % (3600 * 1000));
+
+        int minutes = (int)(remaining / (60 * 1000));
+        remaining = (int)(remaining % (60 * 1000));
+
+        int seconds = (int)(remaining / 1000);
+        remaining = (int)(remaining % (1000));
+
+        int milliseconds = (int)(((int)timeElapsed % 1000) / 100);
+
+        String text = "";
+
+        if (hours > 0) {
+            text += df.format(hours) + ":";
+        }
+
+        text += df.format(minutes) + ":";
+        text += df.format(seconds) + ":";
+        text += Integer.toString(milliseconds);
+
+        setText(text);
     }
 
-    public void setS(int s) {
-        this.s = s;
+    private void updateRunning() {
+        boolean running = mVisible && mStarted;
+        if (running != mRunning) {
+            if (running) {
+                updateText(SystemClock.elapsedRealtime());
+                dispatchChronometerTick();
+                mHandler.sendMessageDelayed(Message.obtain(mHandler,
+                        TICK_WHAT), 100);
+            } else {
+                mHandler.removeMessages(TICK_WHAT);
+            }
+            mRunning = running;
+        }
     }
 
-    public int getMs() {
-        return ms;
-    }
-
-    public void setMs(int ms) {
-        this.ms = ms;
-    }
-
-    public long getTimeMS() {
-        return timeMS;
-    }
-
-    public void setTimeMS(long timeMS) {
-        this.timeMS = timeMS;
-    }
-
-    public long getTimeSB() {
-        return timeSB;
-    }
-
-    public void setTimeSB(long timeSB) {
-        this.timeSB = timeSB;
-    }
-
-    public long getUpdate() {
-        return update;
-    }
-
-    public void setUpdate(long update) {
-        this.update = update;
-    }
-
-    //---------------------------Runnable--------------------------------------
-    Runnable r = new Runnable() {
-        @Override
-        public void run() {
-            DecimalFormat df = new DecimalFormat("00");
-
-            timeMS = SystemClock.uptimeMillis() - startTime;
-            update = timeSB + timeMS;
-            s = (int) (update / 1000);
-            min = s / 60;
-            s = s % 60;
-            ms = (int)(((int)update % 1000) / 10);
-
-            timer.setText("" + /*String.format("%02d", min)*/df.format(min) + ":" + /*String.format("%02d", s)*/df.format(s) + ":" + /*String.format("%02d", ms)*/df.format(ms));
-            h.postDelayed(this, 0);
+    private Handler mHandler = new Handler() {
+        public void handleMessage(Message m) {
+            if (mRunning) {
+                updateText(SystemClock.elapsedRealtime());
+                dispatchChronometerTick();
+                sendMessageDelayed(Message.obtain(this , TICK_WHAT),
+                        100);
+            }
         }
     };
+
+    void dispatchChronometerTick() {
+        if (mOnChronometerTickListener != null) {
+            mOnChronometerTickListener.onChronometerTick(this);
+        }
+    }
+
+    public long getTimeElapsed() {
+        return timeElapsed;
+    }
+
 }
