@@ -8,7 +8,13 @@
     <string name="action_play_next">Play Next</string>
     <string name="backdrop_title">LOVE MUSICS</string>
     <string name="backdrop_subtitle">This season top 20 music</string>
-    <string name="description_test">Uma flexão consiste em fazer baixar o corpo de forma uniforme até que o peito fique a uma mão travessa do solo, sem lhe tocar e de seguida regressar a posição inicial.</string>
+    <string name="button_start">COMEÇAR</string>
+    <string name="button_stop">PARAR</string>
     <string name="sectionToExercise_extraTAG">LEVEL</string>
     <string name="start_exercise">COMEÇAR</string>
+    <string name="timer_min_description">MIN</string>
+    <string name="timer_sec_description">SEG</string>
+    <string name="timer_mil_description">MIL</string>
+    <string name="timer_start">00:00:00</string>
+
 </resources>

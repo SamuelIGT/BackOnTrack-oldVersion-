@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="orangeAccent">#fc4a1a</color>
+    <color name="orangeMiddle">#fa8026</color>
+    <color name="yellow">#f7b733</color>
+
+
+
+    <array name="progressbar">
+        <item>@color/orangeAccent</item>
+        <item>@color/orangeMiddle</item>
+        <item>@color/yellow</item>
+    </array>
+
+</resources>

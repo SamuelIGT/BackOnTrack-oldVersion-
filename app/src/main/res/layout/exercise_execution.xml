@@ -4,13 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txt_steps"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:textSize="36dp"/>
-
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -18,7 +11,7 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="256dp">
+        android:layout_height="350dp">
 
 
        <!-- <ProgressBar
@@ -30,44 +23,42 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:max="100"
             android:progress="100"/>-->
+<ImageView
+    android:id="@+id/pgBarStatic"
+    android:layout_width="200dp"
+    android:layout_height="200dp"
+    android:layout_centerInParent="true"
+    android:background="@drawable/circle_shape">
+
+</ImageView>
 
 
-    <!--    <ProgressBar
-            android:id="@+id/pgBar"
+        <!--<ProgressBar
+            android:id="@+id/pgBarStatic"
             android:layout_width="256dp"
             android:layout_height="256dp"
             android:layout_centerInParent="true"
             android:progressDrawable="@drawable/circular_progress_bar"
             style="?android:attr/progressBarStyleHorizontal"
             android:max="100"
+            android:progress="100"
              />-->
 
         <fr.castorflex.android.circularprogressbar.CircularProgressBar
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="256dp"
-            android:layout_height="256dp"
+            android:id="@+id/pgBar"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
             android:indeterminate="true"
             android:layout_centerInParent="true"
-            app:cpb_color="#FFee44"
+            app:cpb_color="@color/colorAccent"
+            app:cpb_colors="@array/progressbar"
             app:cpb_rotation_speed="1.0"
             app:cpb_sweep_speed="1.0"
             app:cpb_stroke_width="4dp"
-            app:cpb_min_sweep_angle="10"
+            app:cpb_min_sweep_angle="100"
             app:cpb_max_sweep_angle="300"
-            />
-
-
-        <TextView
-            android:id="@+id/timer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:layout_centerInParent="true"
-            android:text="00:00:00"
-            android:textSize="40dp"
-            android:textStyle="bold"
-            android:layout_marginBottom="16dp"
             />
 
         <Button
@@ -75,7 +66,71 @@
             android:layout_width="192dp"
             android:layout_height="192dp"
             android:layout_centerInParent="true"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent"
+            android:text="@string/start_exercise"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:textColor="@color/secondary_text"/>
+
+        <TextView
+            android:id="@+id/timer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@string/timer_start"
+            android:textSize="48dp"
+            android:textStyle="bold"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="250dp"
+            />
+
+        <TextView
+
+            android:id="@+id/timer_min_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_below="@id/pgBar"
+            android:layout_centerInParent="true"
+            android:text="@string/timer_min_description"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:paddingStart="0dp"
+            android:paddingEnd="140dp"
+            android:layout_marginTop="30dp"
+            />
+
+        <TextView
+
+            android:id="@+id/timer_sec_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_below="@id/pgBar"
+            android:layout_centerInParent="true"
+            android:text="@string/timer_sec_description"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            />
+
+        <TextView
+
+            android:id="@+id/timer_mil_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_below="@id/pgBar"
+            android:layout_centerInParent="true"
+            android:paddingStart="140dp"
+            android:paddingEnd="0dp"
+            android:text="@string/timer_mil_description"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            />
+
     </RelativeLayout>
 
 </LinearLayout>

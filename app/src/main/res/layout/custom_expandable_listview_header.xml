@@ -17,7 +17,7 @@
     android:padding="8dp"
     android:layout_marginBottom="8dp"
     android:elevation="2dp"
-    android:background="@color/colorAccent">
+    android:background="@drawable/gradient2">
 
     <TextView
         android:id="@+id/lblListHeader"
