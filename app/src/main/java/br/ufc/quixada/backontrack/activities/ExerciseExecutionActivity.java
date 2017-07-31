@@ -1,10 +1,14 @@
 package br.ufc.quixada.backontrack.activities;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -32,15 +36,15 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
     private CircularProgressDrawable pgBarDrawable;
     private Chronometer chronometer;
 
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercise_execution);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_exercise_execution);
+        //toolbar.setTitle(exercise.getTitle());
         setSupportActionBar(toolbar);
 
-       // txtViewSteps = (TextView) findViewById(R.id.txt_steps);
+        // txtViewSteps = (TextView) findViewById(R.id.txt_steps);
         timer = (TextView) findViewById(R.id.timer);
         startStop = (Button) findViewById(R.id.btn_start_stop);
         finish = (Button) findViewById(R.id.btn_finish);
@@ -52,9 +56,21 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
         finish.setVisibility(View.INVISIBLE);
 //        setupSteps();
 
-        setupTimer(this);
+        setupScreen(this);
 
     }
+
+    private void setupScreen(Context context) {
+        setupButtons(context);
+    }
+
+    //override the function of the android back button
+    @Override
+    public void onBackPressed() {
+        stopTimer();
+        finishExerciseAlert();
+    }
+
 
 /*    private void setupSteps() {
         steps = new ArrayList<String>();
@@ -67,31 +83,16 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
         }
     }*/
 
-    private void setupTimer(final Context context) {
+    private void setupButtons(final Context context) {
         pgBar.setVisibility(View.INVISIBLE);
 
         startStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!chronometer.isRunning()) {
-                    finish.setVisibility(View.INVISIBLE);
-
-                    startStop.setText(R.string.button_stop);
-
-                    pgBar.setVisibility(View.VISIBLE);
-                    pgBarDrawable.start();
-
-                    chronometer.startTimer(SystemClock.uptimeMillis());
+                    startTimer();
                 } else {
-                    finish.setVisibility(View.VISIBLE);
-
-                    startStop.setText(R.string.button_continue);
-
-                    pgBar.setVisibility(View.INVISIBLE);
-                    pgBarDrawable.stop();
-
-                    chronometer.stopTimer();
-
+                   stopTimer();
                 }
             }
         });
@@ -99,12 +100,58 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "TESTE", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+    private void startTimer(){
+        finish.setVisibility(View.INVISIBLE);
+
+        startStop.setText(R.string.button_stop);
+
+        pgBar.setVisibility(View.VISIBLE);
+        pgBarDrawable.start();
+
+        chronometer.startTimer(SystemClock.uptimeMillis());
+    }
+    private void stopTimer(){
+        finish.setVisibility(View.VISIBLE);
+
+        startStop.setText(R.string.button_continue);
+
+        pgBar.setVisibility(View.INVISIBLE);
+        pgBarDrawable.stop();
+
+        chronometer.stopTimer();
+    }
+    private void finishExerciseAlert() {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(ExerciseExecutionActivity.this);
+        View mView = getLayoutInflater().inflate(R.layout.dialog_alert_finish, null);
+
+        Button mAccept = (Button) mView.findViewById(R.id.btn_accept);
+        Button mDecline = (Button) mView.findViewById(R.id.btn_decline);
+
+        mBuilder.setView(mView);
+        final AlertDialog finishAlert = mBuilder.create();
+        finishAlert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        finishAlert.show();
+
+        //closes the dialog window when touched outside.
+        finishAlert.setCanceledOnTouchOutside(true);
+
+        mAccept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ExerciseExecutionActivity.this, "Dados salvos", Toast.LENGTH_SHORT).show();
+                ExerciseExecutionActivity.super.onBackPressed();
             }
         });
 
+        mDecline.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                finishAlert.hide();
+            }
+        });
     }
-
-
 
 }
