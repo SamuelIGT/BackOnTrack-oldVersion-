@@ -18,5 +18,14 @@
     <string name="dialog_finish">FINALIZAR</string>
     <string name="dialog_dontFinish">NÃO FINALIZAR</string>
     <string name="img_description_alert">alerta</string>
+    <string name="txt_effort_exercise_confirmation">Qual foi o seu nível de esforço para realizar esse exercício?</string>
+    <string name="exercise_finish_confirmation">Você acabou?</string>
+    <string name="emoticon1_title">Muito Leve</string>
+    <string name="emoticon2_title">Leve</string>
+    <string name="emoticon3_title">Moderado</string>
+    <string name="emoticon4_title">Difícil</string>
+    <string name="emoticon5_title">Muito Difícil</string>
+    <string name="txt_motivation">Parabéns! Você está indo muito bem.</string>
+    <string name="btn_confirm">Confirmar</string>
 
 </resources>

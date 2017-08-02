@@ -5,15 +5,22 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
+import java.util.Vector;
 
 import br.ufc.quixada.backontrack.R;
 import br.ufc.quixada.backontrack.chronometer.Chronometer;
@@ -68,6 +75,7 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         stopTimer();
+
         finishExerciseAlert();
     }
 
@@ -100,7 +108,7 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                finishExerciseConfirmation();
             }
         });
     }
@@ -123,6 +131,90 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
         pgBarDrawable.stop();
 
         chronometer.stopTimer();
+    }
+
+    private void finishExerciseConfirmation(){
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(ExerciseExecutionActivity.this);
+        View mView = getLayoutInflater().inflate(R.layout.exercise_finish_confirmation, null);
+
+        boolean madeChoice = false;
+        Button btnConfirm = (Button) mView.findViewById(R.id.btn_confirm);
+        ImageButton btnClose = (ImageButton) mView.findViewById(R.id.btn_close_confirmation);
+        final ImageButton emoticon1 = (ImageButton) mView.findViewById(R.id.ic_emotion_1);
+        final ImageButton emoticon2 = (ImageButton) mView.findViewById(R.id.ic_emotion_2);
+        final ImageButton emoticon3 = (ImageButton) mView.findViewById(R.id.ic_emotion_3);
+        final ImageButton emoticon4 = (ImageButton) mView.findViewById(R.id.ic_emotion_4);
+        final ImageButton emoticon5 = (ImageButton) mView.findViewById(R.id.ic_emotion_5);
+        TextView motivation = (TextView) mView.findViewById(R.id.txt_motivation);
+
+        final ImageButton btnlist [] = {(ImageButton)mView.findViewById(R.id.ic_emotion_1),
+                (ImageButton) mView.findViewById(R.id.ic_emotion_2),
+                (ImageButton) mView.findViewById(R.id.ic_emotion_3),
+                (ImageButton) mView.findViewById(R.id.ic_emotion_4),
+                (ImageButton) mView.findViewById(R.id.ic_emotion_5)};
+
+
+        mBuilder.setView(mView);
+        final AlertDialog finishAlert = mBuilder.create();
+        finishAlert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        finishAlert.show();
+
+        //closes the dialog window when touched outside.
+        finishAlert.setCanceledOnTouchOutside(true);
+
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Toast.makeText(ExerciseExecutionActivity.this, "Confirmado!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                finishAlert.hide();
+            }
+        });
+
+        emoticon1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                selectedItem(emoticon1, btnlist);
+            }
+        });
+
+        emoticon2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                selectedItem(emoticon2, btnlist);
+            }
+        });
+
+        emoticon3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                selectedItem(emoticon3, btnlist);
+            }
+        });
+
+        emoticon4.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                selectedItem(emoticon4, btnlist);
+            }
+        });
+
+        emoticon5.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                selectedItem(emoticon5, btnlist);
+            }
+        });
+
+
+    }
+
+    private void selectedItem(ImageButton btn, ImageButton btnList[]){
+        setDefaultButton(btnList);
+        DrawableCompat.setTint(btn.getDrawable(), ContextCompat.getColor(ExerciseExecutionActivity.this, R.color.colorAccent));
+    }
+    public void setDefaultButton(ImageButton btnList[]) {
+        for (int i = 0; i <= btnList.length-1; i++ ) {
+            DrawableCompat.setTint(btnList[i].getDrawable(), ContextCompat.getColor(ExerciseExecutionActivity.this, R.color.icons_black));
+        }
     }
     private void finishExerciseAlert() {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(ExerciseExecutionActivity.this);
