@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
@@ -20,8 +21,14 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Vector;
 
+import br.ufc.quixada.backontrack.EffortButton;
 import br.ufc.quixada.backontrack.R;
 import br.ufc.quixada.backontrack.chronometer.Chronometer;
 import fr.castorflex.android.circularprogressbar.CircularProgressBar;
@@ -42,6 +49,8 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
     private ImageView staticPgBar;
     private CircularProgressDrawable pgBarDrawable;
     private Chronometer chronometer;
+
+    private int selectedEffortLevel;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,7 +109,7 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
                 if (!chronometer.isRunning()) {
                     startTimer();
                 } else {
-                   stopTimer();
+                    stopTimer();
                 }
             }
         });
@@ -112,7 +121,8 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
             }
         });
     }
-    private void startTimer(){
+
+    private void startTimer() {
         finish.setVisibility(View.INVISIBLE);
 
         startStop.setText(R.string.button_stop);
@@ -122,7 +132,8 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
 
         chronometer.startTimer(SystemClock.uptimeMillis());
     }
-    private void stopTimer(){
+
+    private void stopTimer() {
         finish.setVisibility(View.VISIBLE);
 
         startStop.setText(R.string.button_continue);
@@ -133,25 +144,35 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
         chronometer.stopTimer();
     }
 
-    private void finishExerciseConfirmation(){
+    private void finishExerciseConfirmation() {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(ExerciseExecutionActivity.this);
         View mView = getLayoutInflater().inflate(R.layout.exercise_finish_confirmation, null);
 
-        boolean madeChoice = false;
         Button btnConfirm = (Button) mView.findViewById(R.id.btn_confirm);
         ImageButton btnClose = (ImageButton) mView.findViewById(R.id.btn_close_confirmation);
-        final ImageButton emoticon1 = (ImageButton) mView.findViewById(R.id.ic_emotion_1);
-        final ImageButton emoticon2 = (ImageButton) mView.findViewById(R.id.ic_emotion_2);
-        final ImageButton emoticon3 = (ImageButton) mView.findViewById(R.id.ic_emotion_3);
-        final ImageButton emoticon4 = (ImageButton) mView.findViewById(R.id.ic_emotion_4);
-        final ImageButton emoticon5 = (ImageButton) mView.findViewById(R.id.ic_emotion_5);
-        TextView motivation = (TextView) mView.findViewById(R.id.txt_motivation);
 
-        final ImageButton btnlist [] = {(ImageButton)mView.findViewById(R.id.ic_emotion_1),
+        final List<EffortButton> btnList = new ArrayList<EffortButton>();
+        btnList.add(new EffortButton(1, (TextView) mView.findViewById(R.id.txt_emoticon_1), (ImageButton) mView.findViewById(R.id.ic_emotion_1)));
+        btnList.add(new EffortButton(2, (TextView) mView.findViewById(R.id.txt_emoticon_2), (ImageButton) mView.findViewById(R.id.ic_emotion_2)));
+        btnList.add(new EffortButton(3, (TextView) mView.findViewById(R.id.txt_emoticon_3), (ImageButton) mView.findViewById(R.id.ic_emotion_3)));
+        btnList.add(new EffortButton(4, (TextView) mView.findViewById(R.id.txt_emoticon_4), (ImageButton) mView.findViewById(R.id.ic_emotion_4)));
+        btnList.add(new EffortButton(5, (TextView) mView.findViewById(R.id.txt_emoticon_5), (ImageButton) mView.findViewById(R.id.ic_emotion_5)));
+
+        TextView timeResult = (TextView) mView.findViewById(R.id.txt_time_result);
+        timeResult.setText(timer.getText());
+        final TextView motivation = (TextView) mView.findViewById(R.id.txt_motivation);
+        motivation.setVisibility(View.INVISIBLE);
+        /*TextView emotTitle1 = (TextView) mView.findViewById(R.id.txt_emoticon_1);
+        TextView emotTitle2 = (TextView) mView.findViewById(R.id.txt_emoticon_2);
+        TextView emotTitle3 = (TextView) mView.findViewById(R.id.txt_emoticon_3);
+        TextView emotTitle4 = (TextView) mView.findViewById(R.id.txt_emoticon_4);
+        TextView emotTitle5 = (TextView) mView.findViewById(R.id.txt_emoticon_5);*/
+
+        /*final ImageButton btnlist [] = {(ImageButton)mView.findViewById(R.id.ic_emotion_1),
                 (ImageButton) mView.findViewById(R.id.ic_emotion_2),
                 (ImageButton) mView.findViewById(R.id.ic_emotion_3),
                 (ImageButton) mView.findViewById(R.id.ic_emotion_4),
-                (ImageButton) mView.findViewById(R.id.ic_emotion_5)};
+                (ImageButton) mView.findViewById(R.id.ic_emotion_5)};*/
 
 
         mBuilder.setView(mView);
@@ -170,52 +191,65 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
 
         btnClose.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                for (EffortButton btn : btnList) {
+                    DrawableCompat.setTint(btn.getBtn().getDrawable(), ContextCompat.getColor(ExerciseExecutionActivity.this, R.color.icons_black));
+                }
                 finishAlert.hide();
             }
         });
 
-        emoticon1.setOnClickListener(new View.OnClickListener() {
+        btnList.get(0).getBtn().setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                selectedItem(emoticon1, btnlist);
+                // setDefaultButton(btnList.get(0), btnList);
+                btnList.get(0).select(ExerciseExecutionActivity.this, btnList, motivation);
             }
         });
 
-        emoticon2.setOnClickListener(new View.OnClickListener() {
+        btnList.get(1).getBtn().setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                selectedItem(emoticon2, btnlist);
+                // setDefaultButton(btnList.get(1), btnList);
+                btnList.get(1).select(ExerciseExecutionActivity.this, btnList, motivation);
             }
         });
 
-        emoticon3.setOnClickListener(new View.OnClickListener() {
+        btnList.get(2).getBtn().setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                selectedItem(emoticon3, btnlist);
+                // setDefaultButton(btnList.get(2), btnList);
+                btnList.get(2).select(ExerciseExecutionActivity.this, btnList, motivation);
             }
         });
 
-        emoticon4.setOnClickListener(new View.OnClickListener() {
+        btnList.get(3).getBtn().setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                selectedItem(emoticon4, btnlist);
+                //setDefaultButton(btnList.get(3), btnList);
+                btnList.get(3).select(ExerciseExecutionActivity.this, btnList, motivation);
             }
         });
 
-        emoticon5.setOnClickListener(new View.OnClickListener() {
+        btnList.get(4).getBtn().setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                selectedItem(emoticon5, btnlist);
+                //setDefaultButton(btnList.get(4), btnList);
+                btnList.get(4).select(ExerciseExecutionActivity.this, btnList, motivation);
             }
         });
 
 
     }
 
-    private void selectedItem(ImageButton btn, ImageButton btnList[]){
-        setDefaultButton(btnList);
-        DrawableCompat.setTint(btn.getDrawable(), ContextCompat.getColor(ExerciseExecutionActivity.this, R.color.colorAccent));
-    }
-    public void setDefaultButton(ImageButton btnList[]) {
-        for (int i = 0; i <= btnList.length-1; i++ ) {
-            DrawableCompat.setTint(btnList[i].getDrawable(), ContextCompat.getColor(ExerciseExecutionActivity.this, R.color.icons_black));
+/*    public void setDefaultButton(EffortButton btn, List<EffortButton> btnList) {
+        for (EffortButton eBtn : btnList) {
+            if (eBtn.isSelected()) {
+                if (eBtn.getLevel() != btn.getLevel()) {
+                    eBtn.deselect(ExerciseExecutionActivity.this);
+                }
+            } else {
+                if (eBtn.getLevel() != btn.getLevel())
+                    eBtn.getTitle().setVisibility(View.INVISIBLE);
+            }
         }
-    }
+    }*/
+
+
     private void finishExerciseAlert() {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(ExerciseExecutionActivity.this);
         View mView = getLayoutInflater().inflate(R.layout.dialog_alert_finish, null);
