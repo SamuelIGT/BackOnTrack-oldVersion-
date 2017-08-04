@@ -3,6 +3,7 @@ package br.ufc.quixada.backontrack.activities;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
@@ -11,11 +12,13 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,7 +73,7 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
         chronometer = new Chronometer(timer, this);
 
         finish.setVisibility(View.INVISIBLE);
-//        setupSteps();
+        setupSteps();
 
         setupScreen(this);
 
@@ -87,6 +90,22 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
 
         finishExerciseAlert();
     }
+
+    public void setupSteps(){
+        LinearLayout stepsLayout2 = (LinearLayout) findViewById(R.id.layout_steps_2);
+        LinearLayout stepsLayout1 = (LinearLayout) findViewById(R.id.layout_steps_1);
+
+        }
+
+        /*Log.v("StepsLayout Children", ""+stepsLayout1.getChildCount());
+        for( int i = 0; i < stepsLayout.getChildCount(); i++ ) {
+            if (stepsLayout.getChildAt(i) instanceof Button) {
+                Log.v("StepsLayout TextView", "" + i);
+            }
+        }*/
+
+        //List<TextView> stepsView = new ArrayList<>();
+        //stepsView.add((TextView)findViewById(R.));
 
 
 /*    private void setupSteps() {
@@ -151,7 +170,7 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
         Button btnConfirm = (Button) mView.findViewById(R.id.btn_confirm);
         ImageButton btnClose = (ImageButton) mView.findViewById(R.id.btn_close_confirmation);
 
-        final List<EffortButton> btnList = new ArrayList<EffortButton>();
+        final List<EffortButton> btnList = new ArrayList<>();
         btnList.add(new EffortButton(1, (TextView) mView.findViewById(R.id.txt_emoticon_1), (ImageButton) mView.findViewById(R.id.ic_emotion_1)));
         btnList.add(new EffortButton(2, (TextView) mView.findViewById(R.id.txt_emoticon_2), (ImageButton) mView.findViewById(R.id.ic_emotion_2)));
         btnList.add(new EffortButton(3, (TextView) mView.findViewById(R.id.txt_emoticon_3), (ImageButton) mView.findViewById(R.id.ic_emotion_3)));

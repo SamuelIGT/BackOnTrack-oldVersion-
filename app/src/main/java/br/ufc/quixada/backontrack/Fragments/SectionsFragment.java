@@ -75,9 +75,6 @@ public class SectionsFragment extends Fragment {
                // switch ()
 
                 Intent exerciseIntent = new Intent(getActivity(), ExerciseActivity.class);
-                Log.v("CLICK_C groupPosition:", ""+groupPosition);
-                Log.v("CLICK_C childPosition:", ""+childPosition);
-                Log.v("CLICK_C id:", ""+id);
 
                 switch (groupPosition){
                     case 0:

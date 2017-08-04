@@ -16,11 +16,218 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="PASSOS"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/white_view_background" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/layout_steps_1"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="-22dp"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/teste"
+                android:clickable="true"
+                android:text="1"
+                android:textSize="16sp" />
+
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="14dp"
+                android:layout_marginEnd="-5dp"
+                android:layout_marginStart="-5dp"
+                android:layout_marginTop="13dp"
+                android:layout_weight="0.5"
+                android:background="@color/icons_black" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="-22dp"
+                android:layout_marginStart="-22dp"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/teste"
+                android:text="3"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="14dp"
+                android:layout_marginEnd="-5dp"
+                android:layout_marginStart="-5dp"
+                android:layout_marginTop="13dp"
+                android:layout_weight="0.5"
+                android:background="@color/icons_black" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="-22dp"
+                android:layout_marginStart="-22dp"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/teste"
+                android:text="2"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="14dp"
+                android:layout_marginEnd="-5dp"
+                android:layout_marginStart="-5dp"
+                android:layout_marginTop="13dp"
+                android:layout_weight="0.5"
+                android:background="@color/icons_black" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="-22dp"
+                android:layout_marginStart="-22dp"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/teste"
+                android:text="4"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="14dp"
+                android:layout_marginEnd="-5dp"
+                android:layout_marginStart="-5dp"
+                android:layout_marginTop="13dp"
+                android:layout_weight="0.5"
+                android:background="@color/icons_black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/layout_steps_2"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="14dp"
+                android:layout_marginEnd="-5dp"
+                android:layout_marginStart="-5dp"
+                android:layout_marginTop="13dp"
+                android:layout_weight="0.5"
+                android:background="@color/icons_black" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="-22dp"
+                android:layout_marginStart="-22dp"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/teste"
+                android:text="5"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="14dp"
+                android:layout_marginEnd="-5dp"
+                android:layout_marginStart="-5dp"
+                android:layout_marginTop="13dp"
+                android:layout_weight="0.5"
+                android:background="@color/icons_black" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="-22dp"
+                android:layout_marginStart="-22dp"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/teste"
+                android:text="6"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="14dp"
+                android:layout_marginEnd="-5dp"
+                android:layout_marginStart="-5dp"
+                android:layout_marginTop="13dp"
+                android:layout_weight="0.5"
+                android:background="@color/icons_black" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="-22dp"
+                android:layout_marginStart="-22dp"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/teste"
+                android:text="7"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="14dp"
+                android:layout_marginEnd="-5dp"
+                android:layout_marginStart="-5dp"
+                android:layout_marginTop="13dp"
+                android:layout_weight="0.5"
+                android:background="@color/icons_black" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-22dp"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/teste"
+                android:text="8"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/white_view_background" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:drawableTop="@drawable/ic_play"
+        android:layout_marginBottom="-40dp"
+        android:layout_marginEnd="120dp"
+        android:textSize="12sp"
+        android:text="Assistir"/>
 
     <RelativeLayout
         android:id="@+id/layout_start"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1">
 
         <ImageView
@@ -62,21 +269,22 @@
             android:id="@+id/btn_finish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/pgBarStatic"
+            android:layout_marginTop="-25dp"
             android:layout_toEndOf="@+id/pgBarStatic"
-            android:layout_marginTop="170dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:text="@string/button_finish"
-            android:paddingLeft="30dp"
             android:textColor="@color/colorAccent"
             android:textSize="15sp"
             android:textStyle="bold" />
+
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
 
         <TextView
             android:id="@+id/timer"
@@ -90,9 +298,9 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_below="@+id/timer"
-            >
+            android:layout_marginTop="-15dp"
+            android:orientation="horizontal">
 
             <TextView
 
@@ -102,8 +310,7 @@
                 android:text="@string/timer_min_description"
                 android:textAlignment="center"
                 android:textSize="25sp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
             <TextView
 
@@ -128,7 +335,6 @@
                 android:textStyle="bold" />
         </LinearLayout>
     </RelativeLayout>
-
 
 
 </LinearLayout>
