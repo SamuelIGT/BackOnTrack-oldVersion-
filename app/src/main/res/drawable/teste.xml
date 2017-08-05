@@ -1,45 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_focused="true">
-        <shape
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:shape="oval">
-
-            <solid
-                android:color="@color/colorAccent"/>
-
-            <size
-                android:width="40dp"
-                android:height="40dp"/>
-        </shape>
-    </item>
-
-    <item android:state_pressed="true">
-        <shape
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:shape="oval">
-
-            <solid
-                android:color="@color/colorAccent"/>
-
-            <size
-                android:width="40dp"
-                android:height="40dp"/>
-        </shape>
-    </item>
-
-    <item>
-        <shape
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:shape="oval">
-
-            <solid
-                android:color="@color/icons_black"/>
-
-            <size
-                android:width="40dp"
-                android:height="40dp"/>
-        </shape>
-
-    </item>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" android:exitFadeDuration="@android:integer/config_mediumAnimTime">
+    <!-- NOTE: order is important (the first matching state(s) is what is rendered) -->
+    <item
+        android:state_selected="true"
+        android:drawable="@drawable/steps_shape_pressed" />
+    <item
+        android:drawable="@drawable/steps_shape" />
 </selector>

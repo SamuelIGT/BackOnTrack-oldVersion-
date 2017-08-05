@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ import java.util.ListIterator;
 import java.util.Vector;
 
 import br.ufc.quixada.backontrack.EffortButton;
+import br.ufc.quixada.backontrack.ProgressBarAnimation;
 import br.ufc.quixada.backontrack.R;
 import br.ufc.quixada.backontrack.chronometer.Chronometer;
 import fr.castorflex.android.circularprogressbar.CircularProgressBar;
@@ -91,12 +93,168 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
         finishExerciseAlert();
     }
 
-    public void setupSteps(){
+    public void setupSteps() {
         LinearLayout stepsLayout2 = (LinearLayout) findViewById(R.id.layout_steps_2);
         LinearLayout stepsLayout1 = (LinearLayout) findViewById(R.id.layout_steps_1);
 
+        final List<Button> btnSteps = new ArrayList<>();
+        final List<ProgressBar> stepsProgress = new ArrayList<>();
+
+        //travel the entire stepsLayout1 children.
+        for (int i = 0; i < stepsLayout1.getChildCount(); i++) {
+            //if the child is a button
+            if (stepsLayout1.getChildAt(i) instanceof Button) {
+                btnSteps.add((Button) stepsLayout1.getChildAt(i));
+            } else if (stepsLayout1.getChildAt(i) instanceof ProgressBar) {
+                stepsProgress.add((ProgressBar) stepsLayout1.getChildAt(i));
+            }
+        }
+        //travel the entire stepsLayout2 children.
+        for (int i = 0; i < stepsLayout2.getChildCount(); i++) {
+            //if the child is a button
+            if (stepsLayout2.getChildAt(i) instanceof Button) {
+                btnSteps.add((Button) stepsLayout2.getChildAt(i));
+            } else if (stepsLayout2.getChildAt(i) instanceof ProgressBar) {
+                stepsProgress.add((ProgressBar) stepsLayout2.getChildAt(i));
+            }
         }
 
+        //sets the OnClickListener
+        for (int i = 0; i < btnSteps.size(); i++) {
+            final int j = i;
+            btnSteps.get(i).setOnClickListener(new View.OnClickListener() {
+
+                public void onClick(View view) {
+
+                    btnSteps.get(j).setSelected(!btnSteps.get(j).isSelected());
+
+                    //Handle selected state change
+                    if (btnSteps.get(j).isSelected()) {
+                        if (j + 1 == btnSteps.size()) {
+                            for (int k = j; k >= 0; k--) {
+                                if (!btnSteps.get(k).isSelected()) {
+                                    btnSteps.get(k).setSelected(!btnSteps.get(k).isSelected());
+                                }
+                                ProgressBarAnimation anim = new ProgressBarAnimation(stepsProgress.get(k), 0, 100);
+                                anim.setDuration(1000);
+                                stepsProgress.get(k).startAnimation(anim);
+                            }
+                            return;
+                        }
+
+                        if (j + 1 == (btnSteps.size() / 2)) {
+                            ProgressBarAnimation anim = new ProgressBarAnimation(stepsProgress.get(j + 1), 0, 100);
+                            anim.setDuration(1000);
+                            stepsProgress.get(j + 1).startAnimation(anim);
+                        }
+
+                        if (j + 1 > (btnSteps.size() / 2)) {
+                            for (int k = j; k >= 0; k--) {
+                                if (!btnSteps.get(k).isSelected()) {
+                                    btnSteps.get(k).setSelected(!btnSteps.get(k).isSelected());
+                                }
+                                ProgressBarAnimation anim = new ProgressBarAnimation(stepsProgress.get(k), 0, 100);
+                                anim.setDuration(1000);
+                                stepsProgress.get(k).startAnimation(anim);
+                            }
+
+                            ProgressBarAnimation anim = new ProgressBarAnimation(stepsProgress.get(j + 1), 0, 100);
+                            anim.setDuration(1000);
+                            stepsProgress.get(j + 1).startAnimation(anim);
+                        } else {
+                            for (int k = j; k >= 0; k--) {
+                                if (!btnSteps.get(k).isSelected()) {
+                                    btnSteps.get(k).setSelected(!btnSteps.get(k).isSelected());
+                                }
+                                ProgressBarAnimation anim = new ProgressBarAnimation(stepsProgress.get(k), 0, 100);
+                                anim.setDuration(1000);
+                                stepsProgress.get(k).startAnimation(anim);
+                            }
+                            ProgressBarAnimation anim = new ProgressBarAnimation(stepsProgress.get(j), 0, 100);
+                            anim.setDuration(1000);
+                            stepsProgress.get(j).startAnimation(anim);
+                        }
+
+                        //Handle de-select state
+                    } else {
+                        if (j + 1 == btnSteps.size()) {
+
+                            return;
+                        }
+
+                        if (j + 1 == (btnSteps.size() / 2)) {
+                            ProgressBarAnimation anim = new ProgressBarAnimation(stepsProgress.get(j + 1), 100, 0);
+                            anim.setDuration(1000);
+                            stepsProgress.get(j + 1).startAnimation(anim);
+                        }
+
+                        if (j + 1 > (btnSteps.size() / 2)) {
+                            for (int k = j; k < btnSteps.size(); k++) {
+                                if (btnSteps.get(k).isSelected()) {
+                                    if (k == btnSteps.size() - 1) {
+                                        btnSteps.get(k).setSelected(false);
+                                        ProgressBarAnimation anim = new ProgressBarAnimation(stepsProgress.get(k), 100, 0);
+                                        anim.setDuration(1000);
+                                        stepsProgress.get(k).startAnimation(anim);
+                                    } else {
+                                        btnSteps.get(k).setSelected(false);
+                                        ProgressBarAnimation anim = new ProgressBarAnimation(stepsProgress.get(k + 1), 100, 0);
+                                        anim.setDuration(1000);
+                                        stepsProgress.get(k + 1).startAnimation(anim);
+                                    }
+                                }
+                            }
+
+                            ProgressBarAnimation anim = new ProgressBarAnimation(stepsProgress.get(j + 1), 100, 0);
+                            anim.setDuration(1000);
+                            stepsProgress.get(j + 1).startAnimation(anim);
+                        } else {
+                            for (int k = j; k < btnSteps.size(); k++) {
+                                if (btnSteps.get(k).isSelected()) {
+                                    if (k + 1 >= btnSteps.size() / 2) {
+                                        if (k == btnSteps.size() - 1){
+                                            btnSteps.get(k).setSelected(false);
+                                        }else{
+                                            ProgressBarAnimation anim = new ProgressBarAnimation(stepsProgress.get(k + 1), 100, 0);
+                                            anim.setDuration(1000);
+                                            stepsProgress.get(k + 1).startAnimation(anim);
+                                        }
+
+                                    }
+
+                                    btnSteps.get(k).setSelected(false);
+                                    ProgressBarAnimation anim = new ProgressBarAnimation(stepsProgress.get(k), 100, 0);
+                                    anim.setDuration(1000);
+                                    stepsProgress.get(k).startAnimation(anim);
+                                }
+
+                            }
+
+                            ProgressBarAnimation anim = new ProgressBarAnimation(stepsProgress.get(j), 100, 0);
+                            anim.setDuration(1000);
+                            stepsProgress.get(j).startAnimation(anim);
+                        }
+
+
+                    }
+                }
+            });
+        }
+
+
+
+        /*btnStep1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                btnStep1.setSelected(!btnStep1.isSelected());
+                if (btnStep1.isSelected()) {
+                    //Handle selected state change
+                } else {
+                    //Handle de-select state change
+                }
+            }
+        });*/
+
+    }
         /*Log.v("StepsLayout Children", ""+stepsLayout1.getChildCount());
         for( int i = 0; i < stepsLayout.getChildCount(); i++ ) {
             if (stepsLayout.getChildAt(i) instanceof Button) {
@@ -104,8 +262,8 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
             }
         }*/
 
-        //List<TextView> stepsView = new ArrayList<>();
-        //stepsView.add((TextView)findViewById(R.));
+    //List<TextView> stepsView = new ArrayList<>();
+    //stepsView.add((TextView)findViewById(R.));
 
 
 /*    private void setupSteps() {
