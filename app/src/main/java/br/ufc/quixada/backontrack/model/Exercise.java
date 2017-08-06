@@ -1,6 +1,7 @@
 package br.ufc.quixada.backontrack.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by samue on 17/07/2017.
@@ -11,6 +12,7 @@ public class Exercise implements Serializable{
     private int nivel;
     private String nome;
     private String descricao;
+/*    private List<Integer> stepsAudio;*/
     //private int duracao;
     private int thumbnail;
 
@@ -18,11 +20,11 @@ public class Exercise implements Serializable{
 
     }
 
-    public Exercise(int nivel, String nome,/* int duracao,*/ String descricao, int thumbnail){
+    public Exercise(int nivel, String nome,/* int duracao,*/ String descricao, int thumbnail/*, List<Integer> stepsAudio*/){
         this.nivel = nivel;
         this.nome = nome;
         this.descricao = descricao;
-        //this.duracao = duracao;
+        /*this.stepsAudio = stepsAudio;*/
         this.thumbnail = thumbnail;
     }
 

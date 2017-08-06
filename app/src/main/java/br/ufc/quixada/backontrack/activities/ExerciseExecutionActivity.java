@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
@@ -22,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import org.w3c.dom.Text;
 
@@ -47,15 +49,14 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
 
     //private List<String> steps;
     private TextView timer;
-    private TextView txtViewSteps;
+
     private Button startStop;
     private Button finish;
+    private Button playWatch;
+
     private CircularProgressBar pgBar;
-    private ImageView staticPgBar;
     private CircularProgressDrawable pgBarDrawable;
     private Chronometer chronometer;
-
-    private int selectedEffortLevel;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,8 +70,8 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
         timer = (TextView) findViewById(R.id.timer);
         startStop = (Button) findViewById(R.id.btn_start_stop);
         finish = (Button) findViewById(R.id.btn_finish);
+        playWatch = (Button) findViewById(R.id.btn_play);
         pgBar = (CircularProgressBar) findViewById(R.id.pgBar);
-        staticPgBar = (ImageView) findViewById(R.id.pgBarStatic);
         pgBarDrawable = (CircularProgressDrawable) pgBar.getIndeterminateDrawable();
         chronometer = new Chronometer(timer, this);
 
@@ -297,6 +298,32 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
                 finishExerciseConfirmation();
             }
         });
+
+        playWatch.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                watchVideo();
+            }
+        });
+    }
+
+    private void watchVideo() {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(ExerciseExecutionActivity.this);
+        View mView = getLayoutInflater().inflate(R.layout.dialog_video_lesson, null);
+
+        VideoView mVideoView = (VideoView) mView.findViewById(R.id.video_view);
+        String uriPath = "android.resource://br.ufc.quixada.backontrack/" + R.raw.test;
+
+        mBuilder.setView(mView);
+        final AlertDialog finishAlert = mBuilder.create();
+        finishAlert.show();
+
+        Uri uri2 = Uri.parse(uriPath);
+        mVideoView.setVideoURI(uri2);
+        mVideoView.requestFocus();
+        mVideoView.start();
+
     }
 
     private void startTimer() {
