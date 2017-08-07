@@ -39,7 +39,6 @@ public class ExerciseActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ExerciseAdapter adapter;
-    private List<Exercise> exerciseList;
     private Section sec;
 
 

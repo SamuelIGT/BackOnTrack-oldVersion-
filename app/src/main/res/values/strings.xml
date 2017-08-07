@@ -27,5 +27,6 @@
     <string name="emoticon5_title">Muito Difícil</string>
     <string name="txt_motivation">Parabéns! Você está indo muito bem.</string>
     <string name="btn_confirm">Confirmar</string>
+    <string name="exercise_execution_extra">EXERCISE_EXECUTION</string>
 
 </resources>

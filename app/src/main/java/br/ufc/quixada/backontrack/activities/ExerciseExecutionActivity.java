@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -38,6 +39,7 @@ import br.ufc.quixada.backontrack.EffortButton;
 import br.ufc.quixada.backontrack.ProgressBarAnimation;
 import br.ufc.quixada.backontrack.R;
 import br.ufc.quixada.backontrack.chronometer.Chronometer;
+import br.ufc.quixada.backontrack.model.Exercise;
 import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 import fr.castorflex.android.circularprogressbar.CircularProgressDrawable;
 
@@ -58,9 +60,13 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
     private CircularProgressDrawable pgBarDrawable;
     private Chronometer chronometer;
 
+    private Exercise exerc;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercise_execution);
+
+        exerc = (Exercise) getIntent().getSerializableExtra(getString(R.string.exercise_execution_extra));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_exercise_execution);
         //toolbar.setTitle(exercise.getTitle());
@@ -83,6 +89,7 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
     }
 
     private void setupScreen(Context context) {
+        Log.v("EXERCISE_EXTRA_TEST", exerc.getNome());
         setupButtons(context);
     }
 
@@ -310,19 +317,55 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
 
     private void watchVideo() {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(ExerciseExecutionActivity.this);
-        View mView = getLayoutInflater().inflate(R.layout.dialog_video_lesson, null);
+        final View mView = getLayoutInflater().inflate(R.layout.dialog_video_lesson, null);
+        mView.setBackground(null);
 
-        VideoView mVideoView = (VideoView) mView.findViewById(R.id.video_view);
-        String uriPath = "android.resource://br.ufc.quixada.backontrack/" + R.raw.test;
+        final ImageButton btnPlay = (ImageButton) mView.findViewById(R.id.btn_play_video);
+        btnPlay.setImageAlpha(180);
+
+        final VideoView mVideoView = (VideoView) mView.findViewById(R.id.video_view);
+        String uriPath = "android.resource://br.ufc.quixada.backontrack/" + exerc.getVideoPath();
 
         mBuilder.setView(mView);
         final AlertDialog finishAlert = mBuilder.create();
         finishAlert.show();
-
         Uri uri2 = Uri.parse(uriPath);
         mVideoView.setVideoURI(uri2);
         mVideoView.requestFocus();
-        mVideoView.start();
+        mVideoView.seekTo(100);
+
+        btnPlay.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if(btnPlay.getImageAlpha() == 180) {
+                    btnPlay.setImageAlpha(0);
+                    mVideoView.start();
+                }
+                else{
+                    btnPlay.setImageResource(R.drawable.ic_play);
+                    btnPlay.setImageAlpha(180);
+                    mVideoView.pause();
+
+                }
+            }
+        });
+
+        //Called when the video ends.
+        mVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            public void onCompletion(MediaPlayer mp) {
+                btnPlay.setImageResource(R.drawable.ic_replay);
+                btnPlay.setImageAlpha(180);
+                mVideoView.seekTo(100);
+            }
+        });
+
+
+
+
+
+
+
 
     }
 

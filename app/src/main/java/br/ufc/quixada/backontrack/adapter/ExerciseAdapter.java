@@ -6,6 +6,7 @@ import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.ufc.quixada.backontrack.R;
@@ -29,21 +31,27 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
 
     private Context mContext;
     private List<Exercise> exerciseList;
+    private Intent exerciseIntent;
     private View itemView;
+    private List<Integer> itemsPosition;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, description;
         public ImageView thumbnail;
+        public Button start;
 
         public MyViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.title_text);
             description = (TextView) view.findViewById(R.id.description_text);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail_view);
+            start = (Button) view.findViewById(R.id.btn_start);
+
         }
     }
 
     public ExerciseAdapter(Context mContext, List<Exercise> exerciseList) {
+        this.itemsPosition = new ArrayList<>();
         this.mContext = mContext;
         this.exerciseList = exerciseList;
     }
@@ -56,17 +64,9 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
         // setupLayout(itemView);
 
         ImageView thumbnail = (ImageView) itemView.findViewById(R.id.thumbnail_view);
+        exerciseIntent = new Intent(mContext, ExerciseExecutionActivity.class);
 
         Button start = (Button) itemView.findViewById(R.id.btn_start);
-
-        start.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent exerciseIntent = new Intent(mContext, ExerciseExecutionActivity.class);
-                mContext.startActivity(exerciseIntent);
-            }
-
-        });
 
         TextView t = (TextView) itemView.findViewById(R.id.title_text);
         return new MyViewHolder(itemView);
@@ -75,10 +75,19 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Exercise exercise = exerciseList.get(position);
+        final Exercise exercise = exerciseList.get(position);
         holder.title.setText(exercise.getNome());
         holder.description.setText(exercise.getDescricao());
+        itemsPosition.add(position);
 
+        holder.start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    exerciseIntent.putExtra(mContext.getString(R.string.exercise_execution_extra), exercise);
+                    mContext.startActivity(exerciseIntent);
+            }
+
+        });
         // loading album cover using Glide library
         Glide.with(mContext).load(exercise.getThumbnail()).into(holder.thumbnail);
 

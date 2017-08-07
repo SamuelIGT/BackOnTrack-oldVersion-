@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="-22dp"
                 android:background="@android:color/transparent"
-                android:drawableTop="@drawable/teste"
+                android:drawableTop="@drawable/step_shape"
                 android:clickable="true"
                 android:text="1"
                 android:textSize="16sp"
@@ -74,7 +74,7 @@
                 android:layout_marginEnd="-22dp"
                 android:layout_marginStart="-22dp"
                 android:background="@android:color/transparent"
-                android:drawableTop="@drawable/teste"
+                android:drawableTop="@drawable/step_shape"
                 android:text="2"
                 android:textSize="16sp"
                 android:clickable="true"/>
@@ -96,7 +96,7 @@
                 android:layout_marginEnd="-22dp"
                 android:layout_marginStart="-22dp"
                 android:background="@android:color/transparent"
-                android:drawableTop="@drawable/teste"
+                android:drawableTop="@drawable/step_shape"
                 android:text="3"
                 android:textSize="16sp"
                 android:clickable="true"/>
@@ -118,7 +118,7 @@
                 android:layout_marginEnd="-22dp"
                 android:layout_marginStart="-22dp"
                 android:background="@android:color/transparent"
-                android:drawableTop="@drawable/teste"
+                android:drawableTop="@drawable/step_shape"
                 android:text="4"
                 android:textSize="16sp"
                 android:clickable="true"/>
@@ -159,7 +159,7 @@
                 android:layout_marginEnd="-22dp"
                 android:layout_marginStart="-22dp"
                 android:background="@android:color/transparent"
-                android:drawableTop="@drawable/teste"
+                android:drawableTop="@drawable/step_shape"
                 android:text="5"
                 android:textSize="16sp" />
 
@@ -179,7 +179,7 @@
                 android:layout_marginEnd="-22dp"
                 android:layout_marginStart="-22dp"
                 android:background="@android:color/transparent"
-                android:drawableTop="@drawable/teste"
+                android:drawableTop="@drawable/step_shape"
                 android:text="6"
                 android:textSize="16sp" />
 
@@ -199,7 +199,7 @@
                 android:layout_marginEnd="-22dp"
                 android:layout_marginStart="-22dp"
                 android:background="@android:color/transparent"
-                android:drawableTop="@drawable/teste"
+                android:drawableTop="@drawable/step_shape"
                 android:text="7"
                 android:textSize="16sp" />
 
@@ -218,7 +218,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="-22dp"
                 android:background="@android:color/transparent"
-                android:drawableTop="@drawable/teste"
+                android:drawableTop="@drawable/step_shape"
                 android:text="8"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -238,7 +238,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:drawableTop="@drawable/ic_play"
+        android:drawableTop="@drawable/ic_watch"
         android:layout_marginBottom="-40dp"
         android:layout_marginEnd="120dp"
         android:textSize="12sp"

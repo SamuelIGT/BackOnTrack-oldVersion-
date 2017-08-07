@@ -11,11 +11,13 @@ public class Section implements Serializable{
     private int id;
     private String title;
     private List<Exercise> exerciseList;
+    private boolean isLocked;
 
-    public Section(int id, String title, List<Exercise> exerciseList) {
+    public Section(int id, String title, List<Exercise> exerciseList, boolean isLocked) {
         this.id = id;
         this.title = title;
         this.exerciseList = exerciseList;
+        this.isLocked = isLocked;
     }
 
     public int getID() {
@@ -32,6 +34,14 @@ public class Section implements Serializable{
 
     public List<Exercise> getExerciseList() {
         return exerciseList;
+    }
+
+    public boolean isLocked() {
+        return isLocked;
+    }
+
+    public void setLocked(boolean locked) {
+        isLocked = locked;
     }
 
     public void addExerc(Exercise Exerc){

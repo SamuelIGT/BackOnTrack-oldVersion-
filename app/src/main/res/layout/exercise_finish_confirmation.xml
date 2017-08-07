@@ -123,7 +123,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:src="@drawable/ic_emoticon_1_64dp"
+                android:src="@drawable/ic_emoticon_1"
                 />
 
             <ImageButton
@@ -132,7 +132,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:src="@drawable/ic_emoticon_2_64dp" />
+                android:src="@drawable/ic_emoticon_2" />
 
             <ImageButton
                 android:id="@+id/ic_emotion_3"
@@ -140,7 +140,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:src="@drawable/ic_emoticon_3_64dp" />
+                android:src="@drawable/ic_emoticon_3" />
 
             <ImageButton
                 android:id="@+id/ic_emotion_4"
@@ -148,7 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:src="@drawable/ic_emoticon_4_64dp" />
+                android:src="@drawable/ic_emoticon_4" />
 
             <ImageButton
                 android:id="@+id/ic_emotion_5"
@@ -157,7 +157,7 @@
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:src="@drawable/ic_emoticon_5_64dp" />
+                android:src="@drawable/ic_emoticon_5" />
 
         </LinearLayout>
 

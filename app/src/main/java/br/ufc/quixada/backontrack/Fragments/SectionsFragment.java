@@ -22,6 +22,7 @@ import br.ufc.quixada.backontrack.adapter.ExpandableListAdapter;
 import br.ufc.quixada.backontrack.model.Exercise;
 import br.ufc.quixada.backontrack.model.Level;
 import br.ufc.quixada.backontrack.model.Section;
+import br.ufc.quixada.backontrack.model.User;
 
 /**
  * Created by samue on 22/07/2017.
@@ -38,7 +39,9 @@ public class SectionsFragment extends Fragment {
     Map<String, List<String>> listDataChild;
     int previousGroup = -1;
     private View rootView;
+
     //TESTING PURPOSE
+    User user;
     Level lOne, lTwo, lThree;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,15 @@ public class SectionsFragment extends Fragment {
     }
 
     void FnClickEvents(final View thisView) {
+        expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            //Header Click
+            @Override
+            public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
+                Log.v("LevelID", ""+i);
+                return false;
+            }
+        });
+
         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             //Listening to child item selection
             @Override
@@ -139,29 +151,32 @@ public class SectionsFragment extends Fragment {
     }
 
     private void prepareSections() {
+        //User
+        user = new User(1);
+
         //Levels
         lOne = new Level(1, new ArrayList<Section>());
         lTwo = new Level(2, new ArrayList<Section>());
         lThree = new Level(3, new ArrayList<Section>());
 
         //Sections
-        Section alg = new Section(1, "Alongamento", new ArrayList<Exercise>());
-        Section fortB = new Section(2, "Fortalecimento do braço", new ArrayList<Exercise>());
-        Section fortM = new Section(3, "Fortalecimento da mão", new ArrayList<Exercise>());
-        Section coord = new Section(4, "Cordenação", new ArrayList<Exercise>());
-        Section habiM = new Section(5, "Habilidades manuais", new ArrayList<Exercise>());
+        Section alg = new Section(1, "Alongamento", new ArrayList<Exercise>(), false);
+        Section fortB = new Section(2, "Fortalecimento do braço", new ArrayList<Exercise>(), true);
+        Section fortM = new Section(3, "Fortalecimento da mão", new ArrayList<Exercise>(), true);
+        Section coord = new Section(4, "Cordenação", new ArrayList<Exercise>(), true);
+        Section habiM = new Section(5, "Habilidades manuais", new ArrayList<Exercise>(), true);
 
         //Exercises
-        Exercise ex1 = new Exercise(1, "Total Arm Stretch", "Sit straight in your chair and lean forward over your knees.", R.drawable.thumbnail_1);
-        Exercise ex2 = new Exercise(1, "Shoulder Shrug", "Sitin a chair with your arms by your side.", R.drawable.thumbnail_2);
-        Exercise ex3 = new Exercise(2, "Push Ups", "Place the table against a wall", R.drawable.thumbnail_3);
-        Exercise ex4 = new Exercise(2, "One Arm Push-Ups", "Place your weaker hand flat on the table. Use your stronger hand to help keep your hand in place.", R.drawable.thumbnail_4);
-        Exercise ex5 = new Exercise(3, "Grip Power", "Place your weaker arm on the table.", R.drawable.thumbnail_5);
-        Exercise ex6 = new Exercise(3, "Finger Power", "Place the putty on the table and roll into a thick rope. Use your weaker hand as much as possible.", R.drawable.thumbnail_6);
-        Exercise ex7 = new Exercise(4, "Waiter– Ball", "Place the bean bag in your weaker hand.", R.drawable.thumbnail_7);
-        Exercise ex8 = new Exercise(4, "Waiter– Cup", "Place a cup in your weaker hand.", R.drawable.thumbnail_8);
-        Exercise ex9 = new Exercise(5, "Laundry", "Use both hands for the following exercise.", R.drawable.thumbnail_9);
-        Exercise ex10 = new Exercise(5, "Buttons", "Take a shirt with buttons out of your closet.", R.drawable.thumbnail_10);
+        Exercise ex1 = new Exercise(1, "Total Arm Stretch", "Sit straight in your chair and lean forward over your knees.", R.drawable.thumbnail_1, R.raw.video_sample, false);
+        Exercise ex2 = new Exercise(1, "Shoulder Shrug", "Sitin a chair with your arms by your side.", R.drawable.thumbnail_2, R.raw.video_sample, true);
+        Exercise ex3 = new Exercise(2, "Push Ups", "Place the table against a wall", R.drawable.thumbnail_3, R.raw.video_sample, false);
+        Exercise ex4 = new Exercise(2, "One Arm Push-Ups", "Place your weaker hand flat on the table. Use your stronger hand to help keep your hand in place.", R.drawable.thumbnail_4, R.raw.video_sample, true);
+        Exercise ex5 = new Exercise(3, "Grip Power", "Place your weaker arm on the table.", R.drawable.thumbnail_5, R.raw.video_sample, false);
+        Exercise ex6 = new Exercise(3, "Finger Power", "Place the putty on the table and roll into a thick rope. Use your weaker hand as much as possible.", R.drawable.thumbnail_6, R.raw.video_sample, true);
+        Exercise ex7 = new Exercise(4, "Waiter– Ball", "Place the bean bag in your weaker hand.", R.drawable.thumbnail_7, R.raw.video_sample, false);
+        Exercise ex8 = new Exercise(4, "Waiter– Cup", "Place a cup in your weaker hand.", R.drawable.thumbnail_8, R.raw.video_sample, true);
+        Exercise ex9 = new Exercise(5, "Laundry", "Use both hands for the following exercise.", R.drawable.thumbnail_9, R.raw.video_sample, false);
+        Exercise ex10 = new Exercise(5, "Buttons", "Take a shirt with buttons out of your closet.", R.drawable.thumbnail_10, R.raw.video_sample, true);
 
         //Setting up the sections
         alg.addExerc(ex1);
