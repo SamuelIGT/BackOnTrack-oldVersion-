@@ -6,7 +6,6 @@ import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +38,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
         public TextView title, description;
         public ImageView thumbnail;
         public Button start;
+        public ImageView lock;
 
         public MyViewHolder(View view) {
             super(view);
@@ -46,7 +46,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
             description = (TextView) view.findViewById(R.id.description_text);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail_view);
             start = (Button) view.findViewById(R.id.btn_start);
-
+            lock = (ImageView) view.findViewById(R.id.view_card_lock);
         }
     }
 
@@ -79,6 +79,10 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
         holder.title.setText(exercise.getNome());
         holder.description.setText(exercise.getDescricao());
         itemsPosition.add(position);
+
+        if(!exercise.isUnlocked()){
+            holder.lock.setVisibility(View.VISIBLE);
+        }
 
         holder.start.setOnClickListener(new View.OnClickListener() {
             @Override

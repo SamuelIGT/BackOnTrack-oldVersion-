@@ -3,19 +3,34 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="55dip">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/lblListItem"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:textSize="12pt"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:text="Test"
-        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
-        android:textColor="@color/colorAccent"
-        android:textStyle="bold"
-        android:background="#ffffffff"
-        />
+        <TextView
+            android:id="@+id/lblListItem"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:textSize="12pt"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="Test"
+            android:paddingStart="?android:attr/expandableListPreferredChildPaddingLeft"
+            android:paddingEnd="0dp"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:background="#ffffffff"
+            />
+
+        <ImageView
+            android:id="@+id/view_child_list_lock"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_lock_32dp"
+            android:clickable="true"
+            android:background="@drawable/gradient">
+        </ImageView>
+    </RelativeLayout>
+
 
 </LinearLayout>

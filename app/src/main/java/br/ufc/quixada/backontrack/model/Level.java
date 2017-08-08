@@ -1,6 +1,7 @@
 package br.ufc.quixada.backontrack.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -51,6 +52,14 @@ public class Level implements Serializable {
             }
         }
         return null;
+    }
+
+    public List<Boolean> getSectionsPermissions(){
+        List<Boolean> permissionList = new ArrayList<>();
+        for(Section sec: sectionsList) {
+            permissionList.add(sec.isUnlocked());
+        }
+        return permissionList;
     }
 
 

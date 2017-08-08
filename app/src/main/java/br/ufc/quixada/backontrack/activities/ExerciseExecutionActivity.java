@@ -516,6 +516,7 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(ExerciseExecutionActivity.this, "Dados salvos", Toast.LENGTH_SHORT).show();
+                finishAlert.dismiss();
                 ExerciseExecutionActivity.super.onBackPressed();
             }
         });

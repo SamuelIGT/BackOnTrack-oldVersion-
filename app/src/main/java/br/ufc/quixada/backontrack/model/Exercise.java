@@ -1,7 +1,6 @@
 package br.ufc.quixada.backontrack.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by samue on 17/07/2017.
@@ -12,7 +11,7 @@ public class Exercise implements Serializable{
     private int nivel;
     private String nome;
     private String descricao;
-    private boolean isLocked = true;
+    private boolean isUnlocked = true;
     private int videoPath;
 /*    private List<Integer> stepsAudio;*/
     //private int duracao;
@@ -22,14 +21,14 @@ public class Exercise implements Serializable{
 
     }
 
-    public Exercise(int nivel, String nome,/* int duracao,*/ String descricao, int thumbnail, int videoPath , boolean isLocked/*, List<Integer> stepsAudio*/){
+    public Exercise(int nivel, String nome,/* int duracao,*/ String descricao, int thumbnail, int videoPath , boolean isUnlocked/*, List<Integer> stepsAudio*/){
         this.nivel = nivel;
         this.nome = nome;
         this.descricao = descricao;
         /*this.stepsAudio = stepsAudio;*/
         this.thumbnail = thumbnail;
         this.videoPath = videoPath;
-        this.isLocked = isLocked;
+        this.isUnlocked = isUnlocked;
 
     }
 
@@ -78,12 +77,12 @@ public class Exercise implements Serializable{
         this.videoPath = videoPath;
     }
 
-    public boolean isLocked() {
-        return isLocked;
+    public boolean isUnlocked() {
+        return isUnlocked;
     }
 
-    public void setLocked(boolean locked) {
-        isLocked = locked;
+    public void setUnlocked(boolean unlocked) {
+        isUnlocked = unlocked;
     }
 
     public int getThumbnail() {
