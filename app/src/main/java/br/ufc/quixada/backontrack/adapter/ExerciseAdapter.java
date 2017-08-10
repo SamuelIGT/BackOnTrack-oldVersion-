@@ -76,8 +76,8 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         final Exercise exercise = exerciseList.get(position);
-        holder.title.setText(exercise.getNome());
-        holder.description.setText(exercise.getDescricao());
+        holder.title.setText(exercise.getTitle());
+        holder.description.setText(exercise.getDescription());
         itemsPosition.add(position);
 
         if(!exercise.isUnlocked()){

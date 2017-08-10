@@ -1,6 +1,7 @@
 package br.ufc.quixada.backontrack.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by samue on 17/07/2017.
@@ -8,23 +9,23 @@ import java.io.Serializable;
 
 public class Exercise implements Serializable{
     private Integer id;
-    private int nivel;
-    private String nome;
-    private String descricao;
+    private int level;
+    private String title;
+    private String description;
     private boolean isUnlocked = true;
     private int videoPath;
-/*    private List<Integer> stepsAudio;*/
-    //private int duracao;
+    private List<Integer> stepsAudio;
+    private List<String> stepsText;
     private int thumbnail;
 
     public Exercise(){
 
     }
 
-    public Exercise(int nivel, String nome,/* int duracao,*/ String descricao, int thumbnail, int videoPath , boolean isUnlocked/*, List<Integer> stepsAudio*/){
-        this.nivel = nivel;
-        this.nome = nome;
-        this.descricao = descricao;
+    public Exercise(int level, String title,/* int duracao,*/ String description, int thumbnail, int videoPath , boolean isUnlocked/*, List<Integer> stepsAudio*/){
+        this.level = level;
+        this.title = title;
+        this.description = description;
         /*this.stepsAudio = stepsAudio;*/
         this.thumbnail = thumbnail;
         this.videoPath = videoPath;
@@ -40,34 +41,42 @@ public class Exercise implements Serializable{
         this.id = id;
     }
 
-    public int getNivel() {
-        return nivel;
+    public int getLevel() {
+        return level;
     }
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
+    public void setLevel(int level) {
+        this.level = level;
     }
-    public String getNome() {
-        return nome;
+    public String getTitle() {
+        return title;
     }
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getDescricao() {
-        return descricao;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public String getDescription() {
+        return description;
     }
 
-/*    public int getDuracao() {
-        return duracao;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setDuracao(int duracao) {
-        this.duracao = duracao;
-    }*/
+    public List<Integer> getStepsAudio() {
+        return stepsAudio;
+    }
+
+    public void setStepsAudio(List<Integer> stepsAudio) {
+        this.stepsAudio = stepsAudio;
+    }
+
+    public List<String> getStepsText() {
+        return stepsText;
+    }
+
+    public void setStepsText(List<String> stepsText) {
+        this.stepsText = stepsText;
+    }
 
     public int getVideoPath() {
         return videoPath;
