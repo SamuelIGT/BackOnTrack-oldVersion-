@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import br.ufc.quixada.backontrack.Fragments.CalendarFragment;
 import br.ufc.quixada.backontrack.Fragments.SectionsFragment;
 import br.ufc.quixada.backontrack.activities.MainActivity;
 import br.ufc.quixada.backontrack.R;
@@ -36,8 +37,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         switch (position){
             case 0:
                 return new SectionsFragment();
-/*            case 1:
-                return new ExerciseActivity();*/
+            case 1:
+                return new CalendarFragment();
         }
         return MainActivity.PlaceholderFragment.newInstance(position + 1);
     }

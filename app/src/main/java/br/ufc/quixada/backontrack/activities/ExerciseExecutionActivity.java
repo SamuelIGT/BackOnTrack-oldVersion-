@@ -51,6 +51,7 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
     private Chronometer chronometer;
 
     private Exercise exerc;
+    private MediaPlayer musicPlayer;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,13 +118,21 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
                 stepsProgress.add((ProgressBar) stepsLayout2.getChildAt(i));
             }
         }
-
+        exerc.setStepsAudio(new ArrayList<Integer>());
+        exerc.getStepsAudio().add(R.raw.audio_step_sample);
+        exerc.getStepsAudio().add(R.raw.audio_step_sample);
+        exerc.getStepsAudio().add(R.raw.audio_step_sample);
+        exerc.getStepsAudio().add(R.raw.audio_step_sample);
         //sets the OnClickListener
         for (int i = 0; i < btnSteps.size(); i++) {
             final int j = i;
 
             //hide steps buttons and bars according to the numbers of steps.
-            if(i > exerc.getStepsAudio().size()){
+            if (i > exerc.getStepsAudio().size() - 1) {
+                Log.v("step", "" + i);
+                if (i == 4) {
+                    stepsProgress.get(i - 1).setVisibility(View.GONE);
+                }
                 btnSteps.get(i).setVisibility(View.GONE);
                 stepsProgress.get(i).setVisibility(View.GONE);
             }
@@ -134,10 +143,10 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
 
                     btnSteps.get(j).setSelected(!btnSteps.get(j).isSelected());
 
+                    boolean isNull = stopAudioSteps();
 
-                    final MediaPlayer mp = MediaPlayer.create(ExerciseExecutionActivity.this, exerc.getStepsAudio().get(j));
-                    mp.start();
-
+                    musicPlayer = MediaPlayer.create(ExerciseExecutionActivity.this, exerc.getStepsAudio().get(j));
+                    musicPlayer.start();
 
 
                     //Handle selected state change
@@ -145,8 +154,7 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
                         for (int k = 0; k <= j; k++) {
                             if (k == 0) {
                                 btnSteps.get(k).setSelected(true);
-                            }
-                            else if (k > 3) {
+                            } else if (k > 3) {
                                 if (stepsProgress.get(k).getProgress() == 0 || !btnSteps.get(k).isSelected()) {
                                     if (k == 4) {
                                         movePgBar(stepsProgress.get(k - 1), 0, 100);
@@ -154,11 +162,10 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
                                     btnSteps.get(k).setSelected(true);
                                     movePgBar(stepsProgress.get(k), 0, 100);
                                 }
-                            }
-                            else {
+                            } else {
                                 if (stepsProgress.get(k - 1).getProgress() == 0 || !btnSteps.get(k).isSelected()) {
                                     btnSteps.get(k).setSelected(true);
-                                    movePgBar(stepsProgress.get(k-1), 0, 100);
+                                    movePgBar(stepsProgress.get(k - 1), 0, 100);
                                 }
                             }
                         }
@@ -168,11 +175,10 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
                         btnSteps.get(j).setSelected(true);
 
 
-                        for (int k = j+1; k <= btnSteps.size()-1; k++) {
+                        for (int k = j + 1; k <= btnSteps.size() - 1; k++) {
                             if (k == 0) {
                                 btnSteps.get(k).setSelected(false);
-                            }
-                            else if (k > 3) {
+                            } else if (k > 3) {
                                 if (stepsProgress.get(k).getProgress() == 100 || btnSteps.get(k).isSelected()) {
                                     if (k == 4) {
                                         movePgBar(stepsProgress.get(k - 1), 100, 0);
@@ -180,11 +186,10 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
                                     btnSteps.get(k).setSelected(false);
                                     movePgBar(stepsProgress.get(k), 100, 0);
                                 }
-                            }
-                            else {
+                            } else {
                                 if (stepsProgress.get(k - 1).getProgress() == 100 || btnSteps.get(k).isSelected()) {
                                     btnSteps.get(k).setSelected(false);
-                                    movePgBar(stepsProgress.get(k-1), 100, 0);
+                                    movePgBar(stepsProgress.get(k - 1), 100, 0);
                                 }
                             }
                         }
@@ -207,7 +212,18 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
         });*/
 
     }
-    public void movePgBar(ProgressBar pgBar, int start, int end){
+
+    public boolean stopAudioSteps() {
+        if (musicPlayer != null) {
+            if (musicPlayer.isPlaying()) {
+                musicPlayer.stop();
+            }
+            return false;
+        }
+        return true;
+    }
+
+    public void movePgBar(ProgressBar pgBar, int start, int end) {
         ProgressBarAnimation anim = new ProgressBarAnimation(pgBar, start, end);
         anim.setDuration(1000);
         pgBar.startAnimation(anim);
@@ -265,6 +281,8 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
     }
 
     private void watchVideo() {
+        stopAudioSteps();
+
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(ExerciseExecutionActivity.this);
         final View mView = getLayoutInflater().inflate(R.layout.dialog_video_lesson, null);
         mView.setBackground(null);
@@ -332,6 +350,8 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
     }
 
     private void finishExerciseConfirmation() {
+        stopAudioSteps();
+
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(ExerciseExecutionActivity.this);
         View mView = getLayoutInflater().inflate(R.layout.exercise_finish_confirmation, null);
 
@@ -401,6 +421,8 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
 
 
     private void finishExerciseAlert() {
+        stopAudioSteps();
+
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(ExerciseExecutionActivity.this);
         View mView = getLayoutInflater().inflate(R.layout.dialog_alert_finish, null);
 
