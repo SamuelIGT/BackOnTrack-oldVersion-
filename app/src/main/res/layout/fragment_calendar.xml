@@ -1,144 +1,382 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            app:cardUseCompatPadding="true"
+            card_view:cardCornerRadius="2dp"
+            card_view:cardElevation="4dp">
 
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                app:cardUseCompatPadding="true"
-                card_view:cardCornerRadius="2dp"
-                card_view:cardElevation="4dp">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal">
 
-                    <LinearLayout
+                    <ImageButton
+                        android:id="@+id/btn_previous_month"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:orientation="horizontal">
+                        android:layout_marginEnd="10dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_previous_date"/>
 
-                        <Button
-                            android:id="@+id/btn_previous_month"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                        <TextView
-                            android:id="@+id/txt_month_year"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Maio - 2017"
-                            android:textColor="@color/colorAccent"
-                            android:textSize="20sp" />
-
-                        <Button
-                            android:id="@+id/btn_next_month"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                    </LinearLayout>
-
-                    <com.github.sundeepk.compactcalendarview.CompactCalendarView
-                        android:id="@+id/view_calendar"
+                    <TextView
+                        android:id="@+id/txt_month_year"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        app:compactCalendarBackgroundColor="@android:color/white"
-                        app:compactCalendarCurrentDayBackgroundColor="@color/primary_light"
-                        app:compactCalendarCurrentSelectedDayBackgroundColor="@color/colorAccent"
-                        app:compactCalendarMultiEventIndicatorColor="@color/colorPrimary"
-                        app:compactCalendarTargetHeight="250dp"
-                        app:compactCalendarTextColor="@color/primary_text"
-                        app:compactCalendarTextSize="12sp" />
+                        android:text="Maio - 2017"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="20sp" />
+
+                    <ImageButton
+                        android:id="@+id/btn_next_month"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_next_date"/>
+                    />
 
                 </LinearLayout>
 
+                <com.github.sundeepk.compactcalendarview.CompactCalendarView
+                    android:id="@+id/view_calendar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    app:compactCalendarBackgroundColor="@android:color/white"
+                    app:compactCalendarCurrentDayBackgroundColor="@color/primary_light"
+                    app:compactCalendarCurrentSelectedDayBackgroundColor="@color/colorAccent"
+                    app:compactCalendarMultiEventIndicatorColor="@color/colorPrimary"
+                    app:compactCalendarTargetHeight="250dp"
+                    app:compactCalendarTextColor="@color/primary_text"
+                    app:compactCalendarTextSize="12sp" />
 
-            </android.support.v7.widget.CardView>
+            </LinearLayout>
 
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            app:cardUseCompatPadding="true"
+            card_view:cardCornerRadius="2dp"
+            card_view:cardElevation="4dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                app:cardUseCompatPadding="true"
-                card_view:cardCornerRadius="2dp"
-                card_view:cardElevation="4dp">
+                android:layout_gravity="center_horizontal|center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Média Esforço Diário"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="20sp"
+                    />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="40dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@android:color/transparent"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="38.3dp"
+                        android:background="@color/primary_text">
+
+                    </View>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="38.3dp"
+                        android:background="@color/primary_text">
+
+                    </View>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="38.3dp"
+                        android:background="@color/primary_text">
+
+                    </View>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="38.3dp"
+                        android:background="@color/primary_text">
+
+                    </View>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="38.3dp"
+                        android:background="@color/primary_text">
+
+                    </View>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_chart_bars"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="29dp"
                     android:orientation="horizontal">
 
                     <ProgressBar
-                        android:layout_width="30dp"
-                        android:layout_height="100dp"
-                        android:layout_marginTop="13dp"
-                        android:max="100"
                         style="@style/CustomProgressBarHorizontal"
-                        android:progressDrawable="@drawable/pgbar_graph_shape"/>
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"
+                        android:max="100"
+                        android:progress="70"
+                        android:progressDrawable="@drawable/pgbar_graph_shape" />
 
                     <ProgressBar
-                        android:layout_width="30dp"
-                        android:layout_height="100dp"
-                        android:layout_marginTop="13dp"
-                        android:max="100"
                         style="@style/CustomProgressBarHorizontal"
-                        android:progressDrawable="@drawable/pgbar_graph_shape"/>
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="10dp"
+                        android:max="100"
+                        android:progress="15"
+                        android:progressDrawable="@drawable/pgbar_graph_shape" />
 
                     <ProgressBar
-                        android:layout_width="30dp"
-                        android:layout_height="100dp"
-                        android:layout_marginTop="13dp"
-                        android:max="100"
                         style="@style/CustomProgressBarHorizontal"
-                        android:progressDrawable="@drawable/pgbar_graph_shape"/>
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="10dp"
+                        android:max="100"
+                        android:progress="5"
+                        android:progressDrawable="@drawable/pgbar_graph_shape" />
 
                     <ProgressBar
-                        android:layout_width="30dp"
-                        android:layout_height="100dp"
-                        android:layout_marginTop="13dp"
-                        android:max="100"
                         style="@style/CustomProgressBarHorizontal"
-                        android:progressDrawable="@drawable/pgbar_graph_shape"/>
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="10dp"
+                        android:max="100"
+                        android:progress="10"
+                        android:progressDrawable="@drawable/pgbar_graph_shape" />
 
                     <ProgressBar
-                        android:layout_width="30dp"
-                        android:layout_height="100dp"
-                        android:layout_marginTop="13dp"
-                        android:max="100"
                         style="@style/CustomProgressBarHorizontal"
-                        android:progressDrawable="@drawable/pgbar_graph_shape"/>
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="10dp"
+                        android:max="100"
+                        android:progress="50"
+                        android:progressDrawable="@drawable/pgbar_graph_shape" />
+
+                    <ProgressBar
+                        style="@style/CustomProgressBarHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="10dp"
+                        android:max="100"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/pgbar_graph_shape" />
+
+                    <ProgressBar
+                        style="@style/CustomProgressBarHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="10dp"
+                        android:max="100"
+                        android:progress="50"
+                        android:progressDrawable="@drawable/pgbar_graph_shape" />
 
                 </LinearLayout>
 
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="227dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@color/primary_text">
 
-    </ScrollView>
+                </View>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginEnd="18dp"
+                    android:layout_marginTop="230dp"
+                    android:gravity="center_vertical|center_horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.8"
+                        android:textSize="12sp"
+                        android:background="@android:color/transparent"
+                        android:textAlignment="center"
+                        android:text="DOM" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.8"
+                        android:background="@android:color/transparent"
+                        android:layout_marginStart="5dp"
+                        android:textAlignment="center"
+                        android:textSize="12sp"
+                        android:text="SEG" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.8"
+                        android:background="@android:color/transparent"
+                        android:layout_marginStart="5dp"
+                        android:textAlignment="center"
+                        android:textSize="12sp"
+                        android:text="TER" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.8"
+                        android:background="@android:color/transparent"
+                        android:layout_marginStart="5dp"
+                        android:textAlignment="center"
+                        android:textSize="12sp"
+                        android:text="QUA" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.8"
+                        android:background="@android:color/transparent"
+                        android:layout_marginStart="5dp"
+                        android:textAlignment="center"
+                        android:textSize="12sp"
+                        android:textStyle=""
+                        android:text="QUI" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.8"
+                        android:background="@android:color/transparent"
+                        android:layout_marginStart="5dp"
+                        android:textAlignment="center"
+                        android:textSize="12sp"
+                        android:text="SEX" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.8"
+                        android:background="@android:color/transparent"
+                        android:layout_marginStart="5dp"
+                        android:textAlignment="center"
+                        android:textSize="12sp"
+                        android:text="SAB" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginStart="10dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_emoticon_1_filled"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginTop="3.3dp"
+                        android:src="@drawable/ic_emoticon_2_filled"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginTop="3.3dp"
+                        android:src="@drawable/ic_emoticon_3_filled"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginTop="3.3dp"
+                        android:src="@drawable/ic_emoticon_4_filled"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginTop="3.3dp"
+                        android:src="@drawable/ic_emoticon_5_filled"/>
 
 
-</LinearLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+
+</ScrollView>
 

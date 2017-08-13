@@ -15,5 +15,11 @@
     <color name="dialog_alert_background">#f7555a</color>
     <color name="dialog_confirm_button">#30cd22</color>
     <color name="icons_black">#FF000000</color>
+    <color name="emoticon_1_bg">#ff8e00</color>
+    <color name="emoticon_2_bg">#00a85e</color>
+    <color name="emoticon_3_bg">#9951ac</color>
+    <color name="emoticon_4_bg">#4a77ab</color>
+    <color name="emoticon_5_bg">#4d6f7b</color>
+
 
 </resources>

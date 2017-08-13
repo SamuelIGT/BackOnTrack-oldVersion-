@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
@@ -30,6 +31,7 @@ import br.ufc.quixada.backontrack.R;
 public class CalendarFragment extends Fragment {
     private View rootView;
     private CompactCalendarView calendarView;
+    private boolean isCreated = false;
 
     public CalendarFragment() {
     }
@@ -41,12 +43,14 @@ public class CalendarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_calendar, container, false);
 
+        isCreated = true;
+
+
         calendarView = (CompactCalendarView) rootView.findViewById(R.id.view_calendar);
         Locale brLocale = new Locale("PT", "BR");
         calendarView.setLocale(TimeZone.getTimeZone("GMT-03:00"), brLocale );
         calendarView.setUseThreeLetterAbbreviation(true);
         calendarView.shouldScrollMonth(false);
-
 
 
 
@@ -71,8 +75,8 @@ public class CalendarFragment extends Fragment {
 
         txtMothYear.setText(formattedDate);
 
-        Button btnNext = (Button) rootView.findViewById(R.id.btn_next_month);
-        Button btnPrevious = (Button) rootView.findViewById(R.id.btn_previous_month);
+        ImageButton btnNext = (ImageButton) rootView.findViewById(R.id.btn_next_month);
+        ImageButton btnPrevious = (ImageButton) rootView.findViewById(R.id.btn_previous_month);
 
 
         btnNext.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +116,42 @@ public class CalendarFragment extends Fragment {
         return rootView;
     }
 
-//Example of how to format a locale
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isCreated) {
+            if (isVisibleToUser) {
+            } else {
+                calendarView.showCalendarWithAnimation();
+
+            }
+        }
+    }
+
+
+  /*  @Override
+    public void onResume() {
+        calendarView.showCalendarWithAnimation();
+
+        super.onResume();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        calendarView.hideCalendarWithAnimation();
+        super.onHiddenChanged(hidden);
+    }*/
+    //Example of how to format a locale
     /*String[] capitalDays = {
             "", "SUN", "MON",
             "TUE", "WED", "THU",
