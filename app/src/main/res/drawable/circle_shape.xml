@@ -5,6 +5,6 @@
     android:thickness="2dp"
     android:useLevel="false">
 
-    <solid android:color="@color/colorAccent" /> <!--Original Color #CCC-->
+    <solid android:color="@color/newColorAccent" /> <!--Original Color #CCC-->
 
 </shape>

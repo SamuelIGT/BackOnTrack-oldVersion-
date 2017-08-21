@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/card_background">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_exercise_execution"
@@ -12,16 +13,14 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:tabIndicatorColor="@color/colorAccent">
+        app:tabIndicatorColor="@color/newColorAccent"
+        android:titleTextColor="@color/icons"
+        android:subtitleTextColor="@color/icons"
+        app:titleTextColor="@color/icons"
+        app:subtitleTextColor="@color/icons">
 
     </android.support.v7.widget.Toolbar>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-
-    </RelativeLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,7 +34,7 @@
         android:layout_height="1.5dp"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
-        android:background="@color/white_view_background" />
+        android:background="@color/secondary_text" />
 
 
     <LinearLayout
@@ -236,7 +235,7 @@
             android:layout_marginEnd="80dp"
             android:layout_marginStart="80dp"
             android:layout_marginTop="5dp"
-            android:background="@color/white_view_background" />
+            android:background="@color/secondary_text" />
     </LinearLayout>
 
     <Button
@@ -245,10 +244,11 @@
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:drawableTop="@drawable/ic_watch"
-        android:layout_marginBottom="-40dp"
-        android:layout_marginEnd="120dp"
+        android:layout_marginBottom="-50dp"
+        android:layout_marginEnd="90dp"
         android:textSize="12sp"
-        android:text="Assistir"/>
+        android:textColor="@color/primary_text"
+        android:text="@string/btn_watch_description"/>
 
     <RelativeLayout
         android:id="@+id/layout_start"
@@ -272,8 +272,8 @@
             android:layout_height="150dp"
             android:layout_centerInParent="true"
             android:indeterminate="true"
-            app:cpb_color="@color/colorAccent"
-            app:cpb_colors="@array/progressbar"
+            app:cpb_color="@color/newColorAccent"
+            app:cpb_colors="@array/newProgressbar"
             app:cpb_max_sweep_angle="300"
             app:cpb_min_sweep_angle="100"
             app:cpb_rotation_speed="1.0"
@@ -287,7 +287,7 @@
             android:layout_centerInParent="true"
             android:background="@android:color/transparent"
             android:text="@string/button_start"
-            android:textColor="@color/secondary_text"
+            android:textColor="@color/newSecondaryText"
             android:textSize="25sp"
             android:textStyle="bold" />
 
@@ -300,7 +300,7 @@
             android:layout_toEndOf="@+id/pgBarStatic"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:text="@string/button_finish"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/newColorAccent"
             android:textSize="15sp"
             android:textStyle="bold" />
 

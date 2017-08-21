@@ -1,6 +1,7 @@
 package br.ufc.quixada.backontrack.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -441,6 +443,13 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(ExerciseExecutionActivity.this, "Dados salvos", Toast.LENGTH_SHORT).show();
+
+//-------------------TESTING SEND DATA BACK TO THE PREVIOUS ACTIVITY----|
+                Intent intent = new Intent();
+                intent.putExtra("editTextValue", "value_here");
+                setResult(RESULT_OK, intent);
+                finish();
+//----------------------------------------------------------------------|
                 finishAlert.dismiss();
                 ExerciseExecutionActivity.super.onBackPressed();
             }

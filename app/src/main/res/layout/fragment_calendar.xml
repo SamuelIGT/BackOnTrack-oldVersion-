@@ -9,7 +9,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/card_background">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -25,11 +26,13 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@color/newColorAccent">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
                     android:layout_gravity="center_horizontal"
                     android:orientation="horizontal">
 
@@ -46,7 +49,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Maio - 2017"
-                        android:textColor="@color/colorAccent"
+                        android:textColor="@color/newPrimaryText"
                         android:textSize="20sp" />
 
                     <ImageButton
@@ -56,7 +59,6 @@
                         android:layout_marginStart="10dp"
                         android:background="@android:color/transparent"
                         android:src="@drawable/ic_next_date"/>
-                    />
 
                 </LinearLayout>
 
@@ -66,12 +68,12 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    app:compactCalendarBackgroundColor="@android:color/white"
+                    app:compactCalendarBackgroundColor="@color/newColorAccent"
                     app:compactCalendarCurrentDayBackgroundColor="@color/primary_light"
-                    app:compactCalendarCurrentSelectedDayBackgroundColor="@color/colorAccent"
+                    app:compactCalendarCurrentSelectedDayBackgroundColor="@color/calendar_day"
                     app:compactCalendarMultiEventIndicatorColor="@color/colorPrimary"
                     app:compactCalendarTargetHeight="250dp"
-                    app:compactCalendarTextColor="@color/primary_text"
+                    app:compactCalendarTextColor="@color/newPrimaryText"
                     app:compactCalendarTextSize="12sp" />
 
             </LinearLayout>
@@ -88,19 +90,24 @@
             android:layout_marginTop="8dp"
             app:cardUseCompatPadding="true"
             card_view:cardCornerRadius="2dp"
-            card_view:cardElevation="4dp">
+            card_view:cardElevation="4dp"
+            app:cardBackgroundColor="@color/newColorAccent"
+            >
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical">
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:background="@color/newColorAccent"
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Média Esforço Diário"
+                    android:text="@string/calendar_average_txt"
+                    android:paddingBottom="5dp"
                     android:layout_centerHorizontal="true"
-                    android:textColor="@color/secondary_text"
+                    android:textColor="@color/newPrimaryText"
                     android:textSize="20sp"
                     />
 
@@ -263,7 +270,7 @@
                         android:textSize="12sp"
                         android:background="@android:color/transparent"
                         android:textAlignment="center"
-                        android:text="DOM" />
+                        android:text="@string/calendar_dom" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -273,7 +280,7 @@
                         android:layout_marginStart="5dp"
                         android:textAlignment="center"
                         android:textSize="12sp"
-                        android:text="SEG" />
+                        android:text="@string/calendar_seg" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -283,7 +290,7 @@
                         android:layout_marginStart="5dp"
                         android:textAlignment="center"
                         android:textSize="12sp"
-                        android:text="TER" />
+                        android:text="@string/calendar_ter" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -293,7 +300,7 @@
                         android:layout_marginStart="5dp"
                         android:textAlignment="center"
                         android:textSize="12sp"
-                        android:text="QUA" />
+                        android:text="@string/calendar_qua" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -304,7 +311,7 @@
                         android:textAlignment="center"
                         android:textSize="12sp"
                         android:textStyle=""
-                        android:text="QUI" />
+                        android:text="@string/calendar_qui" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -314,7 +321,7 @@
                         android:layout_marginStart="5dp"
                         android:textAlignment="center"
                         android:textSize="12sp"
-                        android:text="SEX" />
+                        android:text="@string/calendar_sex" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -324,7 +331,7 @@
                         android:layout_marginStart="5dp"
                         android:textAlignment="center"
                         android:textSize="12sp"
-                        android:text="SAB" />
+                        android:text="@string/calendar_sab" />
                 </LinearLayout>
 
                 <LinearLayout

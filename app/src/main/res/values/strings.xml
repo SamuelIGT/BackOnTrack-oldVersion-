@@ -28,5 +28,14 @@
     <string name="txt_motivation">Parabéns! Você está indo muito bem.</string>
     <string name="btn_confirm">Confirmar</string>
     <string name="exercise_execution_extra">EXERCISE_EXECUTION</string>
+    <string name="btn_watch_description">Assistir</string>
+    <string name="calendar_dom">DOM</string>
+    <string name="calendar_seg">SEG</string>
+    <string name="calendar_ter">TER</string>
+    <string name="calendar_qua">QUA</string>
+    <string name="calendar_qui">QUI</string>
+    <string name="calendar_sex">SEX</string>
+    <string name="calendar_sab">SAB</string>
+    <string name="calendar_average_txt">Média Esforço Diário</string>
 
 </resources>

@@ -4,12 +4,21 @@
     <color name="orangeMiddle">#fa8026</color>
     <color name="yellow">#f7b733</color>
 
+    <color name="pgbar1">#6DA729</color>
+    <color name="pgbar2">#8AC24A</color>
+    <color name="pgbar3">#B1E378</color>
 
 
     <array name="progressbar">
         <item>@color/orangeAccent</item>
         <item>@color/orangeMiddle</item>
         <item>@color/yellow</item>
+    </array>
+
+    <array name="newProgressbar">
+        <item>@color/pgbar1</item>
+        <item>@color/pgbar2</item>
+        <item>@color/pgbar3</item>
     </array>
 
 </resources>

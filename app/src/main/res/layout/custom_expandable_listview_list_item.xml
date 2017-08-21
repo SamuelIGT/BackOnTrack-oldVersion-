@@ -17,7 +17,7 @@
             android:text="Test"
             android:paddingStart="?android:attr/expandableListPreferredChildPaddingLeft"
             android:paddingEnd="0dp"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/newColorAccent"
             android:textStyle="bold"
             android:background="#ffffffff"
             />
@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:src="@drawable/ic_lock_32dp"
             android:clickable="true"
-            android:background="@drawable/gradient">
+            android:background="@color/section_locked_mask">
         </ImageView>
     </RelativeLayout>
 

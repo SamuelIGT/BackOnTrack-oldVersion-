@@ -17,7 +17,7 @@
             android:gravity="bottom">
             <shape>
                 <solid
-                    android:color="@color/colorAccent">
+                    android:color="@color/calendar_day">
 
                 </solid>
                 <!--<gradient

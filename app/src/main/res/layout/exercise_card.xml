@@ -24,11 +24,12 @@
             android:id="@+id/grid_layout_cardview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white_view">
+            android:background="@color/card_background">
 
             <ImageView
                 android:id="@+id/thumbnail_view"
                 android:layout_width="match_parent"
+                android:background="@color/white_view"
                 android:layout_height="200dp" />
 
             <TextView
@@ -41,7 +42,7 @@
                 android:paddingRight="16dp"
                 android:paddingTop="24dp"
                 android:text="TESTE BACK ON TRACK"
-                android:textColor="#212121"
+                android:textColor="@color/newPrimaryText"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -54,7 +55,7 @@
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:text="TESTE"
-                android:textColor="#757575"
+                android:textColor="@color/newSecondaryText"
                 android:textSize="14sp" />
 
             <Button
@@ -69,7 +70,7 @@
                 android:paddingRight="8dp"
                 android:paddingTop="16dp"
                 android:text="@string/start_exercise"
-                android:textColor="@color/colorAccent" />
+                android:textColor="@color/newColorAccent" />
 
 
         </RelativeLayout>

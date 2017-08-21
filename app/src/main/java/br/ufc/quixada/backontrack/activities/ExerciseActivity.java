@@ -77,7 +77,7 @@ public class ExerciseActivity extends AppCompatActivity {
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
 
         collapsingToolbar.setTitle(sec.getTitle());
-        collapsingToolbar.setExpandedTitleColor(ContextCompat.getColor(context,R.color.primary_text));
+        collapsingToolbar.setExpandedTitleColor(ContextCompat.getColor(context,R.color.newPrimaryText));
 
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
         appBarLayout.setExpanded(true);
@@ -144,5 +144,16 @@ public class ExerciseActivity extends AppCompatActivity {
 */
         adapter.notifyDataSetChanged();
     }
+
+    //----------TESTING GETTING THE DATA BACK FROM A CALLED ACTIVITY---------------------|
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                String strEditText = data.getStringExtra("editTextValue");
+            }
+        }
+    }
+    //--------------------------------------------------------------------------------|
 }
 

@@ -128,29 +128,20 @@ public class CalendarFragment extends Fragment {
         }
     }
 
-
-  /*  @Override
-    public void onResume() {
-        calendarView.showCalendarWithAnimation();
-
-        super.onResume();
-    }
-
     @Override
     public void onStart() {
+
+        calendarView.showCalendarWithAnimation();
+
         super.onStart();
+
     }
 
     @Override
     public void onStop() {
+        calendarView.hideCalendarWithAnimation();
         super.onStop();
     }
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        calendarView.hideCalendarWithAnimation();
-        super.onHiddenChanged(hidden);
-    }*/
     //Example of how to format a locale
     /*String[] capitalDays = {
             "", "SUN", "MON",

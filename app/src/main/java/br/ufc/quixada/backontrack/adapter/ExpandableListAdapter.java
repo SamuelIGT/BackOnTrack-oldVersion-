@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -116,8 +117,27 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
         lblListHeader.setText(headerTitle);
 
+
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        //converts 8dp to px
+        int px = (int) Math.ceil(8 * convertView.getContext().getResources().getDisplayMetrics().density);
+        //if is expanded, removes the margin bottom
+        //if is not expanded, sets a margin bottom
+        if(isExpanded){
+            lp.setMargins(0, 0, 0, 0);
+
+            LinearLayout header = (LinearLayout) convertView.findViewById(R.id.layout_header);
+            header.setLayoutParams(lp);
+        }else{
+            lp.setMargins(0, 0, 0, px);
+
+            LinearLayout header = (LinearLayout) convertView.findViewById(R.id.layout_header);
+            header.setLayoutParams(lp);
+        }
+
         return convertView;
     }
+
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {

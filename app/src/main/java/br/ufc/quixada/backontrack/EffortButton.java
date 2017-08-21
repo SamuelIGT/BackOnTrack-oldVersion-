@@ -34,7 +34,7 @@ public class EffortButton {
             showAll(btnList, context);
             setDefaultButton(btnList, context);
             isSelected = true;
-            DrawableCompat.setTint(btn.getDrawable(), ContextCompat.getColor(context, R.color.colorAccent));
+            DrawableCompat.setTint(btn.getDrawable(), ContextCompat.getColor(context, R.color.newColorAccent));
             title.setTextColor(ContextCompat.getColor(context, R.color.primary_text));
             motivation.setVisibility(View.VISIBLE);
 

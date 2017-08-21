@@ -1,5 +1,6 @@
 package br.ufc.quixada.backontrack.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ufc.quixada.backontrack.R;
+import br.ufc.quixada.backontrack.activities.ExerciseActivity;
 import br.ufc.quixada.backontrack.activities.ExerciseExecutionActivity;
 import br.ufc.quixada.backontrack.model.Exercise;
 
@@ -80,15 +82,16 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
         holder.description.setText(exercise.getDescription());
         itemsPosition.add(position);
 
-        if(!exercise.isUnlocked()){
+        if (!exercise.isUnlocked()) {
             holder.lock.setVisibility(View.VISIBLE);
         }
 
         holder.start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    exerciseIntent.putExtra(mContext.getString(R.string.exercise_execution_extra), exercise);
-                    mContext.startActivity(exerciseIntent);
+                exerciseIntent.putExtra(mContext.getString(R.string.exercise_execution_extra), exercise);
+
+                ((Activity) mContext).startActivityForResult(exerciseIntent, 2);
             }
 
         });

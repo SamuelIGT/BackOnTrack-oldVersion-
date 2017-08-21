@@ -3,14 +3,14 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eeeeee">
+    android:background="@color/card_background">
     
     <ExpandableListView
         android:id="@+id/lvExp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:drawSelectorOnTop="true"
-        android:background="#fafafa"
+        android:background="@color/card_background"
         android:layout_margin="5dp"
         android:dividerHeight="0dp">
 

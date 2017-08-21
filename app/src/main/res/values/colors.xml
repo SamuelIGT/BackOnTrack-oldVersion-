@@ -21,5 +21,18 @@
     <color name="emoticon_4_bg">#4a77ab</color>
     <color name="emoticon_5_bg">#4d6f7b</color>
 
+    <color name="newColorPrimary">#424142</color>
+    <color name="newColorAccent">#8ac24a</color>
+    <color name="newPrimaryText">#404240</color>
+    <color name="newSecondaryText">#9C9A9C</color>
+    <color name="newProgressBar">#94C300</color>
+    <color name="newView">#F7F7F7</color>
+    <color name="newViewBackgroud">#EFEBE7</color>
+    <color name="newColorPrimaryDark">#1E1D1E</color>
+    <color name="section_locked_mask">#CF000000</color>
+    <color name="card_background">#605F60</color>
+    <color name="view_background">#6DA729</color>
+    <color name="calendar_day">#D66E52</color>
+    <color name="calendar_pgbar">#6C2079</color>
 
 </resources>

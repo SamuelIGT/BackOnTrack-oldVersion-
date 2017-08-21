@@ -1,5 +1,6 @@
 package br.ufc.quixada.backontrack.Fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -126,7 +127,7 @@ public class SectionsFragment extends Fragment {
                     case 2:
                         exerciseIntent.putExtra("LEVEL", levels.get(2).getSectionsList().get(childPosition));
                 }
-                getActivity().startActivity(exerciseIntent);
+                getActivity().startActivityForResult(exerciseIntent, 1);
 
 
                 //Working
@@ -289,6 +290,37 @@ public class SectionsFragment extends Fragment {
         listDataChild.put(listDataHeader.get(1), lstTwo);
         listDataChild.put(listDataHeader.get(2), lstThree);
     }
+/*
+    private void restoreSession(Bundle savedInstanceState){
+        SharedPreferences settings = this.getSharedPreferences(getString(R.string.restoreSessionMainActivity), 0);
 
+        //Restores the session
+        if (savedInstanceState != null) {
+            // Restore value of members from saved state
+            String userSerialization = savedInstanceState.getString(getString(R.string.restoreStateMainActivity));
+            userControl.setUsuario(JsonSerializator.jsonBuilder.fromJson(userSerialization, Usuario.class));
+        } else if(!settings.getString("Usuario", "PREFERENCE NAO EXISTE").equals("PREFERENCE NAO EXISTE")) {
+            String userSerialization = settings.getString("Usuario", "PREFERENCE NAO EXISTE" *//*valor default caso a preference nao exista*//*);
+            userControl.setUsuario(JsonSerializator.jsonBuilder.fromJson(userSerialization, Usuario.class));
+        }
+    }
+
+    private void saveSession(){
+        SharedPreferences settings = this.getSharedPreferences(getString(R.string.restoreSessionMainActivity), 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("Usuario", JsonSerializator.jsonBuilder.toJson(userControl.getUsuario()));
+        // Commit the edits!
+        editor.commit();
+    }
+
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        // Save UI state changes to the savedInstanceState.
+        // This bundle will be passed to onCreate if the process is
+        // killed and restarted.
+        savedInstanceState.putString(getString(R.string.restoreStateMainActivity), JsonSerializator.jsonBuilder.toJson(userControl.getUsuario()));
+        Log.v("onSave", "onSaveInstaceState CALLED");
+
+    }*/
 
 }

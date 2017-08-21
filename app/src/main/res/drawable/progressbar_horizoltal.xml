@@ -3,10 +3,10 @@
         <shape>
             <corners android:radius="5dip" />
             <gradient
-                android:startColor="@color/icons_black"
-                android:centerColor="@color/icons_black"
+                android:startColor="@color/secondary_text"
+                android:centerColor="@color/secondary_text"
                 android:centerY="0.75"
-                android:endColor="@color/icons_black"
+                android:endColor="@color/secondary_text"
                 android:angle="270" />
         </shape>
     </item>
@@ -30,10 +30,10 @@
             <shape>
                 <corners android:radius="5dip" />
                 <gradient
-                    android:startColor="@color/colorAccent"
-                    android:centerColor="@color/colorAccent"
+                    android:startColor="@color/newColorAccent"
+                    android:centerColor="@color/newColorAccent"
                     android:centerY="0.75"
-                    android:endColor="@color/colorAccent"
+                    android:endColor="@color/newColorAccent"
                     android:angle="270" />
             </shape>
         </clip>
