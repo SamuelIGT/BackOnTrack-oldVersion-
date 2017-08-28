@@ -9,8 +9,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/card_background">
+        android:background="@color/card_background"
+        android:orientation="vertical">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -26,14 +26,14 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@color/newColorAccent">
+                android:background="@color/newColorAccent"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal">
 
                     <ImageButton
@@ -42,7 +42,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         android:background="@android:color/transparent"
-                        android:src="@drawable/ic_previous_date"/>
+                        android:src="@drawable/ic_previous_date" />
 
                     <TextView
                         android:id="@+id/txt_month_year"
@@ -58,7 +58,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:background="@android:color/transparent"
-                        android:src="@drawable/ic_next_date"/>
+                        android:src="@drawable/ic_next_date" />
 
                 </LinearLayout>
 
@@ -76,6 +76,54 @@
                     app:compactCalendarTextColor="@color/newPrimaryText"
                     app:compactCalendarTextSize="12sp" />
 
+                <LinearLayout
+                    android:id="@+id/layout_day_exercise"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:visibility="gone">
+
+                    <Button
+                        android:id="@+id/btn_day_previous_exercise"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_previous_date" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="ATIVIDADES REALIZADAS NO DIA"
+                            />
+
+                        <TextView
+                            android:id="@+id/txt_day_exercise_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+
+                        <TextView
+                            android:id="@+id/txt_day_exercise_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btn_day_next_exercise"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/ic_next_date"
+                        />
+
+                </LinearLayout>
+
             </LinearLayout>
 
 
@@ -88,28 +136,26 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
+            app:cardBackgroundColor="@color/newColorAccent"
             app:cardUseCompatPadding="true"
             card_view:cardCornerRadius="2dp"
-            card_view:cardElevation="4dp"
-            app:cardBackgroundColor="@color/newColorAccent"
-            >
+            card_view:cardElevation="4dp">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:background="@color/newColorAccent"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:background="@color/newColorAccent">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/calendar_average_txt"
-                    android:paddingBottom="5dp"
                     android:layout_centerHorizontal="true"
+                    android:paddingBottom="5dp"
+                    android:text="@string/calendar_average_txt"
                     android:textColor="@color/newPrimaryText"
-                    android:textSize="20sp"
-                    />
+                    android:textSize="20sp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -168,9 +214,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="200dp"
                     android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_marginStart="50dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="50dp"
                     android:layout_marginTop="29dp"
                     android:orientation="horizontal">
 
@@ -187,8 +233,8 @@
                         style="@style/CustomProgressBarHorizontal"
                         android:layout_width="0dp"
                         android:layout_height="200dp"
-                        android:layout_weight="1"
                         android:layout_marginStart="10dp"
+                        android:layout_weight="1"
                         android:max="100"
                         android:progress="15"
                         android:progressDrawable="@drawable/pgbar_graph_shape" />
@@ -197,8 +243,8 @@
                         style="@style/CustomProgressBarHorizontal"
                         android:layout_width="0dp"
                         android:layout_height="200dp"
-                        android:layout_weight="1"
                         android:layout_marginStart="10dp"
+                        android:layout_weight="1"
                         android:max="100"
                         android:progress="5"
                         android:progressDrawable="@drawable/pgbar_graph_shape" />
@@ -207,8 +253,8 @@
                         style="@style/CustomProgressBarHorizontal"
                         android:layout_width="0dp"
                         android:layout_height="200dp"
-                        android:layout_weight="1"
                         android:layout_marginStart="10dp"
+                        android:layout_weight="1"
                         android:max="100"
                         android:progress="10"
                         android:progressDrawable="@drawable/pgbar_graph_shape" />
@@ -217,8 +263,8 @@
                         style="@style/CustomProgressBarHorizontal"
                         android:layout_width="0dp"
                         android:layout_height="200dp"
-                        android:layout_weight="1"
                         android:layout_marginStart="10dp"
+                        android:layout_weight="1"
                         android:max="100"
                         android:progress="50"
                         android:progressDrawable="@drawable/pgbar_graph_shape" />
@@ -227,8 +273,8 @@
                         style="@style/CustomProgressBarHorizontal"
                         android:layout_width="0dp"
                         android:layout_height="200dp"
-                        android:layout_weight="1"
                         android:layout_marginStart="10dp"
+                        android:layout_weight="1"
                         android:max="100"
                         android:progress="100"
                         android:progressDrawable="@drawable/pgbar_graph_shape" />
@@ -237,8 +283,8 @@
                         style="@style/CustomProgressBarHorizontal"
                         android:layout_width="0dp"
                         android:layout_height="200dp"
-                        android:layout_weight="1"
                         android:layout_marginStart="10dp"
+                        android:layout_weight="1"
                         android:max="100"
                         android:progress="50"
                         android:progressDrawable="@drawable/pgbar_graph_shape" />
@@ -248,9 +294,9 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:layout_marginTop="227dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="227dp"
                     android:background="@color/primary_text">
 
                 </View>
@@ -258,8 +304,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="48dp"
                     android:layout_marginEnd="18dp"
+                    android:layout_marginStart="48dp"
                     android:layout_marginTop="230dp"
                     android:gravity="center_vertical|center_horizontal">
 
@@ -267,113 +313,113 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.8"
-                        android:textSize="12sp"
                         android:background="@android:color/transparent"
+                        android:text="@string/calendar_dom"
                         android:textAlignment="center"
-                        android:text="@string/calendar_dom" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="0.8"
                         android:background="@android:color/transparent"
-                        android:layout_marginStart="5dp"
+                        android:text="@string/calendar_seg"
                         android:textAlignment="center"
-                        android:textSize="12sp"
-                        android:text="@string/calendar_seg" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="0.8"
                         android:background="@android:color/transparent"
-                        android:layout_marginStart="5dp"
+                        android:text="@string/calendar_ter"
                         android:textAlignment="center"
-                        android:textSize="12sp"
-                        android:text="@string/calendar_ter" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="0.8"
                         android:background="@android:color/transparent"
-                        android:layout_marginStart="5dp"
+                        android:text="@string/calendar_qua"
                         android:textAlignment="center"
-                        android:textSize="12sp"
-                        android:text="@string/calendar_qua" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="0.8"
                         android:background="@android:color/transparent"
-                        android:layout_marginStart="5dp"
+                        android:text="@string/calendar_qui"
                         android:textAlignment="center"
                         android:textSize="12sp"
-                        android:textStyle=""
-                        android:text="@string/calendar_qui" />
+                        android:textStyle="" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="0.8"
                         android:background="@android:color/transparent"
-                        android:layout_marginStart="5dp"
+                        android:text="@string/calendar_sex"
                         android:textAlignment="center"
-                        android:textSize="12sp"
-                        android:text="@string/calendar_sex" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="0.8"
                         android:background="@android:color/transparent"
-                        android:layout_marginStart="5dp"
+                        android:text="@string/calendar_sab"
                         android:textAlignment="center"
-                        android:textSize="12sp"
-                        android:text="@string/calendar_sab" />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="32dp"
                     android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:src="@drawable/ic_emoticon_1_filled"/>
+                        android:src="@drawable/ic_emoticon_1_filled" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
                         android:layout_marginTop="3.3dp"
-                        android:src="@drawable/ic_emoticon_2_filled"/>
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_emoticon_2_filled" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
                         android:layout_marginTop="3.3dp"
-                        android:src="@drawable/ic_emoticon_3_filled"/>
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_emoticon_3_filled" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
                         android:layout_marginTop="3.3dp"
-                        android:src="@drawable/ic_emoticon_4_filled"/>
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_emoticon_4_filled" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
                         android:layout_marginTop="3.3dp"
-                        android:src="@drawable/ic_emoticon_5_filled"/>
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_emoticon_5_filled" />
 
 
                 </LinearLayout>

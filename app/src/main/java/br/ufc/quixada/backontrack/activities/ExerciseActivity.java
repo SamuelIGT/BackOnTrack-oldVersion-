@@ -148,9 +148,10 @@ public class ExerciseActivity extends AppCompatActivity {
     //----------TESTING GETTING THE DATA BACK FROM A CALLED ACTIVITY---------------------|
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
+        if (requestCode == 2) {
             if(resultCode == RESULT_OK) {
                 String strEditText = data.getStringExtra("editTextValue");
+                Log.v("RESULT EXERCISE_EXEC", strEditText);
             }
         }
     }

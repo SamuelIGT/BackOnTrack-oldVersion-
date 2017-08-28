@@ -41,6 +41,8 @@ dependencies {
     compile 'com.github.castorflex.smoothprogressbar:library-circular:1.2.0'
     //Calendar
     compile 'com.github.sundeepk:compact-calendar-view:2.0.2.2'
+    //Gson
+    compile 'com.google.code.gson:gson:2.8.1'
 
     compile 'com.android.support:support-v4:25.0.0'
 

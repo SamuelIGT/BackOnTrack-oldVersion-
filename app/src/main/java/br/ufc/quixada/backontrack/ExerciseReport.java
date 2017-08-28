@@ -4,14 +4,14 @@ package br.ufc.quixada.backontrack;
  * Created by samuel on 25/08/17.
  */
 
-public class ExerciseRelatory {
+public class ExerciseReport {
     private int exerciseId;
     private String exerciseTitle;
     private int effort;
     private long dateMillis;
     private String time;
 
-    public ExerciseRelatory(int exerciseId, String exerciseTitle, int effort, long dateMillis, String time) {
+    public ExerciseReport(int exerciseId, String exerciseTitle, int effort, long dateMillis, String time) {
         this.exerciseId = exerciseId;
         this.exerciseTitle = exerciseTitle;
         this.effort = effort;
@@ -19,7 +19,7 @@ public class ExerciseRelatory {
         this.time = time;
     }
 
-    public ExerciseRelatory(int exerciseId) {
+    public ExerciseReport(int exerciseId) {
         this.exerciseId = exerciseId;
     }
 
