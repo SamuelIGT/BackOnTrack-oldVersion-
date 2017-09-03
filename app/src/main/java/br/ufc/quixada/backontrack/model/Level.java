@@ -12,6 +12,7 @@ public class Level implements Serializable {
 
     private int level;
     private List<Section> sectionsList;
+    private boolean isUnlocked = false;
 
     public Level(int level, List<Section>sectionsList){
         this.level = level;
@@ -62,6 +63,20 @@ public class Level implements Serializable {
         return permissionList;
     }
 
+    public boolean isLevelCompleted(){
+        for(Section sec: sectionsList){
+            if (!sec.isUnlocked()){
+                return false;
+            }
+        }
+        return true;
+    }
 
+    public boolean isUnlocked() {
+        return isUnlocked;
+    }
 
+    public void setUnlocked(boolean unlocked) {
+        isUnlocked = unlocked;
+    }
 }

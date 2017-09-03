@@ -65,11 +65,6 @@ public class ExerciseActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
 
-
-
-
-
-
     }
 
     private void initCollapsingToolbar(final Context context){
@@ -150,11 +145,29 @@ public class ExerciseActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 2) {
             if(resultCode == RESULT_OK) {
-                String strEditText = data.getStringExtra("editTextValue");
-                Log.v("RESULT EXERCISE_EXEC", strEditText);
+                String strEditText[] = data.getStringArrayExtra("exercise_conclusion");
+                if(strEditText[1].equals("DONE")){
+                    for(int i = 0; i < sec.getExerciseList().size(); i++){
+                        if(sec.getExerciseList().get(i).getId() == Integer.parseInt(strEditText[0])){
+                            sec.getExerciseList().get(i).setStatus(strEditText[1]);
+                            unlockExercise();
+                        }
+                    }
+                }
             }
         }
     }
-    //--------------------------------------------------------------------------------|
-}
 
+    //--------------------------------------------------------------------------------|
+
+    private void unlockExercise(){
+        for(int i = 1; i < sec.getExerciseList().size(); i++){
+            if(sec.getExerciseList().get(i-1).getStatus().equals("DONE")){
+                sec.getExerciseList().get(i).setUnlocked(true);
+                Log.d("unlockExerciseTEST", "OK");
+                recyclerView.getAdapter().notifyItemChanged(i);
+            }
+        }
+    }
+
+}

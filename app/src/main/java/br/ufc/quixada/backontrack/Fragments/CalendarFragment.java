@@ -4,6 +4,7 @@ package br.ufc.quixada.backontrack.Fragments;
  * Created by samue on 11/08/2017.
  */
 
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -46,8 +47,8 @@ public class CalendarFragment extends Fragment {
 
     private TextView txtvDayActivityTitle;
     private TextView txtvDayActivityTime;
-    private Button btnNextDayActivity;
-    private Button btnPreviousDayActivity;
+    private ImageButton btnNextDayActivity;
+    private ImageButton btnPreviousDayActivity;
     private LinearLayout dayActivityLayout;
 
     private int index = 0;
@@ -126,8 +127,13 @@ public class CalendarFragment extends Fragment {
             public void onDayClick(Date dateClicked) {
                 List<Event> events = new ArrayList<>();
                 events = calendarView.getEvents(dateClicked);
-                if (events.size() > 0)
+                if (events.size() > 0) {
                     showDayEvents(events);
+                }else{
+                    dayActivityLayout = (LinearLayout) rootView.findViewById(R.id.layout_day_exercise);
+                    dayActivityLayout.setVisibility(View.GONE);
+                }
+
 
                 //Adds an event on the day clicked
                 /*long currentDate = dateClicked.getTime();
@@ -149,8 +155,8 @@ public class CalendarFragment extends Fragment {
 
         txtvDayActivityTitle = (TextView) this.rootView.findViewById(R.id.txt_day_exercise_title);
         txtvDayActivityTime = (TextView) this.rootView.findViewById(R.id.txt_day_exercise_time);
-        btnNextDayActivity = (Button) this.rootView.findViewById(R.id.btn_day_next_exercise);
-        btnPreviousDayActivity = (Button) this.rootView.findViewById(R.id.btn_day_previous_exercise);
+        btnNextDayActivity = (ImageButton) this.rootView.findViewById(R.id.btn_day_next_exercise);
+        btnPreviousDayActivity = (ImageButton) this.rootView.findViewById(R.id.btn_day_previous_exercise);
 
 
         this.report = jsonParser.fromJson(eventList.get(index).getData().toString(), ExerciseReport.class);
@@ -232,6 +238,8 @@ public class CalendarFragment extends Fragment {
                 calendarShowAnimation();
                 getCalendarEvents();
             } else {
+                dayActivityLayout = (LinearLayout) rootView.findViewById(R.id.layout_day_exercise);
+                dayActivityLayout.setVisibility(View.GONE);
             }
         }
     }

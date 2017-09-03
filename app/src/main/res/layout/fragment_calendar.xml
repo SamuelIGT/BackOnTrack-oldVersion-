@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/card_background"
+        android:background="@color/revisedColor5"
         android:orientation="vertical">
 
         <android.support.v7.widget.CardView
@@ -26,7 +26,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/newColorAccent"
+                android:background="@color/revisedColor2"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -49,7 +49,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Maio - 2017"
-                        android:textColor="@color/newPrimaryText"
+                        android:textColor="@color/revisedColor7"
                         android:textSize="20sp" />
 
                     <ImageButton
@@ -68,12 +68,12 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    app:compactCalendarBackgroundColor="@color/newColorAccent"
-                    app:compactCalendarCurrentDayBackgroundColor="@color/primary_light"
-                    app:compactCalendarCurrentSelectedDayBackgroundColor="@color/calendar_day"
-                    app:compactCalendarMultiEventIndicatorColor="@color/colorPrimary"
+                    app:compactCalendarBackgroundColor="@color/revisedColor2"
+                    app:compactCalendarCurrentDayBackgroundColor="@color/revisedAccent"
+                    app:compactCalendarCurrentSelectedDayBackgroundColor="@color/revisedColorAccent2"
+                    app:compactCalendarMultiEventIndicatorColor="@color/revisedColor7"
                     app:compactCalendarTargetHeight="250dp"
-                    app:compactCalendarTextColor="@color/newPrimaryText"
+                    app:compactCalendarTextColor="@color/revisedColor7"
                     app:compactCalendarTextSize="12sp" />
 
                 <LinearLayout
@@ -81,45 +81,57 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:background="@color/revisedColor1"
                     android:gravity="center_horizontal|center_vertical"
                     android:visibility="gone">
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/btn_day_previous_exercise"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_previous_date" />
+                        android:layout_marginEnd="15dp"
+                        android:src="@drawable/ic_previous_date"
+                        android:background="@android:color/transparent"/>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical"
+                        android:layout_gravity="center_vertical|center_horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="ATIVIDADES REALIZADAS NO DIA"
+                            android:text="ATIVIDADES REALIZADAS"
+                            android:textSize="18sp"
+                            android:textColor="@color/revisedTextUnfocused"
                             />
 
                         <TextView
                             android:id="@+id/txt_day_exercise_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/revisedColor7"
                             />
 
                         <TextView
                             android:id="@+id/txt_day_exercise_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/revisedColor7"
                             />
                     </LinearLayout>
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/btn_day_next_exercise"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableEnd="@drawable/ic_next_date"
+                        android:src="@drawable/ic_next_date"
+                        android:layout_marginStart="15dp"
+                        android:background="@android:color/transparent"
                         />
 
                 </LinearLayout>
@@ -136,7 +148,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
-            app:cardBackgroundColor="@color/newColorAccent"
+            app:cardBackgroundColor="@color/revisedColor2"
             app:cardUseCompatPadding="true"
             card_view:cardCornerRadius="2dp"
             card_view:cardElevation="4dp">
@@ -146,7 +158,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_marginTop="10dp"
-                android:background="@color/newColorAccent">
+                android:background="@color/revisedColor2">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -154,7 +166,7 @@
                     android:layout_centerHorizontal="true"
                     android:paddingBottom="5dp"
                     android:text="@string/calendar_average_txt"
-                    android:textColor="@color/newPrimaryText"
+                    android:textColor="@color/revisedTextUnfocused"
                     android:textSize="20sp" />
 
                 <LinearLayout
@@ -171,7 +183,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginBottom="38.3dp"
-                        android:background="@color/primary_text">
+                        android:background="@color/revisedTextUnfocused">
 
                     </View>
 
@@ -179,7 +191,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginBottom="38.3dp"
-                        android:background="@color/primary_text">
+                        android:background="@color/revisedTextUnfocused">
 
                     </View>
 
@@ -187,7 +199,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginBottom="38.3dp"
-                        android:background="@color/primary_text">
+                        android:background="@color/revisedTextUnfocused">
 
                     </View>
 
@@ -195,7 +207,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginBottom="38.3dp"
-                        android:background="@color/primary_text">
+                        android:background="@color/revisedTextUnfocused">
 
                     </View>
 
@@ -203,7 +215,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginBottom="38.3dp"
-                        android:background="@color/primary_text">
+                        android:background="@color/revisedTextUnfocused">
 
                     </View>
 
@@ -297,7 +309,7 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="227dp"
-                    android:background="@color/primary_text">
+                    android:background="@color/revisedTextUnfocused">
 
                 </View>
 
@@ -316,7 +328,8 @@
                         android:background="@android:color/transparent"
                         android:text="@string/calendar_dom"
                         android:textAlignment="center"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:textColor="@color/revisedColor7"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -324,6 +337,7 @@
                         android:layout_marginStart="5dp"
                         android:layout_weight="0.8"
                         android:background="@android:color/transparent"
+                        android:textColor="@color/revisedColor7"
                         android:text="@string/calendar_seg"
                         android:textAlignment="center"
                         android:textSize="12sp" />
@@ -334,6 +348,7 @@
                         android:layout_marginStart="5dp"
                         android:layout_weight="0.8"
                         android:background="@android:color/transparent"
+                        android:textColor="@color/revisedColor7"
                         android:text="@string/calendar_ter"
                         android:textAlignment="center"
                         android:textSize="12sp" />
@@ -344,6 +359,7 @@
                         android:layout_marginStart="5dp"
                         android:layout_weight="0.8"
                         android:background="@android:color/transparent"
+                        android:textColor="@color/revisedColor7"
                         android:text="@string/calendar_qua"
                         android:textAlignment="center"
                         android:textSize="12sp" />
@@ -354,6 +370,7 @@
                         android:layout_marginStart="5dp"
                         android:layout_weight="0.8"
                         android:background="@android:color/transparent"
+                        android:textColor="@color/revisedColor7"
                         android:text="@string/calendar_qui"
                         android:textAlignment="center"
                         android:textSize="12sp"
@@ -365,6 +382,7 @@
                         android:layout_marginStart="5dp"
                         android:layout_weight="0.8"
                         android:background="@android:color/transparent"
+                        android:textColor="@color/revisedColor7"
                         android:text="@string/calendar_sex"
                         android:textAlignment="center"
                         android:textSize="12sp" />
@@ -375,6 +393,7 @@
                         android:layout_marginStart="5dp"
                         android:layout_weight="0.8"
                         android:background="@android:color/transparent"
+                        android:textColor="@color/revisedColor7"
                         android:text="@string/calendar_sab"
                         android:textAlignment="center"
                         android:textSize="12sp" />

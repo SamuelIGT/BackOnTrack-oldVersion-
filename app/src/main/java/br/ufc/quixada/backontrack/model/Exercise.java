@@ -17,9 +17,10 @@ public class Exercise implements Serializable{
     private List<Integer> stepsAudio;
     private List<String> stepsText;
     private int thumbnail;
+    private String status;
 
     public Exercise(){
-
+        this.status = "UNSTARTED";
     }
 
     public Exercise(int level, String title,/* int duracao,*/ String description, int thumbnail, int videoPath , boolean isUnlocked/*, List<Integer> stepsAudio*/){
@@ -30,7 +31,29 @@ public class Exercise implements Serializable{
         this.thumbnail = thumbnail;
         this.videoPath = videoPath;
         this.isUnlocked = isUnlocked;
+        this.status = "UNSTARTED";
 
+    }
+
+    public Exercise(int id, int level, String title,/* int duracao,*/ String description, int thumbnail, int videoPath , boolean isUnlocked/*, List<Integer> stepsAudio*/){
+        this.level = level;
+        this.title = title;
+        this.description = description;
+        /*this.stepsAudio = stepsAudio;*/
+        this.thumbnail = thumbnail;
+        this.videoPath = videoPath;
+        this.isUnlocked = isUnlocked;
+        this.status = "UNSTARTED";
+        this.id = id;
+
+    }
+
+    public void setStatus(String status){
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     public Integer getId() {

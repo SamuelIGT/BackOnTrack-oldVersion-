@@ -35,4 +35,20 @@
     <color name="calendar_day">#D66E52</color>
     <color name="calendar_pgbar">#6C2079</color>
 
+
+
+
+
+    <!--COLORS 2.0-->
+    <color name="revisedColor1">#36393e</color>
+    <color name="revisedColor2">#2f3136</color>
+    <color name="revisedColor3">#2a2c31</color>
+    <color name="revisedColor4">#1e2124</color>
+    <color name="revisedColor5">#42464d</color>
+    <color name="revisedColor6">#EFEBE7</color>
+    <color name="revisedAccent">#43b581</color>
+    <color name="revisedColor7">#ffffff</color>
+    <color name="revisedTextUnfocused">#6e7074</color>
+    <color name="revisedColorAccent2">#7289da</color>
+
 </resources>

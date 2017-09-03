@@ -10,9 +10,10 @@
 
 
     <array name="progressbar">
-        <item>@color/orangeAccent</item>
-        <item>@color/orangeMiddle</item>
-        <item>@color/yellow</item>
+        <item>@color/revisedColorAccent2</item>
+        <item>#59B5C7</item>
+        <item>@color/revisedAccent</item>
+
     </array>
 
     <array name="newProgressbar">

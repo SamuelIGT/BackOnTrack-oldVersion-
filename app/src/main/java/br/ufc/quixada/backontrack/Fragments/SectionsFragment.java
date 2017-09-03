@@ -1,16 +1,13 @@
 package br.ufc.quixada.backontrack.Fragments;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import br.ufc.quixada.backontrack.R;
+import br.ufc.quixada.backontrack.StorageController;
 import br.ufc.quixada.backontrack.activities.ExerciseActivity;
 import br.ufc.quixada.backontrack.adapter.ExpandableListAdapter;
 import br.ufc.quixada.backontrack.model.Exercise;
@@ -40,16 +38,17 @@ public class SectionsFragment extends Fragment {
     Map<String, List<String>> listDataChild;
     int previousGroup = -1;
     private View rootView;
+    StorageController storage = new StorageController();
+
 
     //TESTING PURPOSE
-    User user;
+    User user = new User(1);
     List<Level> levels;
-//    Level lOne, lTwo, lThree;
+    //Level lOne, lTwo, lThree;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,13 +57,12 @@ public class SectionsFragment extends Fragment {
 
 
         //Prepare list data
-        prepareSections();
-
-
+        loadData();
+        setupLockers();
         //-------------------------------------------------------------------------
 
         //Bind list
-        listAdapter = new ExpandableListAdapter(rootView.getContext(), listDataHeader, listDataChild, user.getLevelPermission(), levels);
+        listAdapter = new ExpandableListAdapter(rootView.getContext(), listDataHeader, listDataChild /*, user.getLevelPermission()*/, levels);
 
         expListView.setAdapter(listAdapter);
 //        expListView.setDivider(null);
@@ -75,30 +73,100 @@ public class SectionsFragment extends Fragment {
         return rootView;
     }
 
+    private void loadData() {
+        levels = storage.getLevels(getString(R.string.LEVELS_KEY), rootView.getContext());
+
+        if(levels != null){
+            Log.v("LOAD_DATA", "levels not null");
+            listDataHeader = new ArrayList<String>();
+            listDataChild = new HashMap<String, List<String>>();
+
+            // Adding child data
+            for(Level level: levels){
+                listDataHeader.add("Nível " + level.getLevel());
+            }
+
+            List<List<String>> headersSectionsList = new ArrayList<>();
+
+            for (int i = 0; i < levels.size(); i++){
+                headersSectionsList.add(new ArrayList<String>());
+                for(Section section: levels.get(i).getSectionsList()){
+                    headersSectionsList.get(i).add(section.getTitle());
+                }
+            }
+            /*
+            // Adding child data
+            List<String> lstOne = new ArrayList<String>();
+            for (Section sec : levels.get(0).getSectionsList()) {
+                lstOne.add(sec.getTitle());
+            }
+
+            List<String> lstTwo = new ArrayList<String>();
+            for (Section sec : levels.get(1).getSectionsList()) {
+                lstTwo.add(sec.getTitle());
+            }
+
+            List<String> lstThree = new ArrayList<String>();
+            for (Section sec : levels.get(2).getSectionsList()) {
+                lstThree.add(sec.getTitle());
+            }*/
+
+            // Header, Child data
+            for(int i = 0; i < listDataHeader.size(); i++){
+                listDataChild.put(listDataHeader.get(i), headersSectionsList.get(i));
+            }
+
+            /*listDataChild.put(listDataHeader.get(0), lstOne);
+            listDataChild.put(listDataHeader.get(1), lstTwo);
+            listDataChild.put(listDataHeader.get(2), lstThree);*/
+        }else {
+            createSections();
+        }
+    }
+
+    public void setupLockers(){
+        for (int i = 1; i < levels.size(); i++){
+                if(levels.get(i-1).isLevelCompleted()){
+                    levels.get(i).setUnlocked(true);
+            }
+            for(int j = 1; j < levels.get(i).getSectionsList().size(); j++ ){
+                if(levels.get(i).getSectionsList().get(j-1).isSectionCompleted()){
+                    levels.get(i).getSectionsList().get(j).setUnlocked(true);
+                }
+            }
+        }
+    }
+
     void FnClickEvents(final View thisView) {
         expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 
             //Header Click
             //if the onGroupClick returns true, it will hold the click(not expand). If it returns false, the the group will be expanded.
             @Override
-            public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
-                Log.v("LevelID", "" + i);
+            public boolean onGroupClick(ExpandableListView expandableListView, View view, int groupPosition, long l) {
+                Log.v("LevelID", "" + groupPosition);
 
+                if(levels.get(groupPosition).isUnlocked()){
+                    return false;
+                }else{
+                    return true;
+                }
+                /*
                 switch (user.getLevelPermission()) {
                     case 1:
-                        if (i == 0) {
+                        if (groupPosition == 0) {
                             break;
                         } else {
                             return true;
                         }
                     case 2:
-                        if (i <= 1) {
+                        if (groupPosition <= 1) {
                             break;
                         } else {
                             return true;
                         }
                     case 3:
-                        if(i <= 2){
+                        if(groupPosition <= 2){
                             break;
                         }else{
                             return true;
@@ -107,7 +175,7 @@ public class SectionsFragment extends Fragment {
                             Log.v("USER_PERMISSION", "WRONG LEVEL PERMISSION");
 
                 }
-                return false;
+                return false;*/
             }
         });
 
@@ -115,7 +183,6 @@ public class SectionsFragment extends Fragment {
             //Listening to child item selection
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long id) {
-                // switch ()
 
                 Intent exerciseIntent = new Intent(getActivity(), ExerciseActivity.class);
 
@@ -178,7 +245,7 @@ public class SectionsFragment extends Fragment {
         });
     }
 
-    private void prepareSections() {
+    private void createSections() {
         //User
         user = new User(1);
 
@@ -188,11 +255,6 @@ public class SectionsFragment extends Fragment {
         levels.add(new Level(2, new ArrayList<Section>()));
         levels.add(new Level(3, new ArrayList<Section>()));
 
-        /*lOne = );
-        lTwo = ;
-        lThree =;*/
-
-
         //Sections
         Section alg = new Section(1, "Alongamento", new ArrayList<Exercise>(), true);
         Section fortB = new Section(2, "Fortalecimento do braço", new ArrayList<Exercise>(), false);
@@ -201,16 +263,16 @@ public class SectionsFragment extends Fragment {
         Section habiM = new Section(5, "Habilidades manuais", new ArrayList<Exercise>(), false);
 
         //Exercises
-        Exercise ex1 = new Exercise(1, "Total Arm Stretch", "Sit straight in your chair and lean forward over your knees.", R.drawable.thumbnail_1, R.raw.video_sample, true);
-        Exercise ex2 = new Exercise(1, "Shoulder Shrug", "Sitin a chair with your arms by your side.", R.drawable.thumbnail_2, R.raw.video_sample, false);
-        Exercise ex3 = new Exercise(2, "Push Ups", "Place the table against a wall", R.drawable.thumbnail_3, R.raw.video_sample, true);
-        Exercise ex4 = new Exercise(2, "One Arm Push-Ups", "Place your weaker hand flat on the table. Use your stronger hand to help keep your hand in place.", R.drawable.thumbnail_4, R.raw.video_sample, false);
-        Exercise ex5 = new Exercise(3, "Grip Power", "Place your weaker arm on the table.", R.drawable.thumbnail_5, R.raw.video_sample, true);
-        Exercise ex6 = new Exercise(3, "Finger Power", "Place the putty on the table and roll into a thick rope. Use your weaker hand as much as possible.", R.drawable.thumbnail_6, R.raw.video_sample, false);
-        Exercise ex7 = new Exercise(4, "Waiter– Ball", "Place the bean bag in your weaker hand.", R.drawable.thumbnail_7, R.raw.video_sample, true);
-        Exercise ex8 = new Exercise(4, "Waiter– Cup", "Place a cup in your weaker hand.", R.drawable.thumbnail_8, R.raw.video_sample, false);
-        Exercise ex9 = new Exercise(5, "Laundry", "Use both hands for the following exercise.", R.drawable.thumbnail_9, R.raw.video_sample, true);
-        Exercise ex10 = new Exercise(5, "Buttons", "Take a shirt with buttons out of your closet.", R.drawable.thumbnail_10, R.raw.video_sample, false);
+        Exercise ex1 = new Exercise(001, 1, "Total Arm Stretch", "Sit straight in your chair and lean forward over your knees.", R.drawable.thumbnail_1, R.raw.video_sample, true);
+        Exercise ex2 = new Exercise(002, 1, "Shoulder Shrug", "Sit down a chair with your arms by your side.", R.drawable.thumbnail_2, R.raw.video_sample, false);
+        Exercise ex3 = new Exercise(003, 2, "Push Ups", "Place the table against a wall", R.drawable.thumbnail_3, R.raw.video_sample, true);
+        Exercise ex4 = new Exercise(004, 2, "One Arm Push-Ups", "Place your weaker hand flat on the table. Use your stronger hand to help keep your hand in place.", R.drawable.thumbnail_4, R.raw.video_sample, false);
+        Exercise ex5 = new Exercise(005, 3, "Grip Power", "Place your weaker arm on the table.", R.drawable.thumbnail_5, R.raw.video_sample, true);
+        Exercise ex6 = new Exercise(006, 3, "Finger Power", "Place the putty on the table and roll into a thick rope. Use your weaker hand as much as possible.", R.drawable.thumbnail_6, R.raw.video_sample, false);
+        Exercise ex7 = new Exercise(007, 4, "Waiter– Ball", "Place the bean bag in your weaker hand.", R.drawable.thumbnail_7, R.raw.video_sample, true);
+        Exercise ex8 = new Exercise(8, 4, "Waiter– Cup", "Place a cup in your weaker hand.", R.drawable.thumbnail_8, R.raw.video_sample, false);
+        Exercise ex9 = new Exercise(9, 5, "Laundry", "Use both hands for the following exercise.", R.drawable.thumbnail_9, R.raw.video_sample, true);
+        Exercise ex10 = new Exercise(10, 5, "Buttons", "Take a shirt with buttons out of your closet.", R.drawable.thumbnail_10, R.raw.video_sample, false);
 
         //Setting up the sections
         alg.addExerc(ex1);
@@ -226,7 +288,6 @@ public class SectionsFragment extends Fragment {
 
         //Seeting up the Levels
         //LEVEL 1
-
         levels.get(0).addSec(alg);
         levels.get(0).addSec(fortB);
         levels.get(0).addSec(fortM);
@@ -244,6 +305,8 @@ public class SectionsFragment extends Fragment {
         levels.get(2).addSec(coord);
         levels.get(2).addSec(habiM);
 
+        levels.get(0).setUnlocked(true);
+
 
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
@@ -259,38 +322,28 @@ public class SectionsFragment extends Fragment {
             lstOne.add(sec.getTitle());
         }
 
-       /* lstOne.add("Alongamento");
-        lstOne.add("Fortalecimento do braço");
-        lstOne.add("Fortalecimento da mão");
-        lstOne.add("Cordenação");*/
-
         List<String> lstTwo = new ArrayList<String>();
         for (Section sec : levels.get(1).getSectionsList()) {
             lstTwo.add(sec.getTitle());
         }
-       /* lstTwo.add("Alongamento");
-        lstTwo.add("Fortalecimento do braço");
-        lstTwo.add("Fortalecimento da mão");
-        lstTwo.add("Cordenação");
-        lstTwo.add("Habilidades manuais");*/
-
 
         List<String> lstThree = new ArrayList<String>();
         for (Section sec : levels.get(2).getSectionsList()) {
             lstThree.add(sec.getTitle());
         }
-        /*lstThree.add("Alongamento");
-        lstThree.add("Fortalecimento do braço");
-        lstThree.add("Fortalecimento da mão");
-        lstThree.add("Cordenação");
-        lstThree.add("Habilidades manuais");*/
 
         // Header, Child data
         listDataChild.put(listDataHeader.get(0), lstOne);
         listDataChild.put(listDataHeader.get(1), lstTwo);
         listDataChild.put(listDataHeader.get(2), lstThree);
+
+        saveData();
     }
-/*
+
+    private void saveData() {
+        storage.saveLevels(getString(R.string.LEVELS_KEY), levels, rootView.getContext());
+    }
+    /*
     private void restoreSession(Bundle savedInstanceState){
         SharedPreferences settings = this.getSharedPreferences(getString(R.string.restoreSessionMainActivity), 0);
 

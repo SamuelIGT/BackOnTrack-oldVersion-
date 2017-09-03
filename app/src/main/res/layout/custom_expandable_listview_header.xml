@@ -18,7 +18,7 @@
     android:padding="8dp"
     android:layout_marginBottom="8dp"
     android:elevation="2dp"
-    android:background="@color/newColorAccent">
+    android:background="@color/revisedColor2">
 
     <TextView
         android:id="@+id/lblListHeader"
@@ -27,7 +27,7 @@
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:textSize="36sp"
         android:text="Nível 1"
-        android:textColor="@color/icons"
+        android:textColor="@color/revisedColor7"
         android:textStyle="bold" />
 
     <View

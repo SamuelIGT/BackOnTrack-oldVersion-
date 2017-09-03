@@ -39,4 +39,5 @@
     <string name="calendar_average_txt">Média Esforço Diário</string>
     <string name="CALENDAR_KEY">070908</string>
     <string name="DEBUG_STORAGE_GET">Null Shared Preferences</string>
+    <string name="LEVELS_KEY">060807</string>
 </resources>

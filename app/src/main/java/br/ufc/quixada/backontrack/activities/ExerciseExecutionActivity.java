@@ -2,6 +2,7 @@ package br.ufc.quixada.backontrack.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
@@ -95,13 +96,12 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
 
     }
 
-    private void loadData(){
+    private void loadData() {
         exerc = (Exercise) getIntent().getSerializableExtra(getString(R.string.exercise_execution_extra));
-        eventList = new ArrayList<>();//storage.getCalendar(getString(R.string.CALENDAR_KEY), this);
-        if(eventList == null){
+        eventList = storage.getCalendar(getString(R.string.CALENDAR_KEY), this);
+        if (eventList == null) {
             eventList = new ArrayList<>();
         }
-
     }
 
     private void setupScreen() {
@@ -168,8 +168,8 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
                     btnSteps.get(j).setSelected(!btnSteps.get(j).isSelected());
 
                     //boolean isNull = stopAudioSteps();
-
-                    musicPlayer = MediaPlayer.create(ExerciseExecutionActivity.this, exerc.getStepsAudio().get(j));
+                    stopAudioSteps();
+                    musicPlayer = MediaPlayer.create(getApplicationContext(), exerc.getStepsAudio().get(j));
                     musicPlayer.start();
 
 
@@ -239,9 +239,10 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
 
     public boolean stopAudioSteps() {
         if (musicPlayer != null) {
-            if (musicPlayer.isPlaying()) {
                 musicPlayer.stop();
-            }
+                musicPlayer.reset();
+                musicPlayer.release();
+                musicPlayer = null;
             return false;
         }
         return true;
@@ -407,22 +408,22 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
                 Toast.makeText(ExerciseExecutionActivity.this, "Confirmado!", Toast.LENGTH_SHORT).show();
                 //-------Send data back to the previous activity---|
                 Intent intent = new Intent();
-                intent.putExtra("editTextValue", "value_here");
+                String dataResult[] = {exerc.getId().toString(), "DONE"};
+                intent.putExtra("exercise_conclusion", dataResult);
                 setResult(RESULT_OK, intent);
                 //-------------------------------------------------|
-
                 saveData();
 
                 finishAlert.dismiss();
+                resetFinishConfirmationDialog(btnList);
+
                 finish();
             }
         });
 
         btnClose.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                for (EffortButton btn : btnList) {
-                    DrawableCompat.setTint(btn.getBtn().getDrawable(), ContextCompat.getColor(ExerciseExecutionActivity.this, R.color.icons_black));
-                }
+                resetFinishConfirmationDialog(btnList);
                 finishAlert.hide();
             }
         });
@@ -432,7 +433,7 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
             btnList.get(i).getBtn().setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
                     // setDefaultButton(btnList.get(0), btnList);
-                    report.setEffort(j+1);
+                    report.setEffort(j + 1);
                     btnList.get(j).select(ExerciseExecutionActivity.this, btnList, motivation);
                 }
             });
@@ -440,8 +441,13 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
         }
 
     }
+    public void resetFinishConfirmationDialog(List<EffortButton> btnList){
+        for (EffortButton btn : btnList) {
+            DrawableCompat.setTint(btn.getBtn().getDrawable(), ContextCompat.getColor(ExerciseExecutionActivity.this, R.color.icons_black));
+        }
+    }
 
-    public void saveData(){
+    public void saveData() {
         long currentDate = System.currentTimeMillis();
 
         report.setTime(timer.getText().toString());
@@ -449,7 +455,7 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
         report.setExerciseTitle(exerc.getTitle());
 
         Event ev1 = new Event(ContextCompat.getColor(this, R.color.colorPrimary), currentDate, jsonParser.toJson(report));
-        Log.v("getTimeInMillis Test",""+currentDate);
+        Log.v("getTimeInMillis Test", "" + currentDate);
         eventList.add(ev1);
 
         StorageController storage = new StorageController();
@@ -494,7 +500,8 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
 
 //-------------------TESTING SEND DATA BACK TO THE PREVIOUS ACTIVITY----|
                 Intent intent = new Intent();
-                intent.putExtra("editTextValue", "value_here");
+                String dataResult[] = {exerc.getId().toString(), "DONE"};
+                intent.putExtra("exercise_conclusion", dataResult);
                 setResult(RESULT_OK, intent);
 //----------------------------------------------------------------------|
                 saveData();
@@ -511,7 +518,7 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
         });
     }
 
-    private void saveSession(){
+    private void saveSession() {
         SharedPreferences settings = this.getSharedPreferences("TESTE", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("Usuario", "Teste");

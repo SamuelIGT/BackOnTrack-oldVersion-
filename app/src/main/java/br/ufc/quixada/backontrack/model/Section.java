@@ -65,4 +65,13 @@ public class Section implements Serializable{
         }
         return null;
     }
+
+    public boolean isSectionCompleted(){
+        for(Exercise exercise: exerciseList){
+            if (!exercise.isUnlocked()){
+                return false;
+            }
+        }
+        return true;
+    }
 }

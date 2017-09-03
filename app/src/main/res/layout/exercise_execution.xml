@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:background="@color/card_background">
+    android:background="@color/revisedColor5">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_exercise_execution"
@@ -14,10 +14,9 @@
         android:background="?attr/colorPrimary"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:tabIndicatorColor="@color/newColorAccent"
-        android:titleTextColor="@color/icons"
-        android:subtitleTextColor="@color/icons"
-        app:titleTextColor="@color/icons"
-        app:subtitleTextColor="@color/icons">
+        app:titleTextColor="@color/revisedColor7"
+        app:subtitleTextColor="@color/revisedColor7"
+        android:textAlignment="center">
 
     </android.support.v7.widget.Toolbar>
 
@@ -27,14 +26,15 @@
         android:layout_marginTop="5dp"
         android:text="PASSOS"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/revisedTextUnfocused"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1.5dp"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
-        android:background="@color/secondary_text" />
+        android:background="@drawable/gradient_view_dividers" />
 
 
     <LinearLayout
@@ -58,6 +58,7 @@
                 android:drawableTop="@drawable/step_shape"
                 android:clickable="true"
                 android:text="1"
+                android:textColor="@color/revisedTextUnfocused"
                 android:textSize="16sp"
                 />
 
@@ -81,6 +82,7 @@
                 android:background="@android:color/transparent"
                 android:drawableTop="@drawable/step_shape"
                 android:text="2"
+                android:textColor="@color/revisedTextUnfocused"
                 android:textSize="16sp"
                 android:clickable="true"/>
 
@@ -103,6 +105,7 @@
                 android:background="@android:color/transparent"
                 android:drawableTop="@drawable/step_shape"
                 android:text="3"
+                android:textColor="@color/revisedTextUnfocused"
                 android:textSize="16sp"
                 android:clickable="true"/>
 
@@ -125,6 +128,7 @@
                 android:background="@android:color/transparent"
                 android:drawableTop="@drawable/step_shape"
                 android:text="4"
+                android:textColor="@color/revisedTextUnfocused"
                 android:textSize="16sp"
                 android:clickable="true"/>
 
@@ -166,6 +170,7 @@
                 android:background="@android:color/transparent"
                 android:drawableTop="@drawable/step_shape"
                 android:text="5"
+                android:textColor="@color/revisedTextUnfocused"
                 android:textSize="16sp" />
 
             <ProgressBar
@@ -186,6 +191,7 @@
                 android:background="@android:color/transparent"
                 android:drawableTop="@drawable/step_shape"
                 android:text="6"
+                android:textColor="@color/revisedTextUnfocused"
                 android:textSize="16sp" />
 
             <ProgressBar
@@ -206,6 +212,7 @@
                 android:background="@android:color/transparent"
                 android:drawableTop="@drawable/step_shape"
                 android:text="7"
+                android:textColor="@color/revisedTextUnfocused"
                 android:textSize="16sp" />
 
             <ProgressBar
@@ -225,6 +232,7 @@
                 android:background="@android:color/transparent"
                 android:drawableTop="@drawable/step_shape"
                 android:text="8"
+                android:textColor="@color/revisedTextUnfocused"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -235,7 +243,7 @@
             android:layout_marginEnd="80dp"
             android:layout_marginStart="80dp"
             android:layout_marginTop="5dp"
-            android:background="@color/secondary_text" />
+            android:background="@drawable/gradient_view_dividers" />
     </LinearLayout>
 
     <Button
@@ -272,8 +280,8 @@
             android:layout_height="150dp"
             android:layout_centerInParent="true"
             android:indeterminate="true"
-            app:cpb_color="@color/newColorAccent"
-            app:cpb_colors="@array/newProgressbar"
+            app:cpb_color="@color/revisedAccent"
+            app:cpb_colors="@array/progressbar"
             app:cpb_max_sweep_angle="300"
             app:cpb_min_sweep_angle="100"
             app:cpb_rotation_speed="1.0"
@@ -300,7 +308,7 @@
             android:layout_toEndOf="@+id/pgBarStatic"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:text="@string/button_finish"
-            android:textColor="@color/newColorAccent"
+            android:textColor="@color/revisedAccent"
             android:textSize="15sp"
             android:textStyle="bold" />
 

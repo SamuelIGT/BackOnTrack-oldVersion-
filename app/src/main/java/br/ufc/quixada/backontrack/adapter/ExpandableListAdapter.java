@@ -29,16 +29,18 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private Map<String, List<String>> _listDataChild;
     LayoutInflater inflater;
     private int _levelPermission;
+    private List<Boolean> levelPermissionList;
     private List<Level> _levels;
 
 
-    public ExpandableListAdapter(Context context, List<String> listDataHeader, Map<String, List<String>> listDataChild, int levelPermission, List<Level> levels) {
+    public ExpandableListAdapter(Context context, List<String> listDataHeader, Map<String, List<String>> listDataChild, /*int levelPermission*/ List<Level> levels) {
         _context = context;
         _listDataHeader = listDataHeader;
         _listDataChild = listDataChild;
         inflater = (LayoutInflater) _context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        _levelPermission = levelPermission;
+        //_levelPermission = levelPermission;
         _levels = levels;
+        this.levelPermissionList = levelPermissionList;
     }
 
     //for child item view
@@ -86,7 +88,23 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         TextView lblListHeader = (TextView) convertView.findViewById(R.id.lblListHeader);
         ImageView imgLock = (ImageView) convertView.findViewById(R.id.img_lock);
 
-        switch (_levelPermission) {
+
+        if(_levels.get(groupPosition).isUnlocked()){
+            imgLock.setImageResource(R.drawable.ic_unlock);
+        }else{
+            imgLock.setImageResource(R.drawable.ic_lock);
+        }
+
+/*        for(int i = 0; i < levelPermissionList.size();i++){
+            if(i == groupPosition){
+                if (levelPermissionList.get(i)){
+                    imgLock.setImageResource(R.drawable.ic_unlock);
+                }else{
+                    imgLock.setImageResource(R.drawable.ic_lock);
+                }
+            }
+        }*/
+        /*switch (_levelPermission) {
             case 1:
                 if (groupPosition == 0) {
                     imgLock.setImageResource(R.drawable.ic_unlock);
@@ -114,7 +132,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             default:
                 Log.v("USER_PERMISSION", "WRONG LEVEL PERMISSION");
 
-        }
+        }*/
         lblListHeader.setText(headerTitle);
 
 
@@ -150,7 +168,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListItem);
         txtListChild.setText(childText);
 
-        for (Level level : _levels) {
+        if(_levels.get(groupPosition).getSectionsList().get(childPosition).isUnlocked()){
+            lock.setVisibility(View.GONE);
+        }
+
+        /*for (Level level : _levels) {
             if (level.getLevel() - 1 == groupPosition) {
                 for (Section section : level.getSectionsList()) {
                     if (section.getTitle().equals(childText)) {
@@ -160,7 +182,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                     }
                 }
             }
-        }
+        }*/
 
 
 /*//Sets space between child items

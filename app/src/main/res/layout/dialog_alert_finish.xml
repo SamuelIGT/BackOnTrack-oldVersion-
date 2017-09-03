@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@drawable/dialog_layout_bg"
     android:gravity="center_horizontal"
     android:orientation="vertical">
@@ -9,69 +9,93 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/high_importance_100px"
-        android:contentDescription="@string/img_description_alert"/>
+        android:layout_weight="1"
+        android:contentDescription="@string/img_description_alert"
+        android:src="@drawable/high_importance_100px" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_weight="1"
         android:paddingLeft="40dp"
         android:paddingRight="40dp"
         android:text="@string/finish_alert_title"
-        android:textColor="@android:color/white"
         android:textAlignment="center"
+        android:textColor="@android:color/white"
         android:textSize="25sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_weight="1"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
         android:text="@string/finish_alert_description"
-        android:textColor="@android:color/white"
         android:textAlignment="center"
+        android:textColor="@android:color/white"
         android:textSize="18sp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1.5dp"
-        android:layout_marginTop="50dp"
         android:layout_marginLeft="3dip"
         android:layout_marginRight="3dip"
-        android:background="@android:color/white"/>
+        android:background="@android:color/white" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        style="?android:attr/buttonBarButtonStyle">
+        android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/btn_accept"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:textColor="@android:color/white"
             android:text="@string/dialog_finish"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="5dp"
             android:textSize="20sp" />
 
         <Button
             android:id="@+id/btn_decline"
-            android:layout_width="wrap_content"
-            android:layout_height="52dp"
-            android:layout_marginStart="60dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="5dp"
             style="?android:attr/buttonBarButtonStyle"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:textColor="@android:color/white"
             android:text="@string/dialog_dontFinish"
-            android:textSize="20sp" />
+            android:textSize="20sp">
+
+        </Button>
 
     </LinearLayout>
+
+    <!--<Button
+        android:id="@+id/btn_accept"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_weight="0.5"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:text="@string/dialog_finish"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />-->
+
+    <!--<Button
+        android:id="@+id/btn_decline"
+        android:layout_width="wrap_content"
+        android:layout_height="52dp"
+        android:layout_marginStart="60dp"
+        style="?android:attr/buttonBarButtonStyle"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:textColor="@android:color/white"
+        android:text="@string/dialog_dontFinish"
+        android:textSize="20sp" />-->
+
 
 </LinearLayout>
