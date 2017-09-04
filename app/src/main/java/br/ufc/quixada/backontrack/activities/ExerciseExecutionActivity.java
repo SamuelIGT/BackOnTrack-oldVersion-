@@ -1,5 +1,6 @@
 package br.ufc.quixada.backontrack.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
@@ -16,8 +17,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -142,11 +145,7 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
                 stepsProgress.add((ProgressBar) stepsLayout2.getChildAt(i));
             }
         }
-        exerc.setStepsAudio(new ArrayList<Integer>());
-        exerc.getStepsAudio().add(R.raw.audio_step_sample);
-        exerc.getStepsAudio().add(R.raw.audio_step_sample);
-        exerc.getStepsAudio().add(R.raw.audio_step_sample);
-        exerc.getStepsAudio().add(R.raw.audio_step_sample);
+
         //sets the OnClickListener
         for (int i = 0; i < btnSteps.size(); i++) {
             final int j = i;
@@ -315,12 +314,27 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
         final ImageButton btnPlay = (ImageButton) mView.findViewById(R.id.btn_play_video);
         btnPlay.setImageAlpha(180);
 
+        final ImageView dimBehind = (ImageView) findViewById(R.id.view_cover_dialog);
+
         final VideoView mVideoView = (VideoView) mView.findViewById(R.id.video_view);
         String uriPath = "android.resource://br.ufc.quixada.backontrack/" + exerc.getVideoPath();
 
         mBuilder.setView(mView);
-        final AlertDialog finishAlert = mBuilder.create();
-        finishAlert.show();
+        final AlertDialog videoDialog = mBuilder.create();
+        dimBehind.setVisibility(View.VISIBLE);
+        videoDialog.show();
+
+        WindowManager.LayoutParams a = videoDialog.getWindow().getAttributes();
+        a.dimAmount = 0;
+        videoDialog.getWindow().setAttributes(a);
+
+        videoDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                dimBehind.setVisibility(View.GONE);
+            }
+        });
+
         Uri uri2 = Uri.parse(uriPath);
         mVideoView.setVideoURI(uri2);
         mVideoView.requestFocus();
@@ -350,6 +364,8 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
                 mVideoView.seekTo(100);
             }
         });
+
+
     }
 
     private void startTimer() {
@@ -496,9 +512,11 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
         mAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ExerciseExecutionActivity.this, "Dados salvos", Toast.LENGTH_SHORT).show();
+                finishAlert.dismiss();
+                finishExerciseConfirmation();
+//              Toast.makeText(ExerciseExecutionActivity.this, "Dados salvos", Toast.LENGTH_SHORT).show();
 
-//-------------------TESTING SEND DATA BACK TO THE PREVIOUS ACTIVITY----|
+/*//-------------------TESTING SEND DATA BACK TO THE PREVIOUS ACTIVITY----|
                 Intent intent = new Intent();
                 String dataResult[] = {exerc.getId().toString(), "DONE"};
                 intent.putExtra("exercise_conclusion", dataResult);
@@ -507,7 +525,7 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
                 saveData();
 
                 finishAlert.dismiss();
-                ExerciseExecutionActivity.super.onBackPressed();
+                ExerciseExecutionActivity.super.onBackPressed();*/
             }
         });
 

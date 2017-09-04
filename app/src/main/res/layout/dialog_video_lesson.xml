@@ -1,25 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
-
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
 
     <VideoView
         android:id="@+id/video_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
-
- <!--   <VideoView
-        android:id="@+id/video_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />-->
-
-
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
     <ImageButton
         android:id="@+id/btn_play_video"
@@ -31,32 +21,3 @@
         android:src="@drawable/ic_play" />
 
 </RelativeLayout>
-
-
-
-    <!--<TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Tente tocar nos seus pés."/>
--->
-
-    <!--<RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="10dp"/>
-
-    </RelativeLayout>-->
-
-
-</LinearLayout>

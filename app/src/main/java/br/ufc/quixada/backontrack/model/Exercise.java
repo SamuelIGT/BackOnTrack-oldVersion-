@@ -35,11 +35,11 @@ public class Exercise implements Serializable{
 
     }
 
-    public Exercise(int id, int level, String title,/* int duracao,*/ String description, int thumbnail, int videoPath , boolean isUnlocked/*, List<Integer> stepsAudio*/){
+    public Exercise(int id, int level, String title,/* int duracao,*/ String description, int thumbnail, int videoPath , boolean isUnlocked, List<Integer> stepsAudio){
         this.level = level;
         this.title = title;
         this.description = description;
-        /*this.stepsAudio = stepsAudio;*/
+        this.stepsAudio = stepsAudio;
         this.thumbnail = thumbnail;
         this.videoPath = videoPath;
         this.isUnlocked = isUnlocked;

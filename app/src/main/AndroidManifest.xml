@@ -26,6 +26,14 @@
         </activity>
 
         <activity
+            android:name=".activities.LoginActivity"
+            android:label="Login"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+        <activity
             android:name=".activities.ExerciseActivity"
             android:label="Exercícios"
             android:screenOrientation="portrait"

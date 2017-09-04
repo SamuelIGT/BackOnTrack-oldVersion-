@@ -262,17 +262,26 @@ public class SectionsFragment extends Fragment {
         Section coord = new Section(4, "Cordenação", new ArrayList<Exercise>(), false);
         Section habiM = new Section(5, "Habilidades manuais", new ArrayList<Exercise>(), false);
 
+        List<Integer> audioSteps = new ArrayList<Integer>();
+        audioSteps.add(R.raw.alng_tt_br_1);
+        audioSteps.add(R.raw.alng_tt_br_2);
+        audioSteps.add(R.raw.alng_tt_br_3);
+        audioSteps.add(R.raw.alng_tt_br_4);
+        audioSteps.add(R.raw.alng_tt_br_5);
+        audioSteps.add(R.raw.alng_tt_br_6);
+
+
         //Exercises
-        Exercise ex1 = new Exercise(001, 1, "Total Arm Stretch", "Sit straight in your chair and lean forward over your knees.", R.drawable.thumbnail_1, R.raw.video_sample, true);
-        Exercise ex2 = new Exercise(002, 1, "Shoulder Shrug", "Sit down a chair with your arms by your side.", R.drawable.thumbnail_2, R.raw.video_sample, false);
-        Exercise ex3 = new Exercise(003, 2, "Push Ups", "Place the table against a wall", R.drawable.thumbnail_3, R.raw.video_sample, true);
-        Exercise ex4 = new Exercise(004, 2, "One Arm Push-Ups", "Place your weaker hand flat on the table. Use your stronger hand to help keep your hand in place.", R.drawable.thumbnail_4, R.raw.video_sample, false);
-        Exercise ex5 = new Exercise(005, 3, "Grip Power", "Place your weaker arm on the table.", R.drawable.thumbnail_5, R.raw.video_sample, true);
-        Exercise ex6 = new Exercise(006, 3, "Finger Power", "Place the putty on the table and roll into a thick rope. Use your weaker hand as much as possible.", R.drawable.thumbnail_6, R.raw.video_sample, false);
-        Exercise ex7 = new Exercise(007, 4, "Waiter– Ball", "Place the bean bag in your weaker hand.", R.drawable.thumbnail_7, R.raw.video_sample, true);
-        Exercise ex8 = new Exercise(8, 4, "Waiter– Cup", "Place a cup in your weaker hand.", R.drawable.thumbnail_8, R.raw.video_sample, false);
-        Exercise ex9 = new Exercise(9, 5, "Laundry", "Use both hands for the following exercise.", R.drawable.thumbnail_9, R.raw.video_sample, true);
-        Exercise ex10 = new Exercise(10, 5, "Buttons", "Take a shirt with buttons out of your closet.", R.drawable.thumbnail_10, R.raw.video_sample, false);
+        Exercise ex1 = new Exercise(001, 1, "Total Arm Stretch", "Sit straight in your chair and lean forward over your knees.", R.drawable.thumbnail_1, R.raw.video_sample, true, audioSteps);
+        Exercise ex2 = new Exercise(002, 1, "Shoulder Shrug", "Sit down a chair with your arms by your side.", R.drawable.thumbnail_2, R.raw.video_sample, false, audioSteps);
+        Exercise ex3 = new Exercise(003, 2, "Push Ups", "Place the table against a wall", R.drawable.thumbnail_3, R.raw.video_sample, true, audioSteps);
+        Exercise ex4 = new Exercise(004, 2, "One Arm Push-Ups", "Place your weaker hand flat on the table. Use your stronger hand to help keep your hand in place.", R.drawable.thumbnail_4, R.raw.video_sample, false, audioSteps);
+        Exercise ex5 = new Exercise(005, 3, "Grip Power", "Place your weaker arm on the table.", R.drawable.thumbnail_5, R.raw.video_sample, true, audioSteps);
+        Exercise ex6 = new Exercise(006, 3, "Finger Power", "Place the putty on the table and roll into a thick rope. Use your weaker hand as much as possible.", R.drawable.thumbnail_6, R.raw.video_sample, false, audioSteps);
+        Exercise ex7 = new Exercise(007, 4, "Waiter– Ball", "Place the bean bag in your weaker hand.", R.drawable.thumbnail_7, R.raw.video_sample, true, audioSteps);
+        Exercise ex8 = new Exercise(8, 4, "Waiter– Cup", "Place a cup in your weaker hand.", R.drawable.thumbnail_8, R.raw.video_sample, false, audioSteps);
+        Exercise ex9 = new Exercise(9, 5, "Laundry", "Use both hands for the following exercise.", R.drawable.thumbnail_9, R.raw.video_sample, true, audioSteps);
+        Exercise ex10 = new Exercise(10, 5, "Buttons", "Take a shirt with buttons out of your closet.", R.drawable.thumbnail_10, R.raw.video_sample, false, audioSteps);
 
         //Setting up the sections
         alg.addExerc(ex1);

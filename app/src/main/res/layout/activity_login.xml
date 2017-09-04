@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txt_login_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:textSize="30sp"
+        android:text="BACK ON TRACK"/>
+
+    <TextView
+        android:id="@+id/txt_login_loginField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/edit_login_loginField"
+        android:layout_marginStart="55dp"
+        android:text="Login"/>
+
+    <EditText
+        android:id="@+id/edit_login_loginField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txt_login_passwordField"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
+        android:hint="Logue com sua matrícula"
+        />
+
+    <TextView
+        android:id="@+id/txt_login_passwordField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/edit_login_passwordField"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="40dp"
+        android:text="Senha"/>
+
+    <EditText
+        android:id="@+id/edit_login_passwordField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
+        android:hint="Insira sua senha"
+        />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/edit_login_passwordField"
+        android:background="@color/revisedColor2"
+        android:text="ENTRAR"
+        android:textColor="@color/cardview_light_background"
+        android:elevation="8dp"
+        android:layout_marginTop="40dp"/>
+
+</RelativeLayout>

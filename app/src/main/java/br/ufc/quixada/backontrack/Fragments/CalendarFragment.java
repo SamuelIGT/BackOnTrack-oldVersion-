@@ -232,9 +232,9 @@ public class CalendarFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        Log.v("DEBUG_VISIBLE_CALENDAR", "VISIBLE HINT TRIGGERED: " + isVisibleToUser);
         if (isCreated) {
             if (isVisibleToUser) {
+                Log.v("DEBUG_VISIBLE_CALENDAR", "VISIBLE: " + isVisibleToUser);
                 calendarShowAnimation();
                 getCalendarEvents();
             } else {

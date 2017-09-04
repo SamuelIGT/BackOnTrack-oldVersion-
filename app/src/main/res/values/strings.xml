@@ -13,10 +13,10 @@
     <string name="timer_sec_description">SEG</string>
     <string name="timer_mil_description">MIL</string>
     <string name="timer_start">00:00:00</string>
-    <string name="finish_alert_description">Você não finalizou ainda seu exercício. Se insistir em voltar, o mesmo será finalizado automaticamente.  Deseja finalizar o exercício?</string>
+    <string name="finish_alert_description">Você não finalizou ainda seu exercício. Sempre que sair de um exercicío, finalize-o. Deseja finalizar o exercício?</string>
     <string name="finish_alert_title">Você está saindo do exercício sem finalizá-lo!</string>
     <string name="dialog_finish">FINALIZAR</string>
-    <string name="dialog_dontFinish">NÃO FINALIZAR</string>
+    <string name="dialog_dontFinish">VOLTAR</string>
     <string name="img_description_alert">alerta</string>
     <string name="txt_effort_exercise_confirmation">Qual foi o seu nível de esforço para realizar esse exercício?</string>
     <string name="exercise_finish_confirmation">Você acabou?</string>
