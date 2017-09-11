@@ -27,6 +27,7 @@ import java.util.List;
 
 import br.ufc.quixada.backontrack.Fragments.GridSpacingItemDecoration;
 import br.ufc.quixada.backontrack.R;
+import br.ufc.quixada.backontrack.StorageController;
 import br.ufc.quixada.backontrack.adapter.ExerciseAdapter;
 import br.ufc.quixada.backontrack.model.Exercise;
 import br.ufc.quixada.backontrack.model.Section;
@@ -40,7 +41,8 @@ public class ExerciseActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ExerciseAdapter adapter;
     private Section sec;
-
+    private boolean hasDataChanges = false;
+    private StorageController storage = new StorageController();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,21 +65,16 @@ public class ExerciseActivity extends AppCompatActivity {
         //recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true)); //Defines how the cards will be shown
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
-
-
     }
 
     private void initCollapsingToolbar(final Context context){
-        final CollapsingToolbarLayout collapsingToolbar =
-                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        final CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
 
         collapsingToolbar.setTitle(sec.getTitle());
         collapsingToolbar.setExpandedTitleColor(ContextCompat.getColor(context,R.color.newPrimaryText));
 
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
         appBarLayout.setExpanded(true);
-
-
 
         // hiding & showing the title when toolbar expanded & collapsed
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener(){
@@ -120,39 +117,47 @@ public class ExerciseActivity extends AppCompatActivity {
             Log.v("Backdrop Glide catch", "Gliding Error");
         }
 
-        /*int[] thumbnails = new int[]{
-                R.drawable.exercise,
-                R.drawable.images
-        };
-
-        Exercise a = new Exercise(1, "Flexão", getString(R.string.description_test), thumbnails[0]);
-        exerciseList.add(a);
-
-        a = new Exercise(1, "Flexão2", getString(R.string.description_test), thumbnails[1]);
-        exerciseList.add(a);
-
-        a = new Exercise(1, "Flexão3", getString(R.string.description_test), thumbnails[0]);
-        exerciseList.add(a);
-
-        a = new Exercise(1, "Flexão4", getString(R.string.description_test), thumbnails[1]);
-        exerciseList.add(a);
-*/
         adapter.notifyDataSetChanged();
     }
 
-    //----------TESTING GETTING THE DATA BACK FROM A CALLED ACTIVITY---------------------|
+    @Override
+    public void onBackPressed() {
+        Log.v("Exercise_onBackPressed", "ENTERED");
+        notifyPreviousActivity();
+        super.onBackPressed();
+    }
+
+    private void notifyPreviousActivity() {
+        Intent intent = new Intent();
+        boolean hasChange = false;
+        if(hasDataChanges){
+            hasChange = true;
+            intent.putExtra("HAS_CHANGE", hasChange);
+            setResult(RESULT_OK, intent);
+            storage.saveSectionChanges(getString(R.string.LEVELS_KEY), sec, this);
+
+            hasDataChanges = false;
+        }
+        intent.putExtra("HAS_CHANGE", hasChange);
+        setResult(RESULT_OK, intent);
+    }
+
+    //----------GETTING THE DATA BACK FROM A CALLED ACTIVITY---------------------|
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 2) {
             if(resultCode == RESULT_OK) {
-                String strEditText[] = data.getStringArrayExtra("exercise_conclusion");
+                String strEditText[] = data.getStringArrayExtra("EXERCISE_RESULT");
                 if(strEditText[1].equals("DONE")){
+                    hasDataChanges = true;
                     for(int i = 0; i < sec.getExerciseList().size(); i++){
                         if(sec.getExerciseList().get(i).getId() == Integer.parseInt(strEditText[0])){
                             sec.getExerciseList().get(i).setStatus(strEditText[1]);
                             unlockExercise();
                         }
                     }
+                }else{
+                    Log.d("ON_ActivityResult", "INCOMPLETE");
                 }
             }
         }
@@ -164,7 +169,6 @@ public class ExerciseActivity extends AppCompatActivity {
         for(int i = 1; i < sec.getExerciseList().size(); i++){
             if(sec.getExerciseList().get(i-1).getStatus().equals("DONE")){
                 sec.getExerciseList().get(i).setUnlocked(true);
-                Log.d("unlockExerciseTEST", "OK");
                 recyclerView.getAdapter().notifyItemChanged(i);
             }
         }

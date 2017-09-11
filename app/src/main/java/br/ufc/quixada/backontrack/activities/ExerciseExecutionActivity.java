@@ -50,7 +50,6 @@ import fr.castorflex.android.circularprogressbar.CircularProgressDrawable;
 
 public class ExerciseExecutionActivity extends AppCompatActivity {
 
-    //private List<String> steps;
     private StorageController storage;
     private Gson jsonParser = new GsonBuilder().create();
 
@@ -82,8 +81,6 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
         toolbar.setTitle(exerc.getTitle());
         setSupportActionBar(toolbar);
 
-
-        // txtViewSteps = (TextView) findViewById(R.id.txt_steps);
         timer = (TextView) findViewById(R.id.timer);
         startStop = (Button) findViewById(R.id.btn_start_stop);
         finish = (Button) findViewById(R.id.btn_finish);
@@ -108,7 +105,6 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
     }
 
     private void setupScreen() {
-        Log.v("EXERCISE_EXTRA_TEST", exerc.getTitle());
         setupButtons();
     }
 
@@ -116,7 +112,6 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         stopTimer();
-
         finishExerciseAlert();
     }
 
@@ -146,7 +141,7 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
             }
         }
 
-        //sets the OnClickListener
+        //sets the OnClickListener for all steps buttons
         for (int i = 0; i < btnSteps.size(); i++) {
             final int j = i;
 
@@ -166,7 +161,6 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
 
                     btnSteps.get(j).setSelected(!btnSteps.get(j).isSelected());
 
-                    //boolean isNull = stopAudioSteps();
                     stopAudioSteps();
                     musicPlayer = MediaPlayer.create(getApplicationContext(), exerc.getStepsAudio().get(j));
                     musicPlayer.start();
@@ -220,28 +214,14 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
                 }
             });
         }
-
-
-
-        /*btnStep1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                btnStep1.setSelected(!btnStep1.isSelected());
-                if (btnStep1.isSelected()) {
-                    //Handle selected state change
-                } else {
-                    //Handle de-select state change
-                }
-            }
-        });*/
-
     }
 
     public boolean stopAudioSteps() {
         if (musicPlayer != null) {
-                musicPlayer.stop();
-                musicPlayer.reset();
-                musicPlayer.release();
-                musicPlayer = null;
+            musicPlayer.stop();
+            musicPlayer.reset();
+            musicPlayer.release();
+            musicPlayer = null;
             return false;
         }
         return true;
@@ -252,27 +232,6 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
         anim.setDuration(1000);
         pgBar.startAnimation(anim);
     }
-        /*Log.v("StepsLayout Children", ""+stepsLayout1.getChildCount());
-        for( int i = 0; i < stepsLayout.getChildCount(); i++ ) {
-            if (stepsLayout.getChildAt(i) instanceof Button) {
-                Log.v("StepsLayout TextView", "" + i);
-            }
-        }*/
-
-    //List<TextView> stepsView = new ArrayList<>();
-    //stepsView.add((TextView)findViewById(R.));
-
-
-/*    private void setupSteps() {
-        steps = new ArrayList<String>();
-        steps.add("Sente-se em uma cadeira.");
-        steps.add("Coloque suas mãos na mesa.");
-        steps.add("Empurre seu corpo para trás.");
-
-        for (String step : steps) {
-            txtViewSteps.setText(txtViewSteps.getText() + step + "\n");
-        }
-    }*/
 
     private void setupButtons() {
         pgBar.setVisibility(View.INVISIBLE);
@@ -370,9 +329,7 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
 
     private void startTimer() {
         finish.setVisibility(View.INVISIBLE);
-
         startStop.setText(R.string.button_stop);
-
         pgBar.setVisibility(View.VISIBLE);
         pgBarDrawable.start();
 
@@ -381,9 +338,7 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
 
     private void stopTimer() {
         finish.setVisibility(View.VISIBLE);
-
         startStop.setText(R.string.button_continue);
-
         pgBar.setVisibility(View.INVISIBLE);
         pgBarDrawable.stop();
 
@@ -406,7 +361,7 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
         btnList.add(new EffortButton(4, (TextView) mView.findViewById(R.id.txt_emoticon_4), (ImageButton) mView.findViewById(R.id.ic_emotion_4)));
         btnList.add(new EffortButton(5, (TextView) mView.findViewById(R.id.txt_emoticon_5), (ImageButton) mView.findViewById(R.id.ic_emotion_5)));
 
-        TextView timeResult = (TextView) mView.findViewById(R.id.txt_time_result);
+        final TextView timeResult = (TextView) mView.findViewById(R.id.txt_time_result);
         timeResult.setText(timer.getText());
         final TextView motivation = (TextView) mView.findViewById(R.id.txt_motivation);
         motivation.setVisibility(View.INVISIBLE);
@@ -422,18 +377,23 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Toast.makeText(ExerciseExecutionActivity.this, "Confirmado!", Toast.LENGTH_SHORT).show();
-                //-------Send data back to the previous activity---|
-                Intent intent = new Intent();
-                String dataResult[] = {exerc.getId().toString(), "DONE"};
-                intent.putExtra("exercise_conclusion", dataResult);
-                setResult(RESULT_OK, intent);
-                //-------------------------------------------------|
-                saveData();
+                if (report.getEffort() > 0) {
 
-                finishAlert.dismiss();
-                resetFinishConfirmationDialog(btnList);
+                    //-------Send data back to the previous activity---|
+                    Intent intent = new Intent();
+                    String dataResult[] = {exerc.getId().toString(), statusBuilder(timeResult.getText().toString())};
+                    intent.putExtra("EXERCISE_RESULT", dataResult);
+                    setResult(RESULT_OK, intent);
+                    //-------------------------------------------------|
+                    saveData();
 
-                finish();
+                    finishAlert.dismiss();
+                    resetFinishConfirmationDialog(btnList);
+
+                    finish();
+                }else{
+                    Toast.makeText(ExerciseExecutionActivity.this, "Selecione um esforço!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -453,11 +413,21 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
                     btnList.get(j).select(ExerciseExecutionActivity.this, btnList, motivation);
                 }
             });
-
         }
-
     }
-    public void resetFinishConfirmationDialog(List<EffortButton> btnList){
+
+    private String statusBuilder(String timer) {
+        String[] timeText = timer.split(":");
+        int[] timeInt = {Integer.parseInt(timeText[0]), Integer.parseInt(timeText[1]), Integer.parseInt(timeText[2])};
+        if (timeInt[0] < 1) {
+            if (timeInt[1] < 30) {
+                return "UNFINISHED";
+            }
+        }
+        return "DONE";
+    }
+
+    public void resetFinishConfirmationDialog(List<EffortButton> btnList) {
         for (EffortButton btn : btnList) {
             DrawableCompat.setTint(btn.getBtn().getDrawable(), ContextCompat.getColor(ExerciseExecutionActivity.this, R.color.icons_black));
         }

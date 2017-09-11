@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ExpandableListView;
 
 import java.util.ArrayList;
@@ -23,23 +24,24 @@ import br.ufc.quixada.backontrack.model.Level;
 import br.ufc.quixada.backontrack.model.Section;
 import br.ufc.quixada.backontrack.model.User;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Created by samue on 22/07/2017.
  */
 
 public class SectionsFragment extends Fragment {
-    //Contructor
+    //Constructor
     public SectionsFragment() {
     }
 
     private ExpandableListAdapter listAdapter;
     private ExpandableListView expListView;
-    List<String> listDataHeader;
-    Map<String, List<String>> listDataChild;
+    private List<String> listDataHeader;
+    private Map<String, List<String>> listDataChild;
     int previousGroup = -1;
     private View rootView;
-    StorageController storage = new StorageController();
-
+    private StorageController storage = new StorageController();
 
     //TESTING PURPOSE
     User user = new User(1);
@@ -54,8 +56,6 @@ public class SectionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.exercise_fragment, container, false);
         expListView = (ExpandableListView) rootView.findViewById(R.id.lvExp);
-
-
         //Prepare list data
         loadData();
         setupLockers();
@@ -63,78 +63,70 @@ public class SectionsFragment extends Fragment {
 
         //Bind list
         listAdapter = new ExpandableListAdapter(rootView.getContext(), listDataHeader, listDataChild /*, user.getLevelPermission()*/, levels);
-
         expListView.setAdapter(listAdapter);
 //        expListView.setDivider(null);
 //        expListView.setDividerHeight(8);
 
         FnClickEvents(rootView);
-
         return rootView;
     }
 
     private void loadData() {
+        //Load the List<Level> object from the local database (sharedPreferences)
         levels = storage.getLevels(getString(R.string.LEVELS_KEY), rootView.getContext());
 
-        if(levels != null){
+        if (levels != null) {
             Log.v("LOAD_DATA", "levels not null");
-            listDataHeader = new ArrayList<String>();
-            listDataChild = new HashMap<String, List<String>>();
+            listDataHeader = new ArrayList<String>();   //Prepares the headers(Level) titles
+            listDataChild = new HashMap<String, List<String>>();    //Prepares the child(Section) titles
 
-            // Adding child data
-            for(Level level: levels){
+            // Adding header(Level) titles
+            for (Level level : levels) {
                 listDataHeader.add("Nível " + level.getLevel());
             }
-
+            //Create a List of the type that the expandableListView require
             List<List<String>> headersSectionsList = new ArrayList<>();
 
-            for (int i = 0; i < levels.size(); i++){
+            // Adding section titles on the List that will be added on the expandable list view
+            for (int i = 0; i < levels.size(); i++) {
                 headersSectionsList.add(new ArrayList<String>());
-                for(Section section: levels.get(i).getSectionsList()){
+                for (Section section : levels.get(i).getSectionsList()) {
+                    Log.v("isSectionUnlocked", "Level " + levels.get(i).getLevel() + ": " + section.isUnlocked());
                     headersSectionsList.get(i).add(section.getTitle());
                 }
             }
-            /*
-            // Adding child data
-            List<String> lstOne = new ArrayList<String>();
-            for (Section sec : levels.get(0).getSectionsList()) {
-                lstOne.add(sec.getTitle());
-            }
-
-            List<String> lstTwo = new ArrayList<String>();
-            for (Section sec : levels.get(1).getSectionsList()) {
-                lstTwo.add(sec.getTitle());
-            }
-
-            List<String> lstThree = new ArrayList<String>();
-            for (Section sec : levels.get(2).getSectionsList()) {
-                lstThree.add(sec.getTitle());
-            }*/
-
-            // Header, Child data
-            for(int i = 0; i < listDataHeader.size(); i++){
+            // Adding the Child(Section) titles
+            for (int i = 0; i < listDataHeader.size(); i++) {
                 listDataChild.put(listDataHeader.get(i), headersSectionsList.get(i));
             }
-
-            /*listDataChild.put(listDataHeader.get(0), lstOne);
-            listDataChild.put(listDataHeader.get(1), lstTwo);
-            listDataChild.put(listDataHeader.get(2), lstThree);*/
-        }else {
+        } else {
             createSections();
         }
     }
 
-    public void setupLockers(){
-        for (int i = 1; i < levels.size(); i++){
-                if(levels.get(i-1).isLevelCompleted()){
+    public void setupLockers() {
+        boolean hasChanges = false;
+        for (int i = 0; i < levels.size(); i++) {
+            if (i > 0) {
+                if (levels.get(i - 1).isLevelCompleted()) {
                     levels.get(i).setUnlocked(true);
+                    if (!hasChanges)
+                        hasChanges = true;
+                }
             }
-            for(int j = 1; j < levels.get(i).getSectionsList().size(); j++ ){
-                if(levels.get(i).getSectionsList().get(j-1).isSectionCompleted()){
+
+            for (int j = 1; j < levels.get(i).getSectionsList().size(); j++) {
+                if (levels.get(i).getSectionsList().get(j - 1).isSectionCompleted()) {
+                    Log.v("UNLOCK_SECTION", "Level " + levels.get(i).getLevel() + ":" + levels.get(i).getSectionsList().get(j).getTitle() + " UNLOCKED");
                     levels.get(i).getSectionsList().get(j).setUnlocked(true);
+                    if (!hasChanges)
+                        hasChanges = true;
                 }
             }
         }
+        if (hasChanges)
+            saveData();
+
     }
 
     void FnClickEvents(final View thisView) {
@@ -146,36 +138,11 @@ public class SectionsFragment extends Fragment {
             public boolean onGroupClick(ExpandableListView expandableListView, View view, int groupPosition, long l) {
                 Log.v("LevelID", "" + groupPosition);
 
-                if(levels.get(groupPosition).isUnlocked()){
+                if (levels.get(groupPosition).isUnlocked()) {
                     return false;
-                }else{
+                } else {
                     return true;
                 }
-                /*
-                switch (user.getLevelPermission()) {
-                    case 1:
-                        if (groupPosition == 0) {
-                            break;
-                        } else {
-                            return true;
-                        }
-                    case 2:
-                        if (groupPosition <= 1) {
-                            break;
-                        } else {
-                            return true;
-                        }
-                    case 3:
-                        if(groupPosition <= 2){
-                            break;
-                        }else{
-                            return true;
-                        }
-                        default:
-                            Log.v("USER_PERMISSION", "WRONG LEVEL PERMISSION");
-
-                }
-                return false;*/
             }
         });
 
@@ -194,7 +161,7 @@ public class SectionsFragment extends Fragment {
                     case 2:
                         exerciseIntent.putExtra("LEVEL", levels.get(2).getSectionsList().get(childPosition));
                 }
-                getActivity().startActivityForResult(exerciseIntent, 1);
+                startActivityForResult(exerciseIntent, 1);
 
 
                 //Working
@@ -272,16 +239,16 @@ public class SectionsFragment extends Fragment {
 
 
         //Exercises
-        Exercise ex1 = new Exercise(001, 1, "Total Arm Stretch", "Sit straight in your chair and lean forward over your knees.", R.drawable.thumbnail_1, R.raw.video_sample, true, audioSteps);
-        Exercise ex2 = new Exercise(002, 1, "Shoulder Shrug", "Sit down a chair with your arms by your side.", R.drawable.thumbnail_2, R.raw.video_sample, false, audioSteps);
-        Exercise ex3 = new Exercise(003, 2, "Push Ups", "Place the table against a wall", R.drawable.thumbnail_3, R.raw.video_sample, true, audioSteps);
-        Exercise ex4 = new Exercise(004, 2, "One Arm Push-Ups", "Place your weaker hand flat on the table. Use your stronger hand to help keep your hand in place.", R.drawable.thumbnail_4, R.raw.video_sample, false, audioSteps);
-        Exercise ex5 = new Exercise(005, 3, "Grip Power", "Place your weaker arm on the table.", R.drawable.thumbnail_5, R.raw.video_sample, true, audioSteps);
-        Exercise ex6 = new Exercise(006, 3, "Finger Power", "Place the putty on the table and roll into a thick rope. Use your weaker hand as much as possible.", R.drawable.thumbnail_6, R.raw.video_sample, false, audioSteps);
-        Exercise ex7 = new Exercise(007, 4, "Waiter– Ball", "Place the bean bag in your weaker hand.", R.drawable.thumbnail_7, R.raw.video_sample, true, audioSteps);
-        Exercise ex8 = new Exercise(8, 4, "Waiter– Cup", "Place a cup in your weaker hand.", R.drawable.thumbnail_8, R.raw.video_sample, false, audioSteps);
-        Exercise ex9 = new Exercise(9, 5, "Laundry", "Use both hands for the following exercise.", R.drawable.thumbnail_9, R.raw.video_sample, true, audioSteps);
-        Exercise ex10 = new Exercise(10, 5, "Buttons", "Take a shirt with buttons out of your closet.", R.drawable.thumbnail_10, R.raw.video_sample, false, audioSteps);
+        Exercise ex1 = new Exercise(001, "Total Arm Stretch", "Sit straight in your chair and lean forward over your knees.", R.drawable.thumbnail_1, R.raw.video_sample, true, audioSteps);
+        Exercise ex2 = new Exercise(002, "Shoulder Shrug", "Sit down a chair with your arms by your side.", R.drawable.thumbnail_2, R.raw.video_sample, false, audioSteps);
+        Exercise ex3 = new Exercise(003, "Push Ups", "Place the table against a wall", R.drawable.thumbnail_3, R.raw.video_sample, true, audioSteps);
+        Exercise ex4 = new Exercise(004, "One Arm Push-Ups", "Place your weaker hand flat on the table. Use your stronger hand to help keep your hand in place.", R.drawable.thumbnail_4, R.raw.video_sample, false, audioSteps);
+        Exercise ex5 = new Exercise(005, "Grip Power", "Place your weaker arm on the table.", R.drawable.thumbnail_5, R.raw.video_sample, true, audioSteps);
+        Exercise ex6 = new Exercise(006, "Finger Power", "Place the putty on the table and roll into a thick rope. Use your weaker hand as much as possible.", R.drawable.thumbnail_6, R.raw.video_sample, false, audioSteps);
+        Exercise ex7 = new Exercise(007, "Waiter– Ball", "Place the bean bag in your weaker hand.", R.drawable.thumbnail_7, R.raw.video_sample, true, audioSteps);
+        Exercise ex8 = new Exercise(8, "Waiter– Cup", "Place a cup in your weaker hand.", R.drawable.thumbnail_8, R.raw.video_sample, false, audioSteps);
+        Exercise ex9 = new Exercise(9, "Laundry", "Use both hands for the following exercise.", R.drawable.thumbnail_9, R.raw.video_sample, true, audioSteps);
+        Exercise ex10 = new Exercise(10, "Buttons", "Take a shirt with buttons out of your closet.", R.drawable.thumbnail_10, R.raw.video_sample, false, audioSteps);
 
         //Setting up the sections
         alg.addExerc(ex1);
@@ -352,6 +319,24 @@ public class SectionsFragment extends Fragment {
     private void saveData() {
         storage.saveLevels(getString(R.string.LEVELS_KEY), levels, rootView.getContext());
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            Log.v("ACTIVITY_RESULT", "EXPECTED CODE: " + RESULT_OK + " | GIVEN CODE: " + resultCode);
+            if (resultCode == RESULT_OK) {
+                Log.v("ACTIVITY_RESULT", "ENTERED3");
+                if (data.getBooleanExtra("HAS_CHANGE", false)) {
+                    Log.v("ACTIVITY_RESULT", "ENTERED4");
+                    loadData();
+                    setupLockers();
+                    ((BaseAdapter)expListView.getAdapter()).notifyDataSetChanged();
+                }
+            }
+        }
+    }
+
     /*
     private void restoreSession(Bundle savedInstanceState){
         SharedPreferences settings = this.getSharedPreferences(getString(R.string.restoreSessionMainActivity), 0);

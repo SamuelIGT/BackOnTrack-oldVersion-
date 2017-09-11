@@ -94,45 +94,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }else{
             imgLock.setImageResource(R.drawable.ic_lock);
         }
-
-/*        for(int i = 0; i < levelPermissionList.size();i++){
-            if(i == groupPosition){
-                if (levelPermissionList.get(i)){
-                    imgLock.setImageResource(R.drawable.ic_unlock);
-                }else{
-                    imgLock.setImageResource(R.drawable.ic_lock);
-                }
-            }
-        }*/
-        /*switch (_levelPermission) {
-            case 1:
-                if (groupPosition == 0) {
-                    imgLock.setImageResource(R.drawable.ic_unlock);
-                    break;
-                } else {
-                    imgLock.setImageResource(R.drawable.ic_lock);
-                    break;
-                }
-            case 2:
-                if (groupPosition <= 1) {
-                    imgLock.setImageResource(R.drawable.ic_unlock);
-                    break;
-                } else {
-                    imgLock.setImageResource(R.drawable.ic_lock);
-                    break;
-                }
-            case 3:
-                if (groupPosition <= 2) {
-                    imgLock.setImageResource(R.drawable.ic_unlock);
-                    break;
-                } else {
-                    imgLock.setImageResource(R.drawable.ic_lock);
-                    break;
-                }
-            default:
-                Log.v("USER_PERMISSION", "WRONG LEVEL PERMISSION");
-
-        }*/
         lblListHeader.setText(headerTitle);
 
 
@@ -167,25 +128,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         ImageView lock = (ImageView) convertView.findViewById(R.id.view_child_list_lock);
         TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListItem);
         txtListChild.setText(childText);
-
+        Log.d("GetChildView",""+groupPosition + ", "+childPosition);
         if(_levels.get(groupPosition).getSectionsList().get(childPosition).isUnlocked()){
+            Log.d("GetChildView","Level "+_levels.get(groupPosition).getSectionsList().get(childPosition)+" Unlocked");
             lock.setVisibility(View.GONE);
         }
 
-        /*for (Level level : _levels) {
-            if (level.getLevel() - 1 == groupPosition) {
-                for (Section section : level.getSectionsList()) {
-                    if (section.getTitle().equals(childText)) {
-                        if (section.isUnlocked()) {
-                            lock.setVisibility(View.GONE);
-                        }
-                    }
-                }
-            }
-        }*/
-
-
-/*//Sets space between child items
+        /*//Sets space between child items
         if (childPosition == groups.get(groupPosition).getChilds().size() - 1) {
             convertView.setPadding(0, 0, 0, 40);
         } else

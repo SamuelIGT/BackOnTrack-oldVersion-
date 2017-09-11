@@ -4,17 +4,19 @@ package br.ufc.quixada.backontrack.Fragments;
  * Created by samue on 11/08/2017.
  */
 
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
@@ -45,6 +47,7 @@ public class CalendarFragment extends Fragment {
     private List<Event> eventList;
     private Gson jsonParser = new GsonBuilder().create();
 
+    private Animation slideAnim;
     private TextView txtvDayActivityTitle;
     private TextView txtvDayActivityTime;
     private ImageButton btnNextDayActivity;
@@ -71,10 +74,56 @@ public class CalendarFragment extends Fragment {
         btnPrevious = (ImageButton) rootView.findViewById(R.id.btn_previous_month);
 
         setupCalendar();
+        setupGraph();
 
         isCreated = true;
 
         return rootView;
+    }
+
+    private void setupGraph() {
+        List<ProgressBar> pBarsWeek = new ArrayList<>();
+        pBarsWeek.add((ProgressBar) rootView.findViewById(R.id.calendar_pgBar_1));
+        pBarsWeek.add((ProgressBar) rootView.findViewById(R.id.calendar_pgBar_2));
+        pBarsWeek.add((ProgressBar) rootView.findViewById(R.id.calendar_pgBar_3));
+        pBarsWeek.add((ProgressBar) rootView.findViewById(R.id.calendar_pgBar_4));
+        pBarsWeek.add((ProgressBar) rootView.findViewById(R.id.calendar_pgBar_5));
+        pBarsWeek.add((ProgressBar) rootView.findViewById(R.id.calendar_pgBar_6));
+        pBarsWeek.add((ProgressBar) rootView.findViewById(R.id.calendar_pgBar_7));
+
+
+        Date dt = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(dt);
+        dt = c.getTime();
+        while (!dt.toString().split(" ")[0].equals("Sun")) {
+            //Log.d("TESTE","Esperado:Sun"+ dt.toString().split(" ")[0]);
+            c.add(Calendar.DATE, -1);
+            dt = c.getTime();
+        }
+        List<Event> eventsDay;
+        for (int i = 0; i < 7; i++) {
+            Log.d("Calendar graph", "for " + c.getTime().toString());
+            eventsDay = calendarView.getEvents(c.getTime());
+            if (eventsDay.size() >= 1) {
+                Log.d("Calendar graph", "IF " + eventsDay.get(0).toString());
+                int sum = 0;
+                int count = 0;
+                for (Event event : eventsDay) {
+                    ExerciseReport report = jsonParser.fromJson(event.getData().toString(), ExerciseReport.class);
+                    sum += report.getEffort();
+                    count++;
+                }
+                if (count > 0) {
+                    pBarsWeek.get(i).setProgress((sum / count) * 10);
+                }
+            } else {
+                Log.d("TESTE", "Nenhum evento");
+                pBarsWeek.get(i).setProgress(0);
+            }
+            c.add(Calendar.DATE, 1);
+        }
+        Log.d("TESTE", "Quarta Progresso" + pBarsWeek.get(3).getProgress());
     }
 
     private void setupCalendar() {
@@ -100,7 +149,7 @@ public class CalendarFragment extends Fragment {
                 "Jun", "Jul", "Ago",
                 "Set", "Out", "Nov",
                 "Dez"
-        };
+        };f
         */
         txtMothYear.setText(formattedDate);
 
@@ -125,13 +174,13 @@ public class CalendarFragment extends Fragment {
         calendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
-                List<Event> events = new ArrayList<>();
+                List<Event> events;
                 events = calendarView.getEvents(dateClicked);
                 if (events.size() > 0) {
                     showDayEvents(events);
-                }else{
+                } else {
                     dayActivityLayout = (LinearLayout) rootView.findViewById(R.id.layout_day_exercise);
-                    dayActivityLayout.setVisibility(View.GONE);
+                    showDayEventAnimation(false);
                 }
 
 
@@ -151,19 +200,18 @@ public class CalendarFragment extends Fragment {
 
     private void showDayEvents(final List<Event> events) {
         dayActivityLayout = (LinearLayout) this.rootView.findViewById(R.id.layout_day_exercise);
-        dayActivityLayout.setVisibility(View.VISIBLE);
+        showDayEventAnimation(true);
 
         txtvDayActivityTitle = (TextView) this.rootView.findViewById(R.id.txt_day_exercise_title);
         txtvDayActivityTime = (TextView) this.rootView.findViewById(R.id.txt_day_exercise_time);
         btnNextDayActivity = (ImageButton) this.rootView.findViewById(R.id.btn_day_next_exercise);
         btnPreviousDayActivity = (ImageButton) this.rootView.findViewById(R.id.btn_day_previous_exercise);
 
-
+        index = 0;
         this.report = jsonParser.fromJson(eventList.get(index).getData().toString(), ExerciseReport.class);
 
         txtvDayActivityTitle.setText(report.getExerciseTitle());
         txtvDayActivityTime.setText(report.getTime());
-
 
         btnNextDayActivity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,13 +219,13 @@ public class CalendarFragment extends Fragment {
                 index++;
                 if (index >= 0) {
                     if (index < events.size()) {
-                        report = jsonParser.fromJson(eventList.get(index).getData().toString(), ExerciseReport.class);
+                        report = jsonParser.fromJson(events.get(index).getData().toString(), ExerciseReport.class);
                         if (report != null) {
                             txtvDayActivityTitle.setText(report.getExerciseTitle());
                             txtvDayActivityTime.setText(String.valueOf(report.getTime()));
                         }
                     } else
-                        index = events.size();
+                        index = events.size() - 1;
                 } else
                     index = 0;
             }
@@ -189,26 +237,72 @@ public class CalendarFragment extends Fragment {
                 index--;
                 if (index >= 0) {
                     if (index < events.size()) {
-                        report = jsonParser.fromJson(eventList.get(index).getData().toString(), ExerciseReport.class);
+                        report = jsonParser.fromJson(events.get(index).getData().toString(), ExerciseReport.class);
                         if (report != null) {
                             txtvDayActivityTitle.setText(report.getExerciseTitle());
                             txtvDayActivityTime.setText(String.valueOf(report.getTime()));
                         }
                     } else
-                        index = events.size();
+                        index = events.size() - 1;
                 } else
                     index = 0;
             }
         });
     }
 
+    //true = show animation | false = hide animation
+    private void showDayEventAnimation(boolean showOrHide) {
+        if (showOrHide) {
+            //prepares the animation
+            slideAnim = AnimationUtils.loadAnimation(this.getActivity().getApplicationContext(), R.anim.move_right);
+            slideAnim.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+                    dayActivityLayout.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+                }
+            });
+        }else{
+            slideAnim = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.move_left);
+            slideAnim.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                //hides the layout when the animation is done
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    dayActivityLayout.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+        }
+        dayActivityLayout.startAnimation(slideAnim); // starts the animation
+    }
+
     private void getCalendarEvents() {
-        eventList = storage.getCalendar(getString(R.string.CALENDAR_KEY), rootView.getContext());
+        List<Event> newEventList;
+        newEventList = storage.getCalendar(getString(R.string.CALENDAR_KEY), rootView.getContext());
         if (eventList == null) {
             Log.d("EVENT_LIST", "EMPTY EVENT LIST");
             eventList = new ArrayList<>();
+        } else if (newEventList != eventList) {
+            eventList = newEventList;
+            Log.d("EVENT_LIST", "EVENT LIST ELSE");
+            calendarView.addEvents(eventList);
         }
-        calendarView.addEvents(eventList);
     }
 
     @Override
@@ -237,6 +331,7 @@ public class CalendarFragment extends Fragment {
                 Log.v("DEBUG_VISIBLE_CALENDAR", "VISIBLE: " + isVisibleToUser);
                 calendarShowAnimation();
                 getCalendarEvents();
+                setupGraph();
             } else {
                 dayActivityLayout = (LinearLayout) rootView.findViewById(R.id.layout_day_exercise);
                 dayActivityLayout.setVisibility(View.GONE);
@@ -253,20 +348,6 @@ public class CalendarFragment extends Fragment {
             }
             //Do something after 100ms
         }, 100);
-    }
-
-    @Override
-    public void onStart() {
-
-        Log.v("DEBUG_ONSTART_CALENDAR", "ON START TRIGGERED");
-        super.onStart();
-
-    }
-
-    @Override
-    public void onResume() {
-        Log.v("DEBUG_ONRESUME_CALENDAR", "ON RESUME TRIGGERED");
-        super.onResume();
     }
     //Example of how to format a locale
     /*String[] capitalDays = {

@@ -9,7 +9,6 @@ import java.util.List;
 
 public class Exercise implements Serializable{
     private Integer id;
-    private int level;
     private String title;
     private String description;
     private boolean isUnlocked = true;
@@ -23,8 +22,7 @@ public class Exercise implements Serializable{
         this.status = "UNSTARTED";
     }
 
-    public Exercise(int level, String title,/* int duracao,*/ String description, int thumbnail, int videoPath , boolean isUnlocked/*, List<Integer> stepsAudio*/){
-        this.level = level;
+    public Exercise(String title,/* int duracao,*/ String description, int thumbnail, int videoPath , boolean isUnlocked/*, List<Integer> stepsAudio*/){
         this.title = title;
         this.description = description;
         /*this.stepsAudio = stepsAudio;*/
@@ -32,11 +30,9 @@ public class Exercise implements Serializable{
         this.videoPath = videoPath;
         this.isUnlocked = isUnlocked;
         this.status = "UNSTARTED";
-
     }
 
-    public Exercise(int id, int level, String title,/* int duracao,*/ String description, int thumbnail, int videoPath , boolean isUnlocked, List<Integer> stepsAudio){
-        this.level = level;
+    public Exercise(int id, String title,/* int duracao,*/ String description, int thumbnail, int videoPath , boolean isUnlocked, List<Integer> stepsAudio){
         this.title = title;
         this.description = description;
         this.stepsAudio = stepsAudio;
@@ -64,12 +60,6 @@ public class Exercise implements Serializable{
         this.id = id;
     }
 
-    public int getLevel() {
-        return level;
-    }
-    public void setLevel(int level) {
-        this.level = level;
-    }
     public String getTitle() {
         return title;
     }

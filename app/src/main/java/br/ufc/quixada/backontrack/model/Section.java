@@ -1,5 +1,9 @@
 package br.ufc.quixada.backontrack.model;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.res.Resources;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -68,10 +72,15 @@ public class Section implements Serializable{
 
     public boolean isSectionCompleted(){
         for(Exercise exercise: exerciseList){
-            if (!exercise.isUnlocked()){
+            if (!exercise.getStatus().equals("DONE")){//SHOULD BE GET STATUS
                 return false;
             }
         }
         return true;
+    }
+
+    public void updateSection(Section sec){
+        this.exerciseList = sec.getExerciseList();
+        this.isUnlocked = sec.isUnlocked();
     }
 }

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import br.ufc.quixada.backontrack.model.Level;
 
+import br.ufc.quixada.backontrack.model.Section;
 import br.ufc.quixada.backontrack.model.User;
 
 /**
@@ -75,6 +76,18 @@ public class StorageController {
         userSerialized = jsonParser.toJson(user);
 
         storage.setDefaults(key, userSerialized, context);
+    }
+
+    public void saveSectionChanges(String key, Section sec, Context context){
+        List<Level> levels = getLevels(key, context);
+        for(Level level: levels){
+            for(int i  = 0; i < level.getSectionsList().size(); i++){
+                if(level.getSectionsList().get(i).getID() == sec.getID()){
+                    level.getSectionsList().get(i).updateSection(sec);
+                }
+            }
+        }
+        saveLevels(key, levels, context);
     }
 
 

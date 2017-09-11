@@ -131,6 +131,12 @@ public class Chronometer {
         this.update = update;
     }
 
+    public int[] getTimerInt() {
+        String timeText = timer.getText().toString();
+        String[] timeString = timeText.split(":");
+        int[] time = {Integer.parseInt(timeString[0]), Integer.parseInt(timeString[1]), Integer.parseInt(timeString[2])};
+        return  time;
+    }
     //---------------------------Runnable--------------------------------------
     Runnable r = new Runnable() {
         @Override
