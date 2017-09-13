@@ -3,6 +3,7 @@ package br.ufc.quixada.backontrack.Fragments;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,8 +65,6 @@ public class SectionsFragment extends Fragment {
         //Bind list
         listAdapter = new ExpandableListAdapter(rootView.getContext(), listDataHeader, listDataChild /*, user.getLevelPermission()*/, levels);
         expListView.setAdapter(listAdapter);
-//        expListView.setDivider(null);
-//        expListView.setDividerHeight(8);
 
         FnClickEvents(rootView);
         return rootView;

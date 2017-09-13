@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
     android:orientation="vertical">
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:background="@android:color/transparent"/>
+        android:background="@android:color/transparent" />
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layout_header"
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="8dp"
-    android:layout_marginBottom="8dp"
-    android:elevation="2dp"
-    android:background="@color/revisedColor2">
-
-    <TextView
-        android:id="@+id/lblListHeader"
-        android:layout_width="wrap_content"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/layout_header"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
-        android:textSize="36sp"
-        android:text="Nível 1"
-        android:textColor="@color/revisedColor7"
-        android:textStyle="bold" />
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/expandablelistview_header_shape"
+        android:orientation="horizontal"
+        android:padding="8dp">
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-    </View>
+        <TextView
+            android:id="@+id/lblListHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+            android:text="Nível 1"
+            android:textColor="@color/secondaryText"
+            android:textSize="36sp"
+            android:textStyle="bold" />
 
-    <ImageView
-        android:id="@+id/img_lock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_lock"
-        />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"></View>
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/img_lock"
+
+            android:layout_width="wrap_content"
+            android:layout_height="128dp"
+            android:src="@drawable/ic_lock" />
+
+    </LinearLayout>
 </LinearLayout>

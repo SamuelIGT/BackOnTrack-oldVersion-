@@ -26,7 +26,7 @@
                 android:text="@string/exercise_finish_confirmation"
                 android:layout_centerInParent="true"
                 android:textAlignment="center"
-                android:textColor="@color/primary_text"
+                android:textColor="@color/primaryText"
                 android:textSize="20sp" />
 
             <ImageButton
@@ -67,7 +67,7 @@
                 android:layout_below="@+id/ic_stopwatch"
                 android:layout_centerHorizontal="true"
                 android:text="@string/timer_start"
-                android:textColor="@color/primary_text"
+                android:textColor="@color/primaryText"
                 android:textSize="20sp" />
 
             <LinearLayout
@@ -116,7 +116,7 @@
             android:layout_marginBottom="10dp"
             android:text="@string/txt_effort_exercise_confirmation"
             android:textAlignment="center"
-            android:textColor="@color/primary_text"
+            android:textColor="@color/primaryText"
             android:textSize="20sp" />
 
         <RelativeLayout

@@ -293,11 +293,12 @@ public class CalendarFragment extends Fragment {
     }
 
     private void getCalendarEvents() {
-        List<Event> newEventList;
+        List<Event> newEventList ;
         newEventList = storage.getCalendar(getString(R.string.CALENDAR_KEY), rootView.getContext());
-        if (eventList == null) {
+        if (newEventList == null) {
             Log.d("EVENT_LIST", "EMPTY EVENT LIST");
-            eventList = new ArrayList<>();
+            newEventList = new ArrayList<>();
+            eventList = newEventList;
         } else if (newEventList != eventList) {
             eventList = newEventList;
             Log.d("EVENT_LIST", "EVENT LIST ELSE");

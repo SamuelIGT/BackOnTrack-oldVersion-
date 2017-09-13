@@ -35,13 +35,13 @@ public class EffortButton {
             setDefaultButton(btnList, context);
             isSelected = true;
             DrawableCompat.setTint(btn.getDrawable(), ContextCompat.getColor(context, R.color.newColorAccent));
-            title.setTextColor(ContextCompat.getColor(context, R.color.primary_text));
+            title.setTextColor(ContextCompat.getColor(context, R.color.primaryText));
             motivation.setVisibility(View.VISIBLE);
 
         } else {
             showAll(btnList, context);
             DrawableCompat.setTint(btn.getDrawable(), ContextCompat.getColor(context, R.color.icons_black));
-            getTitle().setTextColor(ContextCompat.getColor(context, R.color.secondary_text));
+            getTitle().setTextColor(ContextCompat.getColor(context, R.color.secondaryText));
             setSelected(false);
             motivation.setVisibility(View.INVISIBLE);
 
@@ -58,7 +58,7 @@ public class EffortButton {
 
     public void deselectAll(EffortButton eBtn, Context context) {
         DrawableCompat.setTint(eBtn.getBtn().getDrawable(), ContextCompat.getColor(context, R.color.icons_black));
-        eBtn.getTitle().setTextColor(ContextCompat.getColor(context, R.color.secondary_text));
+        eBtn.getTitle().setTextColor(ContextCompat.getColor(context, R.color.secondaryText));
         eBtn.setSelected(false);
         eBtn.getTitle().setVisibility(View.INVISIBLE);
 

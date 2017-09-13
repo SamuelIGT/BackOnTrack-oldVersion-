@@ -3,29 +3,33 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="55dip">
+
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
 
         <TextView
             android:id="@+id/lblListItem"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:textSize="12pt"
+            android:textSize="24sp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:text="Test"
             android:paddingStart="?android:attr/expandableListPreferredChildPaddingLeft"
             android:paddingEnd="0dp"
-            android:textColor="@color/revisedColor7"
+            android:textColor="@color/primaryText"
             android:textStyle="bold"
-            android:background="@color/revisedColor5"
+            android:background="@color/childList"
             />
 
         <ImageView
             android:id="@+id/view_child_list_lock"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
+            android:foregroundGravity="center_horizontal|center_vertical"
             android:src="@drawable/ic_lock_32dp"
             android:clickable="true"
             android:background="@color/section_locked_mask"

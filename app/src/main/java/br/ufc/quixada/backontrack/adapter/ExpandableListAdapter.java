@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -90,7 +92,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
 
         if(_levels.get(groupPosition).isUnlocked()){
-            imgLock.setImageResource(R.drawable.ic_unlock);
+            imgLock.setImageResource(R.color.transparent);
         }else{
             imgLock.setImageResource(R.drawable.ic_lock);
         }
@@ -121,10 +123,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         String childText = (String) getChild(groupPosition, childPosition);
-
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.custom_expandable_listview_list_item, null);
         }
+
+
+
         ImageView lock = (ImageView) convertView.findViewById(R.id.view_child_list_lock);
         TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListItem);
         txtListChild.setText(childText);

@@ -3,16 +3,18 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/card_background">
+    android:background="@color/primary_light"
+    >
     
     <ExpandableListView
         android:id="@+id/lvExp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:drawSelectorOnTop="true"
-        android:background="@color/card_background"
+        android:background="@color/primary_light"
         android:layout_margin="5dp"
-        android:dividerHeight="0dp">
+        android:dividerHeight="0dp"
+        android:divider="@color/transparent">
 
     </ExpandableListView>
 
