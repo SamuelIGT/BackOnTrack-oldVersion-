@@ -8,7 +8,7 @@ import java.util.List;
  */
 
 public class Exercise implements Serializable{
-    private Integer id;
+    private int id;
     private String title;
     private String description;
     private boolean isUnlocked = true;

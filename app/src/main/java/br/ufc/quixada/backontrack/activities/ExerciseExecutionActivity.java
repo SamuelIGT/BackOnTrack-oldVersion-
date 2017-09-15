@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -65,7 +66,7 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
     private Exercise exerc;
     private MediaPlayer musicPlayer;
     private List<Event> eventList;
-
+    private boolean timerCountdown = false;
     private ExerciseReport report;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +75,6 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
 
         storage = new StorageController();
         loadData();
-        exerc.setId(1);
         report = new ExerciseReport(exerc.getId());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_exercise_execution);
@@ -239,8 +239,9 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
         startStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!chronometer.isRunning()) {
-                    startTimer();
+                if (!chronometer.isRunning()){
+                    if(!timerCountdown)
+                        startTimer();
                 } else {
                     stopTimer();
                 }
@@ -264,7 +265,6 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
     }
 
     private void watchVideo() {
-        stopAudioSteps();
 
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(ExerciseExecutionActivity.this);
         final View mView = getLayoutInflater().inflate(R.layout.dialog_video_lesson, null);
@@ -329,11 +329,31 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
 
     private void startTimer() {
         finish.setVisibility(View.INVISIBLE);
-        startStop.setText(R.string.button_stop);
-        pgBar.setVisibility(View.VISIBLE);
-        pgBarDrawable.start();
 
-        chronometer.startTimer(SystemClock.uptimeMillis());
+        new CountDownTimer(5000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                timerCountdown = true;
+
+                if((millisUntilFinished/1000) == 4)
+                    startStop.setText("3");
+                if((millisUntilFinished/1000) == 3)
+                    startStop.setText("2");
+                if((millisUntilFinished/1000) == 2)
+                    startStop.setText("1");
+                if((millisUntilFinished/1000) == 1)
+                    startStop.setText("VAI!");
+            }
+
+            public void onFinish() {
+                timerCountdown = false;
+                startStop.setText(R.string.button_stop);
+                pgBar.setVisibility(View.VISIBLE);
+                pgBarDrawable.start();
+                chronometer.startTimer(SystemClock.uptimeMillis());
+            }
+        }.start();
+
     }
 
     private void stopTimer() {
@@ -381,6 +401,7 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
 
                     //-------Send data back to the previous activity---|
                     Intent intent = new Intent();
+                    Log.v("btnConfirm.OnClick", "Exercise ID: "+exerc.getId().toString());
                     String dataResult[] = {exerc.getId().toString(), statusBuilder(timeResult.getText().toString())};
                     intent.putExtra("EXERCISE_RESULT", dataResult);
                     setResult(RESULT_OK, intent);
@@ -391,6 +412,7 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
                     resetFinishConfirmationDialog(btnList);
 
                     finish();
+                    return;
                 }else{
                     Toast.makeText(ExerciseExecutionActivity.this, "Selecione um esforço!", Toast.LENGTH_SHORT).show();
                 }

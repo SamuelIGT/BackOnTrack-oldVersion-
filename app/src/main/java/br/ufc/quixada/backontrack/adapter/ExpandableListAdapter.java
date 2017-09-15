@@ -89,7 +89,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         convertView = (convertView != null) ? convertView : inflater.inflate(R.layout.custom_expandable_listview_header, null); //operação térnaria
         TextView lblListHeader = (TextView) convertView.findViewById(R.id.lblListHeader);
         ImageView imgLock = (ImageView) convertView.findViewById(R.id.img_lock);
-
+        //LinearLayout layoutHeader = (LinearLayout)convertView.findViewById(R.id.layout_listHeader);
 
         if(_levels.get(groupPosition).isUnlocked()){
             imgLock.setImageResource(R.color.transparent);
@@ -116,6 +116,14 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             header.setLayoutParams(lp);
         }
 
+/*        //Makes the list header being in front
+        convertView.bringToFront();
+        layoutHeader.bringToFront();
+        layoutHeader.bringChildToFront(imgLock);
+        layoutHeader.bringChildToFront(lblListHeader);
+        layoutHeader.requestLayout();
+        layoutHeader.invalidate();*/
+
         return convertView;
     }
 
@@ -126,8 +134,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.custom_expandable_listview_list_item, null);
         }
-
-
 
         ImageView lock = (ImageView) convertView.findViewById(R.id.view_child_list_lock);
         TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListItem);
@@ -143,6 +149,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             convertView.setPadding(0, 0, 0, 40);
         } else
             convertView.setPadding(0, 0, 0, 0);*/
+/*        parent.bringToFront();
+        Animation slideAnim = AnimationUtils.loadAnimation(convertView.getContext(), R.anim.move_down);
+        slideAnim.setZAdjustment(Animation.ZORDER_BOTTOM);
+        convertView.startAnimation(slideAnim);*/
         return convertView;
     }
 

@@ -1,6 +1,7 @@
 package br.ufc.quixada.backontrack.chronometer;
 
 import android.content.Context;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.widget.Button;

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -41,7 +42,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
         public TextView title, description;
         public ImageView thumbnail;
         public Button start;
-        public ImageView lock;
+        public RelativeLayout lock;
 
         public MyViewHolder(View view) {
             super(view);
@@ -49,7 +50,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
             description = (TextView) view.findViewById(R.id.description_text);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail_view);
             start = (Button) view.findViewById(R.id.btn_start);
-            lock = (ImageView) view.findViewById(R.id.view_card_lock);
+            lock = (RelativeLayout) view.findViewById(R.id.view_card_lock);
         }
     }
 
@@ -86,12 +87,15 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
         if (!exercise.isUnlocked()) {
             Log.d("onBindViewHolder", "OK");
             holder.lock.setVisibility(View.VISIBLE);
+        }else{
+            holder.lock.setVisibility(View.GONE);
         }
 
         holder.start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 exerciseIntent.putExtra(mContext.getString(R.string.exercise_execution_extra), exercise);
+                Log.d("onBindViewHolder start", "Exercise "+exercise.getTitle()+"ID: "+exercise.getId());
 
                 ((Activity) mContext).startActivityForResult(exerciseIntent, 2);
             }

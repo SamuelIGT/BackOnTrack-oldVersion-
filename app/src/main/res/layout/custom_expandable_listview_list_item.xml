@@ -23,6 +23,7 @@
             android:textColor="@color/primaryText"
             android:textStyle="bold"
             android:background="@color/childList"
+
             />
 
         <ImageView
@@ -33,6 +34,7 @@
             android:src="@drawable/ic_lock_32dp"
             android:clickable="true"
             android:background="@color/section_locked_mask"
+            android:visibility="gone"
             >
         </ImageView>
     </RelativeLayout>

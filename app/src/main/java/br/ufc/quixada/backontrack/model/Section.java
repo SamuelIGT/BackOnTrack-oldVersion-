@@ -3,6 +3,7 @@ package br.ufc.quixada.backontrack.model;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.Log;
 
 import java.io.Serializable;
 import java.util.List;
@@ -73,6 +74,7 @@ public class Section implements Serializable{
     public boolean isSectionCompleted(){
         for(Exercise exercise: exerciseList){
             if (!exercise.getStatus().equals("DONE")){//SHOULD BE GET STATUS
+                Log.d("isSectionCompleted", "Section Incompleted"+ exercise.getTitle() + "Status: "+exercise.getStatus());
                 return false;
             }
         }

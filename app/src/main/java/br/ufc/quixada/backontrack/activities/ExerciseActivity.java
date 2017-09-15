@@ -122,7 +122,6 @@ public class ExerciseActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Log.v("Exercise_onBackPressed", "ENTERED");
         notifyPreviousActivity();
         super.onBackPressed();
     }
@@ -130,14 +129,18 @@ public class ExerciseActivity extends AppCompatActivity {
     private void notifyPreviousActivity() {
         Intent intent = new Intent();
         boolean hasChange = false;
+        Log.d("notifyPreviousActivity", "hasDataChanges: " + hasDataChanges);
         if(hasDataChanges){
             hasChange = true;
             intent.putExtra("HAS_CHANGE", hasChange);
             setResult(RESULT_OK, intent);
+            Log.d("notifyPreviousActivity", "section saved");
             storage.saveSectionChanges(getString(R.string.LEVELS_KEY), sec, this);
 
             hasDataChanges = false;
         }
+        Log.d("notifyPreviousActivity", "ShoulderShurg Status: "+ sec.getExerciseList().get(1).getStatus());
+
         intent.putExtra("HAS_CHANGE", hasChange);
         setResult(RESULT_OK, intent);
     }
@@ -148,11 +151,13 @@ public class ExerciseActivity extends AppCompatActivity {
         if (requestCode == 2) {
             if(resultCode == RESULT_OK) {
                 String strEditText[] = data.getStringArrayExtra("EXERCISE_RESULT");
+                Log.d("onActivityResult", "EXERCISE ID"+ Integer.parseInt(strEditText[0]));
                 if(strEditText[1].equals("DONE")){
                     hasDataChanges = true;
                     for(int i = 0; i < sec.getExerciseList().size(); i++){
                         if(sec.getExerciseList().get(i).getId() == Integer.parseInt(strEditText[0])){
-                            sec.getExerciseList().get(i).setStatus(strEditText[1]);
+                            Log.d("onActivityResult", "Exercise Status setted "+sec.getExerciseList().get(i).getTitle());
+                            sec.getExerciseList().get(i).setStatus("DONE");
                             unlockExercise();
                         }
                     }
@@ -168,6 +173,8 @@ public class ExerciseActivity extends AppCompatActivity {
     private void unlockExercise(){
         for(int i = 1; i < sec.getExerciseList().size(); i++){
             if(sec.getExerciseList().get(i-1).getStatus().equals("DONE")){
+                Log.d("unlockExercise", "Next Exercise Unlocked");
+                Log.d("unlockExercise", "ShoulderShurg Status: "+ sec.getExerciseList().get(1).getStatus());
                 sec.getExerciseList().get(i).setUnlocked(true);
                 recyclerView.getAdapter().notifyItemChanged(i);
             }

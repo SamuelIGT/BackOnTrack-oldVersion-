@@ -47,7 +47,6 @@ public class SectionsFragment extends Fragment {
     //TESTING PURPOSE
     User user = new User(1);
     List<Level> levels;
-    //Level lOne, lTwo, lThree;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,6 +114,7 @@ public class SectionsFragment extends Fragment {
             }
 
             for (int j = 1; j < levels.get(i).getSectionsList().size(); j++) {
+                Log.v("UNLOCK_SECTION", "FOR ENTERED: Section "+ levels.get(i).getSectionsList().get(j - 1).getTitle()+" is "+levels.get(i).getSectionsList().get(j - 1).isSectionCompleted());
                 if (levels.get(i).getSectionsList().get(j - 1).isSectionCompleted()) {
                     Log.v("UNLOCK_SECTION", "Level " + levels.get(i).getLevel() + ":" + levels.get(i).getSectionsList().get(j).getTitle() + " UNLOCKED");
                     levels.get(i).getSectionsList().get(j).setUnlocked(true);
@@ -238,13 +238,13 @@ public class SectionsFragment extends Fragment {
 
 
         //Exercises
-        Exercise ex1 = new Exercise(001, "Total Arm Stretch", "Sit straight in your chair and lean forward over your knees.", R.drawable.thumbnail_1, R.raw.video_sample, true, audioSteps);
-        Exercise ex2 = new Exercise(002, "Shoulder Shrug", "Sit down a chair with your arms by your side.", R.drawable.thumbnail_2, R.raw.video_sample, false, audioSteps);
-        Exercise ex3 = new Exercise(003, "Push Ups", "Place the table against a wall", R.drawable.thumbnail_3, R.raw.video_sample, true, audioSteps);
-        Exercise ex4 = new Exercise(004, "One Arm Push-Ups", "Place your weaker hand flat on the table. Use your stronger hand to help keep your hand in place.", R.drawable.thumbnail_4, R.raw.video_sample, false, audioSteps);
-        Exercise ex5 = new Exercise(005, "Grip Power", "Place your weaker arm on the table.", R.drawable.thumbnail_5, R.raw.video_sample, true, audioSteps);
-        Exercise ex6 = new Exercise(006, "Finger Power", "Place the putty on the table and roll into a thick rope. Use your weaker hand as much as possible.", R.drawable.thumbnail_6, R.raw.video_sample, false, audioSteps);
-        Exercise ex7 = new Exercise(007, "Waiter– Ball", "Place the bean bag in your weaker hand.", R.drawable.thumbnail_7, R.raw.video_sample, true, audioSteps);
+        Exercise ex1 = new Exercise(1, "Total Arm Stretch", "Sit straight in your chair and lean forward over your knees.", R.drawable.thumbnail_1, R.raw.video_sample, true, audioSteps);
+        Exercise ex2 = new Exercise(2, "Shoulder Shrug", "Sit down a chair with your arms by your side.", R.drawable.thumbnail_2, R.raw.video_sample, false, audioSteps);
+        Exercise ex3 = new Exercise(3, "Push Ups", "Place the table against a wall", R.drawable.thumbnail_3, R.raw.video_sample, true, audioSteps);
+        Exercise ex4 = new Exercise(4, "One Arm Push-Ups", "Place your weaker hand flat on the table. Use your stronger hand to help keep your hand in place.", R.drawable.thumbnail_4, R.raw.video_sample, false, audioSteps);
+        Exercise ex5 = new Exercise(5, "Grip Power", "Place your weaker arm on the table.", R.drawable.thumbnail_5, R.raw.video_sample, true, audioSteps);
+        Exercise ex6 = new Exercise(6, "Finger Power", "Place the putty on the table and roll into a thick rope. Use your weaker hand as much as possible.", R.drawable.thumbnail_6, R.raw.video_sample, false, audioSteps);
+        Exercise ex7 = new Exercise(7, "Waiter– Ball", "Place the bean bag in your weaker hand.", R.drawable.thumbnail_7, R.raw.video_sample, true, audioSteps);
         Exercise ex8 = new Exercise(8, "Waiter– Cup", "Place a cup in your weaker hand.", R.drawable.thumbnail_8, R.raw.video_sample, false, audioSteps);
         Exercise ex9 = new Exercise(9, "Laundry", "Use both hands for the following exercise.", R.drawable.thumbnail_9, R.raw.video_sample, true, audioSteps);
         Exercise ex10 = new Exercise(10, "Buttons", "Take a shirt with buttons out of your closet.", R.drawable.thumbnail_10, R.raw.video_sample, false, audioSteps);
@@ -330,7 +330,7 @@ public class SectionsFragment extends Fragment {
                     Log.v("ACTIVITY_RESULT", "ENTERED4");
                     loadData();
                     setupLockers();
-                    ((BaseAdapter)expListView.getAdapter()).notifyDataSetChanged();
+                    ((BaseAdapter)expListView.getAdapter()).notifyDataSetChanged();//NOT WORKING
                 }
             }
         }

@@ -4,12 +4,14 @@
     xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="60dp">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -18,6 +20,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             app:cardBackgroundColor="@color/colorAccent"
             app:cardUseCompatPadding="true"
             card_view:cardCornerRadius="2dp"
@@ -33,15 +36,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="15dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingTop="15dp">
 
                     <ImageButton
                         android:id="@+id/btn_previous_month"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
                         android:background="@android:color/transparent"
+                        android:paddingBottom="5dp"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="5dp"
+                        android:paddingTop="5dp"
                         android:src="@drawable/ic_previous_date" />
 
                     <TextView
@@ -56,8 +62,11 @@
                         android:id="@+id/btn_next_month"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
                         android:background="@android:color/transparent"
+                        android:paddingBottom="5dp"
+                        android:paddingEnd="15dp"
+                        android:paddingStart="10dp"
+                        android:paddingTop="5dp"
                         android:src="@drawable/ic_next_date" />
 
                 </LinearLayout>
@@ -80,75 +89,75 @@
                     android:id="@+id/layout_day_exercise"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:background="@color/icons"
                     android:gravity="center_horizontal|center_vertical"
-                    android:visibility="gone"
-                    >
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <ImageButton
                         android:id="@+id/btn_day_previous_exercise"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="15dp"
-                        android:src="@drawable/ic_previous_date"
-                        android:background="@android:color/transparent"/>
+                        android:background="@android:color/transparent"
+                        android:paddingBottom="5dp"
+                        android:paddingEnd="15dp"
+                        android:paddingStart="5dp"
+                        android:paddingTop="5dp"
+                        android:src="@drawable/ic_previous_date" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center_horizontal"
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="10dp"
                         android:orientation="vertical"
-                        android:layout_gravity="center_vertical|center_horizontal">
+                        >
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
                             android:text="ATIVIDADES REALIZADAS"
-                            android:textSize="18sp"
                             android:textColor="@color/tertiaryText"
-                            />
+                            android:textSize="18sp" />
 
                         <TextView
                             android:id="@+id/txt_day_exercise_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/secondaryText"
-                            />
+                            android:textColor="@color/secondaryText" />
 
                         <TextView
                             android:id="@+id/txt_day_exercise_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/secondaryText"
-                            />
+                            android:textColor="@color/secondaryText" />
                     </LinearLayout>
 
                     <ImageButton
                         android:id="@+id/btn_day_next_exercise"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_next_date"
-                        android:layout_marginStart="15dp"
                         android:background="@android:color/transparent"
-                        />
+                        android:paddingBottom="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingStart="15dp"
+                        android:paddingTop="5dp"
+                        android:src="@drawable/ic_next_date" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
-
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:layout_gravity="center"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             app:cardBackgroundColor="@color/colorAccent"
             app:cardUseCompatPadding="true"
             card_view:cardCornerRadius="2dp"
@@ -158,8 +167,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginTop="10dp"
-                android:background="@color/colorAccent">
+                android:background="@color/colorAccent"
+                android:paddingTop="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -234,8 +243,8 @@
                     android:orientation="horizontal">
 
                     <ProgressBar
-                        style="@style/CustomProgressBarHorizontal"
                         android:id="@+id/calendar_pgBar_1"
+                        style="@style/CustomProgressBarHorizontal"
                         android:layout_width="0dp"
                         android:layout_height="200dp"
                         android:layout_weight="1"
@@ -329,8 +338,8 @@
                         android:background="@android:color/transparent"
                         android:text="@string/calendar_dom"
                         android:textAlignment="center"
-                        android:textSize="12sp"
-                        android:textColor="@color/tertiaryText"/>
+                        android:textColor="@color/tertiaryText"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -338,9 +347,9 @@
                         android:layout_marginStart="5dp"
                         android:layout_weight="0.8"
                         android:background="@android:color/transparent"
-                        android:textColor="@color/tertiaryText"
                         android:text="@string/calendar_seg"
                         android:textAlignment="center"
+                        android:textColor="@color/tertiaryText"
                         android:textSize="12sp" />
 
                     <TextView
@@ -349,9 +358,9 @@
                         android:layout_marginStart="5dp"
                         android:layout_weight="0.8"
                         android:background="@android:color/transparent"
-                        android:textColor="@color/tertiaryText"
                         android:text="@string/calendar_ter"
                         android:textAlignment="center"
+                        android:textColor="@color/tertiaryText"
                         android:textSize="12sp" />
 
                     <TextView
@@ -360,9 +369,9 @@
                         android:layout_marginStart="5dp"
                         android:layout_weight="0.8"
                         android:background="@android:color/transparent"
-                        android:textColor="@color/tertiaryText"
                         android:text="@string/calendar_qua"
                         android:textAlignment="center"
+                        android:textColor="@color/tertiaryText"
                         android:textSize="12sp" />
 
                     <TextView
@@ -371,9 +380,9 @@
                         android:layout_marginStart="5dp"
                         android:layout_weight="0.8"
                         android:background="@android:color/transparent"
-                        android:textColor="@color/tertiaryText"
                         android:text="@string/calendar_qui"
                         android:textAlignment="center"
+                        android:textColor="@color/tertiaryText"
                         android:textSize="12sp"
                         android:textStyle="" />
 
@@ -383,9 +392,9 @@
                         android:layout_marginStart="5dp"
                         android:layout_weight="0.8"
                         android:background="@android:color/transparent"
-                        android:textColor="@color/tertiaryText"
                         android:text="@string/calendar_sex"
                         android:textAlignment="center"
+                        android:textColor="@color/tertiaryText"
                         android:textSize="12sp" />
 
                     <TextView
@@ -394,9 +403,9 @@
                         android:layout_marginStart="5dp"
                         android:layout_weight="0.8"
                         android:background="@android:color/transparent"
-                        android:textColor="@color/tertiaryText"
                         android:text="@string/calendar_sab"
                         android:textAlignment="center"
+                        android:textColor="@color/tertiaryText"
                         android:textSize="12sp" />
                 </LinearLayout>
 
@@ -404,8 +413,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="32dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingTop="32dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -452,4 +461,3 @@
 
 
 </ScrollView>
-
