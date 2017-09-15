@@ -6,6 +6,7 @@
     <color name="colorAccent">#FFCF6E</color>
     <color name="primaryText">#999999</color>
     <color name="secondaryText">#EF6214</color>
+    <color name="tertiaryText">#737373</color>
     <color name="icons">#F9B041</color>
     <color name="transparent">#00000000</color>
     <color name="childList">#FFDEA6</color>

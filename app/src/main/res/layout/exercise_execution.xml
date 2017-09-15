@@ -5,17 +5,16 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:background="@color/revisedColor5">
+    android:background="@color/primary_light">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_exercise_execution"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
+        android:titleTextColor="@color/primary_light"
+        app:titleTextColor="@color/primary_light"
         app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:tabIndicatorColor="@color/newColorAccent"
-        app:titleTextColor="@color/revisedColor7"
-        app:subtitleTextColor="@color/revisedColor7"
         android:textAlignment="center">
     </android.support.v7.widget.Toolbar>
 
@@ -30,7 +29,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/revisedTextUnfocused"/>
+        android:textColor="@color/tertiaryText"/>
 
     <View
         android:id="@+id/vw_exercise_execution_divider"
@@ -66,7 +65,7 @@
                 android:drawableTop="@drawable/step_shape"
                 android:clickable="true"
                 android:text="1"
-                android:textColor="@color/revisedTextUnfocused"
+                android:textColor="@color/tertiaryText"
                 android:textSize="16sp"
                 />
 
@@ -90,7 +89,7 @@
                 android:background="@android:color/transparent"
                 android:drawableTop="@drawable/step_shape"
                 android:text="2"
-                android:textColor="@color/revisedTextUnfocused"
+                android:textColor="@color/tertiaryText"
                 android:textSize="16sp"
                 android:clickable="true"/>
 
@@ -113,7 +112,7 @@
                 android:background="@android:color/transparent"
                 android:drawableTop="@drawable/step_shape"
                 android:text="3"
-                android:textColor="@color/revisedTextUnfocused"
+                android:textColor="@color/tertiaryText"
                 android:textSize="16sp"
                 android:clickable="true"/>
 
@@ -136,7 +135,7 @@
                 android:background="@android:color/transparent"
                 android:drawableTop="@drawable/step_shape"
                 android:text="4"
-                android:textColor="@color/revisedTextUnfocused"
+                android:textColor="@color/tertiaryText"
                 android:textSize="16sp"
                 android:clickable="true"/>
 
@@ -179,7 +178,7 @@
                 android:background="@android:color/transparent"
                 android:drawableTop="@drawable/step_shape"
                 android:text="5"
-                android:textColor="@color/revisedTextUnfocused"
+                android:textColor="@color/tertiaryText"
                 android:textSize="16sp" />
 
             <ProgressBar
@@ -200,7 +199,7 @@
                 android:background="@android:color/transparent"
                 android:drawableTop="@drawable/step_shape"
                 android:text="6"
-                android:textColor="@color/revisedTextUnfocused"
+                android:textColor="@color/tertiaryText"
                 android:textSize="16sp" />
 
             <ProgressBar
@@ -221,7 +220,7 @@
                 android:background="@android:color/transparent"
                 android:drawableTop="@drawable/step_shape"
                 android:text="7"
-                android:textColor="@color/revisedTextUnfocused"
+                android:textColor="@color/tertiaryText"
                 android:textSize="16sp" />
 
             <ProgressBar
@@ -241,7 +240,7 @@
                 android:background="@android:color/transparent"
                 android:drawableTop="@drawable/step_shape"
                 android:text="8"
-                android:textColor="@color/revisedTextUnfocused"
+                android:textColor="@color/tertiaryText"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -266,7 +265,7 @@
         android:layout_marginBottom="-50dp"
         android:layout_marginEnd="-10dp"
         android:textSize="12sp"
-        android:textColor="@color/primaryText"
+        android:textColor="@color/tertiaryText"
         android:text="@string/btn_watch_description"/>
 
     <RelativeLayout
@@ -294,7 +293,7 @@
             android:layout_height="145dp"
             android:layout_centerInParent="true"
             android:indeterminate="true"
-            app:cpb_color="@color/revisedAccent"
+            app:cpb_color="@color/secondaryText"
             app:cpb_colors="@array/progressbar"
             app:cpb_max_sweep_angle="300"
             app:cpb_min_sweep_angle="100"
@@ -309,7 +308,7 @@
             android:layout_centerInParent="true"
             android:background="@android:color/transparent"
             android:text="@string/button_start"
-            android:textColor="@color/newSecondaryText"
+            android:textColor="@color/tertiaryText"
             android:textSize="25sp"
             android:textStyle="bold" />
 
@@ -321,7 +320,7 @@
             android:layout_marginTop="100dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:text="@string/button_finish"
-            android:textColor="@color/revisedAccent"
+            android:textColor="@color/secondaryText"
             android:textSize="15sp"
             android:textStyle="bold" />
 

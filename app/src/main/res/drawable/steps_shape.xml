@@ -4,7 +4,7 @@
     android:shape="oval">
 
     <solid
-        android:color="@color/revisedTextUnfocused"/>
+        android:color="@color/primaryText"/>
 
     <size
         android:width="40dp"
